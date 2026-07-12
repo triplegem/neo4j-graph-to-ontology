@@ -7,11 +7,16 @@ ontology-toolkit/
 ├── output/
 │
 └── ontology_toolkit/
-    ├── __init__.py
     ├── connection.py
-    ├── models.py
     ├── discover_schema.py
-    └── printer.py
+    ├── export_rdf.py
+    ├── generate_ontology.py
+    ├── generate_shacl.py
+    ├── printer.py
+    ├── property_analysis.py
+    ├── type_inference.py
+    ├── models.py
+    └── vocab.py
 
 Neo4j
       │

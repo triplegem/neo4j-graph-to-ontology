@@ -35,6 +35,7 @@ def analyze_property(name: str, values: list) -> PropertyDefinition:
             inferred_identifier=False,
             inferred_enum=False,
             distinct_values=0,
+            enum_values=[],
             examples=[]
         )
 
@@ -45,13 +46,17 @@ def analyze_property(name: str, values: list) -> PropertyDefinition:
     datatype = infer_property_type(non_null[0])
 
     #
-    # Count distinct values
+    # Collect distinct values
     #
 
-    try:
-        distinct = len(set(non_null))
-    except TypeError:
-        distinct = len({str(v) for v in non_null})
+    distinct_list = []
+
+    for value in non_null:
+
+        if value not in distinct_list:
+            distinct_list.append(value)
+
+    distinct = len(distinct_list)
 
     #
     # Determine uniqueness
@@ -71,9 +76,22 @@ def analyze_property(name: str, values: list) -> PropertyDefinition:
 
     inferred_enum = (
         datatype == "string"
-        and distinct <= 10
+        and 1 < distinct <= 10
         and len(non_null) > distinct
     )
+
+    #
+    # Enumeration values
+    #
+
+    enum_values = []
+
+    if inferred_enum:
+
+        enum_values = sorted(
+            str(v)
+            for v in distinct_list
+        )
 
     #
     # Candidate identifier
@@ -96,15 +114,7 @@ def analyze_property(name: str, values: list) -> PropertyDefinition:
     # Example values
     #
 
-    examples = []
-
-    for value in non_null:
-
-        if value not in examples:
-            examples.append(value)
-
-        if len(examples) >= 5:
-            break
+    examples = distinct_list[:5]
 
     return PropertyDefinition(
         name=name,
@@ -114,5 +124,6 @@ def analyze_property(name: str, values: list) -> PropertyDefinition:
         inferred_identifier=inferred_identifier,
         inferred_enum=inferred_enum,
         distinct_values=distinct,
+        enum_values=enum_values,
         examples=examples
     )

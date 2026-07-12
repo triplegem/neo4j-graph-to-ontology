@@ -44,17 +44,11 @@ XSD_TYPES = {
 #
 
 STANDARD_SHACL_PATHS = {
-
     "prefLabel": "skos:prefLabel",
-
     "broader": "skos:broader",
-
     "inScheme": "skos:inScheme",
-
     "exactMatch": "skos:exactMatch",
-
     "sameAs": "owl:sameAs",
-
 }
 
 
@@ -97,7 +91,10 @@ def generate_shacl(schema: GraphSchema):
     # One NodeShape per node label
     #
 
-    for node in sorted(schema.node_types.values(), key=lambda n: n.label):
+    for node in sorted(
+        schema.node_types.values(),
+        key=lambda n: n.label
+    ):
 
         lines.append(f"kgo:{node.label}Shape")
         lines.append("    a sh:NodeShape ;")
@@ -107,12 +104,15 @@ def generate_shacl(schema: GraphSchema):
         # Properties
         #
 
-        for prop in sorted(node.properties.values(), key=lambda p: p.name):
+        for prop in sorted(
+            node.properties.values(),
+            key=lambda p: p.name
+        ):
 
             lines.append("    sh:property [")
 
             #
-            # Reuse standard vocabularies where appropriate
+            # Reuse standard vocabularies
             #
 
             path = STANDARD_SHACL_PATHS.get(
@@ -129,7 +129,7 @@ def generate_shacl(schema: GraphSchema):
             )
 
             #
-            # Required property?
+            # Required?
             #
 
             if prop.name in REQUIRED_PROPERTIES:
@@ -139,7 +139,7 @@ def generate_shacl(schema: GraphSchema):
                 )
 
             #
-            # Identifier property?
+            # Identifier?
             #
 
             if (
@@ -151,10 +151,28 @@ def generate_shacl(schema: GraphSchema):
                     "        sh:maxCount 1 ;"
                 )
 
+            #
+            # Enumeration
+            #
+
+            if (
+                prop.inferred_enum
+                and prop.enum_values
+            ):
+
+                enum_values = " ".join(
+                    f'"{value}"'
+                    for value in prop.enum_values
+                )
+
+                lines.append(
+                    f"        sh:in ( {enum_values} ) ;"
+                )
+
             lines.append("    ] ;")
 
         #
-        # Remove trailing semicolon from final property
+        # Remove trailing semicolon
         #
 
         lines[-1] = lines[-1].rstrip(" ;")

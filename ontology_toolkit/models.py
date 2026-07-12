@@ -25,6 +25,11 @@ class PropertyDefinition:
 
     # Statistics
     distinct_values: int = 0
+
+    # Enumeration values (if inferred)
+    enum_values: list = field(default_factory=list)
+
+    # Example values
     examples: list = field(default_factory=list)
 
 
@@ -69,5 +74,6 @@ class GraphSchema:
     """
     Represents the discovered schema of a Neo4j graph.
     """
+
     node_types: dict[str, NodeType] = field(default_factory=dict)
     relationship_types: dict[str, RelationshipType] = field(default_factory=dict)
