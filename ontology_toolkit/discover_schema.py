@@ -1,0 +1,153 @@
+from ontology_toolkit.models import (
+    GraphSchema,
+    NodeType,
+    RelationshipType,
+    PropertyDefinition,
+)
+
+from ontology_toolkit.type_inference import infer_property_type
+
+
+def discover_schema(driver):
+
+    schema = GraphSchema()
+
+    with driver.session() as session:
+
+        #
+        # ----------------------------------------------------------
+        # Discover node labels
+        # ----------------------------------------------------------
+        #
+
+        result = session.run("""
+            MATCH (n)
+            RETURN labels(n)[0] AS label,
+                   count(*) AS count
+            ORDER BY label
+        """)
+
+        for record in result:
+
+            schema.node_types[record["label"]] = NodeType(
+                label=record["label"],
+                count=record["count"]
+            )
+
+        #
+        # ----------------------------------------------------------
+        # Discover node properties
+        # ----------------------------------------------------------
+        #
+
+        result = session.run("""
+            MATCH (n)
+
+            UNWIND labels(n) AS label
+
+            UNWIND keys(n) AS property
+
+            RETURN
+                label,
+                property,
+                head(collect(n[property])) AS sampleValue
+
+            ORDER BY
+                label,
+                property
+        """)
+
+        for record in result:
+
+            label = record["label"]
+            prop = record["property"]
+
+            if prop not in schema.node_types[label].properties:
+
+                schema.node_types[label].properties[prop] = PropertyDefinition(
+                    name=prop,
+                    data_type=infer_property_type(record["sampleValue"])
+                )
+
+        #
+        # ----------------------------------------------------------
+        # Discover relationship types
+        # ----------------------------------------------------------
+        #
+
+        result = session.run("""
+            MATCH ()-[r]->()
+
+            RETURN
+                type(r) AS relationship,
+                count(*) AS count
+
+            ORDER BY relationship
+        """)
+
+        for record in result:
+
+            schema.relationship_types[record["relationship"]] = RelationshipType(
+                name=record["relationship"],
+                count=record["count"]
+            )
+
+        #
+        # ----------------------------------------------------------
+        # Discover relationship properties
+        # ----------------------------------------------------------
+        #
+
+        result = session.run("""
+            MATCH ()-[r]->()
+
+            UNWIND keys(r) AS property
+
+            RETURN
+                type(r) AS relationship,
+                property,
+                head(collect(r[property])) AS sampleValue
+
+            ORDER BY
+                relationship,
+                property
+        """)
+
+        for record in result:
+
+            rel = record["relationship"]
+            prop = record["property"]
+
+            if prop not in schema.relationship_types[rel].properties:
+
+                schema.relationship_types[rel].properties[prop] = PropertyDefinition(
+                    name=prop,
+                    data_type=infer_property_type(record["sampleValue"])
+                )
+
+        #
+        # ----------------------------------------------------------
+        # Discover graph topology
+        # ----------------------------------------------------------
+        #
+
+        result = session.run("""
+            MATCH (a)-[r]->(b)
+
+            RETURN DISTINCT
+
+                labels(a)[0] AS source,
+
+                type(r) AS relationship,
+
+                labels(b)[0] AS target
+        """)
+
+        for record in result:
+
+            rel = schema.relationship_types[record["relationship"]]
+
+            rel.source_labels.add(record["source"])
+            rel.target_labels.add(record["target"])
+
+    return schema

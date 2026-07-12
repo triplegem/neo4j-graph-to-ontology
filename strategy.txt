@@ -1,0 +1,14 @@
+ontology-toolkit/
+│
+├── .env
+├── requirements.txt
+├── main.py
+│
+├── output/
+│
+└── ontology_toolkit/
+    ├── __init__.py
+    ├── connection.py
+    ├── models.py
+    ├── discover_schema.py
+    └── printer.py
