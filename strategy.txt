@@ -12,3 +12,43 @@ ontology-toolkit/
     ├── models.py
     ├── discover_schema.py
     └── printer.py
+
+Neo4j
+      │
+      ▼
+discover_schema.py
+      │
+      ▼
+property_analysis.py
+      │
+      ▼
+GraphSchema
+      │
+      ├───────────────┐
+      ▼               ▼
+generate_shacl.py   export_rdf.py
+      │               │
+      ▼               ▼
+ shapes.ttl       graph.ttl
+      │               │
+      └───────┬───────┘
+              ▼
+      validate_shacl.py
+              │
+              ▼
+      Validation Report
+
+      Neo4j
+   │
+   ▼
+discover_schema.py
+   │
+   ▼
+GraphSchema
+   │
+   ├──────────────┬──────────────┬──────────────┐
+   ▼              ▼              ▼
+ontology.ttl   graph.ttl    shapes.ttl
+                                     │
+                                     ▼
+                            validate_shacl.py

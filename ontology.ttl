@@ -1,0 +1,174 @@
+@prefix kgo: <https://kg.engineering.cornell.edu/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+kgo: a owl:Ontology ;
+    rdfs:label "Cornell Engineering Faculty Expertise Ontology" ;
+    rdfs:comment "Ontology supporting an engineering faculty expertise knowledge graph." ;
+    owl:versionInfo "1.0" .
+
+kgo:about a owl:ObjectProperty ;
+    rdfs:label "about" ;
+    rdfs:domain kgo:Grant,
+        kgo:Publication ;
+    rdfs:range kgo:Concept .
+
+kgo:affiliatedWith a owl:ObjectProperty ;
+    rdfs:label "affiliatedWith" ;
+    rdfs:domain kgo:Faculty ;
+    rdfs:range kgo:Department .
+
+kgo:authorOf a owl:ObjectProperty ;
+    rdfs:label "authorOf" ;
+    rdfs:domain kgo:Faculty ;
+    rdfs:range kgo:Publication .
+
+kgo:awardNumber a owl:DatatypeProperty ;
+    rdfs:label "awardNumber" ;
+    rdfs:domain kgo:Grant ;
+    rdfs:range xsd:string .
+
+kgo:datePublished a owl:DatatypeProperty ;
+    rdfs:label "datePublished" ;
+    rdfs:domain kgo:Publication ;
+    rdfs:range xsd:date .
+
+kgo:description a owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    rdfs:domain kgo:ConceptScheme ;
+    rdfs:range xsd:string .
+
+kgo:email a owl:DatatypeProperty ;
+    rdfs:label "email" ;
+    rdfs:domain kgo:Faculty ;
+    rdfs:range xsd:string .
+
+kgo:endDate a owl:DatatypeProperty ;
+    rdfs:label "endDate" ;
+    rdfs:domain kgo:Grant ;
+    rdfs:range xsd:date .
+
+kgo:hasLocation a owl:ObjectProperty ;
+    rdfs:label "hasLocation" ;
+    rdfs:domain kgo:Department,
+        kgo:Faculty ;
+    rdfs:range kgo:Campus .
+
+kgo:identifier a owl:DatatypeProperty ;
+    rdfs:label "identifier" ;
+    rdfs:domain kgo:Concept,
+        kgo:ConceptScheme,
+        kgo:Grant,
+        kgo:ORCID,
+        kgo:Publication,
+        kgo:Wikidata ;
+    rdfs:range xsd:string .
+
+kgo:investigatorOn a owl:ObjectProperty ;
+    rdfs:label "investigatorOn" ;
+    rdfs:domain kgo:Faculty ;
+    rdfs:range kgo:Grant .
+
+kgo:knowsAbout a owl:ObjectProperty ;
+    rdfs:label "knowsAbout" ;
+    rdfs:domain kgo:Faculty ;
+    rdfs:range kgo:Concept .
+
+kgo:name a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    rdfs:domain kgo:Campus,
+        kgo:College,
+        kgo:Department,
+        kgo:Faculty,
+        kgo:University ;
+    rdfs:range xsd:string .
+
+kgo:netid a owl:DatatypeProperty ;
+    rdfs:label "netid" ;
+    rdfs:domain kgo:Faculty ;
+    rdfs:range xsd:string .
+
+kgo:rank a owl:DatatypeProperty ;
+    rdfs:label "rank" ;
+    rdfs:domain kgo:Faculty ;
+    rdfs:range xsd:string .
+
+kgo:sponsor a owl:DatatypeProperty ;
+    rdfs:label "sponsor" ;
+    rdfs:domain kgo:Grant ;
+    rdfs:range xsd:string .
+
+kgo:startDate a owl:DatatypeProperty ;
+    rdfs:label "startDate" ;
+    rdfs:domain kgo:Grant ;
+    rdfs:range xsd:date .
+
+kgo:subOrganization a owl:ObjectProperty ;
+    rdfs:label "subOrganization" ;
+    rdfs:domain kgo:College,
+        kgo:Department ;
+    rdfs:range kgo:College,
+        kgo:University .
+
+kgo:title a owl:DatatypeProperty ;
+    rdfs:label "title" ;
+    rdfs:domain kgo:Grant,
+        kgo:Publication ;
+    rdfs:range xsd:string .
+
+kgo:uri a owl:DatatypeProperty ;
+    rdfs:label "uri" ;
+    rdfs:domain kgo:ORCID,
+        kgo:Publication,
+        kgo:Wikidata ;
+    rdfs:range xsd:anyURI .
+
+kgo:venue a owl:DatatypeProperty ;
+    rdfs:label "venue" ;
+    rdfs:domain kgo:Publication ;
+    rdfs:range xsd:string .
+
+kgo:Campus a owl:Class ;
+    rdfs:label "Campus" ;
+    rdfs:subClassOf schema:Place .
+
+kgo:ConceptScheme a owl:Class ;
+    rdfs:label "ConceptScheme" ;
+    rdfs:subClassOf skos:ConceptScheme .
+
+kgo:ORCID a owl:Class ;
+    rdfs:label "ORCID" .
+
+kgo:University a owl:Class ;
+    rdfs:label "University" ;
+    rdfs:subClassOf schema:CollegeOrUniversity .
+
+kgo:Wikidata a owl:Class ;
+    rdfs:label "Wikidata" .
+
+kgo:College a owl:Class ;
+    rdfs:label "College" ;
+    rdfs:subClassOf schema:CollegeOrUniversity .
+
+kgo:Concept a owl:Class ;
+    rdfs:label "Concept" ;
+    rdfs:subClassOf skos:Concept .
+
+kgo:Department a owl:Class ;
+    rdfs:label "Department" ;
+    rdfs:subClassOf schema:Organization .
+
+kgo:Publication a owl:Class ;
+    rdfs:label "Publication" ;
+    rdfs:subClassOf schema:ScholarlyArticle .
+
+kgo:Grant a owl:Class ;
+    rdfs:label "Grant" .
+
+kgo:Faculty a owl:Class ;
+    rdfs:label "Faculty" ;
+    rdfs:subClassOf schema:Person .
+

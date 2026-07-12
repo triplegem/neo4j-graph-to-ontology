@@ -51,7 +51,6 @@ def analyze_property(name: str, values: list) -> PropertyDefinition:
     try:
         distinct = len(set(non_null))
     except TypeError:
-        # Handles lists or other unhashable values
         distinct = len({str(v) for v in non_null})
 
     #
@@ -80,15 +79,17 @@ def analyze_property(name: str, values: list) -> PropertyDefinition:
     # Candidate identifier
     #
 
+    IDENTIFIER_PROPERTIES = {
+        "identifier",
+        "id",
+        "uri",
+        "netid",
+        "awardNumber",
+    }
+
     inferred_identifier = (
         unique
-        and not nullable
-        and datatype not in (
-            "integer",
-            "float",
-            "boolean",
-            "list"
-        )
+        and name in IDENTIFIER_PROPERTIES
     )
 
     #
@@ -98,6 +99,7 @@ def analyze_property(name: str, values: list) -> PropertyDefinition:
     examples = []
 
     for value in non_null:
+
         if value not in examples:
             examples.append(value)
 

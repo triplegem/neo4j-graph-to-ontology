@@ -1,0 +1,202 @@
+
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <https://example.org/kg/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+ex:CampusShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Campus ;
+    sh:property [
+        sh:path ex:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] 
+.
+
+ex:CollegeShape
+    a sh:NodeShape ;
+    sh:targetClass ex:College ;
+    sh:property [
+        sh:path ex:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] 
+.
+
+ex:ConceptShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Concept ;
+    sh:property [
+        sh:path ex:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:prefLabel ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] 
+.
+
+ex:ConceptSchemeShape
+    a sh:NodeShape ;
+    sh:targetClass ex:ConceptScheme ;
+    sh:property [
+        sh:path ex:description ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path ex:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:prefLabel ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] 
+.
+
+ex:DepartmentShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Department ;
+    sh:property [
+        sh:path ex:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] 
+.
+
+ex:FacultyShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Faculty ;
+    sh:property [
+        sh:path ex:email ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path ex:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:netid ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:rank ;
+        sh:datatype xsd:string ;
+    ] 
+.
+
+ex:GrantShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Grant ;
+    sh:property [
+        sh:path ex:awardNumber ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:endDate ;
+        sh:datatype xsd:date ;
+    ] ;
+    sh:property [
+        sh:path ex:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:sponsor ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path ex:startDate ;
+        sh:datatype xsd:date ;
+    ] ;
+    sh:property [
+        sh:path ex:title ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] 
+.
+
+ex:ORCIDShape
+    a sh:NodeShape ;
+    sh:targetClass ex:ORCID ;
+    sh:property [
+        sh:path ex:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:uri ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] 
+.
+
+ex:PublicationShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Publication ;
+    sh:property [
+        sh:path ex:datePublished ;
+        sh:datatype xsd:date ;
+    ] ;
+    sh:property [
+        sh:path ex:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:title ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:uri ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:venue ;
+        sh:datatype xsd:string ;
+    ] 
+.
+
+ex:UniversityShape
+    a sh:NodeShape ;
+    sh:targetClass ex:University ;
+    sh:property [
+        sh:path ex:name ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] 
+.
+
+ex:WikidataShape
+    a sh:NodeShape ;
+    sh:targetClass ex:Wikidata ;
+    sh:property [
+        sh:path ex:identifier ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path ex:uri ;
+        sh:datatype xsd:anyURI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] 
+.

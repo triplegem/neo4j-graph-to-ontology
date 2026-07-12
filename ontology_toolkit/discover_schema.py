@@ -2,10 +2,9 @@ from ontology_toolkit.models import (
     GraphSchema,
     NodeType,
     RelationshipType,
-    PropertyDefinition,
 )
 
-from ontology_toolkit.type_inference import infer_property_type
+from ontology_toolkit.property_analysis import analyze_property
 
 
 def discover_schema(driver):
@@ -50,7 +49,7 @@ def discover_schema(driver):
             RETURN
                 label,
                 property,
-                head(collect(n[property])) AS sampleValue
+                collect(n[property]) AS values
 
             ORDER BY
                 label,
@@ -62,12 +61,10 @@ def discover_schema(driver):
             label = record["label"]
             prop = record["property"]
 
-            if prop not in schema.node_types[label].properties:
-
-                schema.node_types[label].properties[prop] = PropertyDefinition(
-                    name=prop,
-                    data_type=infer_property_type(record["sampleValue"])
-                )
+            schema.node_types[label].properties[prop] = analyze_property(
+                prop,
+                record["values"]
+            )
 
         #
         # ----------------------------------------------------------
@@ -106,7 +103,7 @@ def discover_schema(driver):
             RETURN
                 type(r) AS relationship,
                 property,
-                head(collect(r[property])) AS sampleValue
+                collect(r[property]) AS values
 
             ORDER BY
                 relationship,
@@ -118,12 +115,10 @@ def discover_schema(driver):
             rel = record["relationship"]
             prop = record["property"]
 
-            if prop not in schema.relationship_types[rel].properties:
-
-                schema.relationship_types[rel].properties[prop] = PropertyDefinition(
-                    name=prop,
-                    data_type=infer_property_type(record["sampleValue"])
-                )
+            schema.relationship_types[rel].properties[prop] = analyze_property(
+                prop,
+                record["values"]
+            )
 
         #
         # ----------------------------------------------------------
