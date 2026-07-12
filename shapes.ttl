@@ -1,202 +1,204 @@
 
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix kgo: <https://kg.engineering.cornell.edu/ontology#> .
+@prefix kgr: <https://kg.engineering.cornell.edu/resource/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix ex: <https://example.org/kg/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 
-ex:CampusShape
+kgo:CampusShape
     a sh:NodeShape ;
-    sh:targetClass ex:Campus ;
+    sh:targetClass kgo:Campus ;
     sh:property [
-        sh:path ex:name ;
+        sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-    ] 
+    ]
 .
 
-ex:CollegeShape
+kgo:CollegeShape
     a sh:NodeShape ;
-    sh:targetClass ex:College ;
+    sh:targetClass kgo:College ;
     sh:property [
-        sh:path ex:name ;
+        sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-    ] 
+    ]
 .
 
-ex:ConceptShape
+kgo:ConceptShape
     a sh:NodeShape ;
-    sh:targetClass ex:Concept ;
+    sh:targetClass kgo:Concept ;
     sh:property [
-        sh:path ex:identifier ;
+        sh:path kgo:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:prefLabel ;
+        sh:path skos:prefLabel ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-    ] 
+    ]
 .
 
-ex:ConceptSchemeShape
+kgo:ConceptSchemeShape
     a sh:NodeShape ;
-    sh:targetClass ex:ConceptScheme ;
+    sh:targetClass kgo:ConceptScheme ;
     sh:property [
-        sh:path ex:description ;
+        sh:path kgo:description ;
         sh:datatype xsd:string ;
     ] ;
     sh:property [
-        sh:path ex:identifier ;
+        sh:path kgo:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:prefLabel ;
+        sh:path skos:prefLabel ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-    ] 
+    ]
 .
 
-ex:DepartmentShape
+kgo:DepartmentShape
     a sh:NodeShape ;
-    sh:targetClass ex:Department ;
+    sh:targetClass kgo:Department ;
     sh:property [
-        sh:path ex:name ;
+        sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-    ] 
+    ]
 .
 
-ex:FacultyShape
+kgo:FacultyShape
     a sh:NodeShape ;
-    sh:targetClass ex:Faculty ;
+    sh:targetClass kgo:Faculty ;
     sh:property [
-        sh:path ex:email ;
+        sh:path kgo:email ;
         sh:datatype xsd:string ;
     ] ;
     sh:property [
-        sh:path ex:name ;
+        sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:netid ;
+        sh:path kgo:netid ;
         sh:datatype xsd:string ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:rank ;
+        sh:path kgo:rank ;
         sh:datatype xsd:string ;
-    ] 
+    ]
 .
 
-ex:GrantShape
+kgo:GrantShape
     a sh:NodeShape ;
-    sh:targetClass ex:Grant ;
+    sh:targetClass kgo:Grant ;
     sh:property [
-        sh:path ex:awardNumber ;
+        sh:path kgo:awardNumber ;
         sh:datatype xsd:string ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:endDate ;
+        sh:path kgo:endDate ;
         sh:datatype xsd:date ;
     ] ;
     sh:property [
-        sh:path ex:identifier ;
+        sh:path kgo:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:sponsor ;
+        sh:path kgo:sponsor ;
         sh:datatype xsd:string ;
     ] ;
     sh:property [
-        sh:path ex:startDate ;
+        sh:path kgo:startDate ;
         sh:datatype xsd:date ;
     ] ;
     sh:property [
-        sh:path ex:title ;
+        sh:path kgo:title ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-    ] 
+    ]
 .
 
-ex:ORCIDShape
+kgo:ORCIDShape
     a sh:NodeShape ;
-    sh:targetClass ex:ORCID ;
+    sh:targetClass kgo:ORCID ;
     sh:property [
-        sh:path ex:identifier ;
+        sh:path kgo:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:uri ;
+        sh:path kgo:uri ;
         sh:datatype xsd:anyURI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-    ] 
+    ]
 .
 
-ex:PublicationShape
+kgo:PublicationShape
     a sh:NodeShape ;
-    sh:targetClass ex:Publication ;
+    sh:targetClass kgo:Publication ;
     sh:property [
-        sh:path ex:datePublished ;
+        sh:path kgo:datePublished ;
         sh:datatype xsd:date ;
     ] ;
     sh:property [
-        sh:path ex:identifier ;
+        sh:path kgo:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:title ;
+        sh:path kgo:title ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:uri ;
+        sh:path kgo:uri ;
         sh:datatype xsd:anyURI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:venue ;
+        sh:path kgo:venue ;
         sh:datatype xsd:string ;
-    ] 
+    ]
 .
 
-ex:UniversityShape
+kgo:UniversityShape
     a sh:NodeShape ;
-    sh:targetClass ex:University ;
+    sh:targetClass kgo:University ;
     sh:property [
-        sh:path ex:name ;
+        sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
-    ] 
+    ]
 .
 
-ex:WikidataShape
+kgo:WikidataShape
     a sh:NodeShape ;
-    sh:targetClass ex:Wikidata ;
+    sh:targetClass kgo:Wikidata ;
     sh:property [
-        sh:path ex:identifier ;
+        sh:path kgo:identifier ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path ex:uri ;
+        sh:path kgo:uri ;
         sh:datatype xsd:anyURI ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-    ] 
+    ]
 .

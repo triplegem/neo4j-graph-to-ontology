@@ -11,9 +11,11 @@ from ontology_toolkit.models import GraphSchema
 
 PREFIXES = """
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix kgo: <https://kg.engineering.cornell.edu/ontology#> .
+@prefix kgr: <https://kg.engineering.cornell.edu/resource/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix ex: <https://example.org/kg/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
 """
 
@@ -34,6 +36,25 @@ XSD_TYPES = {
     "doi": "xsd:string",
     "orcid": "xsd:string",
     "wikidata_identifier": "xsd:string",
+}
+
+
+#
+# Standard vocabulary mappings
+#
+
+STANDARD_SHACL_PATHS = {
+
+    "prefLabel": "skos:prefLabel",
+
+    "broader": "skos:broader",
+
+    "inScheme": "skos:inScheme",
+
+    "exactMatch": "skos:exactMatch",
+
+    "sameAs": "owl:sameAs",
+
 }
 
 
@@ -78,9 +99,9 @@ def generate_shacl(schema: GraphSchema):
 
     for node in sorted(schema.node_types.values(), key=lambda n: n.label):
 
-        lines.append(f"ex:{node.label}Shape")
+        lines.append(f"kgo:{node.label}Shape")
         lines.append("    a sh:NodeShape ;")
-        lines.append(f"    sh:targetClass ex:{node.label} ;")
+        lines.append(f"    sh:targetClass kgo:{node.label} ;")
 
         #
         # Properties
@@ -90,8 +111,17 @@ def generate_shacl(schema: GraphSchema):
 
             lines.append("    sh:property [")
 
+            #
+            # Reuse standard vocabularies where appropriate
+            #
+
+            path = STANDARD_SHACL_PATHS.get(
+                prop.name,
+                f"kgo:{prop.name}"
+            )
+
             lines.append(
-                f"        sh:path ex:{prop.name} ;"
+                f"        sh:path {path} ;"
             )
 
             lines.append(
@@ -124,10 +154,10 @@ def generate_shacl(schema: GraphSchema):
             lines.append("    ] ;")
 
         #
-        # Remove trailing semicolon
+        # Remove trailing semicolon from final property
         #
 
-        lines[-1] = lines[-1].rstrip(";")
+        lines[-1] = lines[-1].rstrip(" ;")
 
         lines.append(".")
         lines.append("")

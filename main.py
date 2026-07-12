@@ -4,6 +4,7 @@ from ontology_toolkit.printer import print_schema
 from ontology_toolkit.generate_shacl import save_shacl
 from ontology_toolkit.export_rdf import export_rdf
 from ontology_toolkit.generate_ontology import save_ontology
+from ontology_toolkit.validate_shacl import validate_graph
 
 
 def main():
@@ -21,6 +22,10 @@ def main():
         #
 
         schema = discover_schema(driver)
+
+        #
+        # Generate Ontology
+        #
 
         save_ontology(schema)
 
@@ -44,6 +49,15 @@ def main():
 
         print("\nGenerated SHACL:")
         print("shapes.ttl")
+
+        #
+        # Validate SHACL
+        #
+
+        validate_graph(
+            "graph.ttl",
+            "shapes.ttl",
+        )
 
         #
         # Print discovered schema
