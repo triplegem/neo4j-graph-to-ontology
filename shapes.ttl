@@ -14,6 +14,7 @@ kgo:CampusShape
         sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ]
 .
 
@@ -24,6 +25,7 @@ kgo:CollegeShape
         sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ]
 .
 
@@ -40,6 +42,7 @@ kgo:ConceptShape
         sh:path skos:prefLabel ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ]
 .
 
@@ -60,6 +63,7 @@ kgo:ConceptSchemeShape
         sh:path skos:prefLabel ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ]
 .
 
@@ -70,6 +74,7 @@ kgo:DepartmentShape
         sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ]
 .
 
@@ -79,11 +84,13 @@ kgo:FacultyShape
     sh:property [
         sh:path kgo:email ;
         sh:datatype xsd:string ;
+        sh:maxCount 1 ;
     ] ;
     sh:property [
         sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ] ;
     sh:property [
         sh:path kgo:netid ;
@@ -102,6 +109,7 @@ kgo:GrantShape
     sh:property [
         sh:path kgo:awardNumber ;
         sh:datatype xsd:string ;
+        sh:minCount 1 ;
         sh:maxCount 1 ;
     ] ;
     sh:property [
@@ -126,6 +134,7 @@ kgo:GrantShape
         sh:path kgo:title ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ]
 .
 
@@ -163,6 +172,7 @@ kgo:PublicationShape
         sh:path kgo:title ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ] ;
     sh:property [
         sh:path kgo:uri ;
@@ -183,6 +193,7 @@ kgo:UniversityShape
         sh:path kgo:name ;
         sh:datatype xsd:string ;
         sh:minCount 1 ;
+        sh:maxCount 1 ;
     ]
 .
 

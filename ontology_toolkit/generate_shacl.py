@@ -52,24 +52,52 @@ STANDARD_SHACL_PATHS = {
 }
 
 
-#
-# Ontology design rules
-#
+# Explicit ontology design rules
 
-REQUIRED_PROPERTIES = {
-    "name",
-    "identifier",
-    "title",
-    "prefLabel",
-    "uri",
-}
+DESIGN_RULES = {
 
-IDENTIFIER_PROPERTIES = {
-    "identifier",
-    "id",
-    "uri",
-    "netid",
-    "awardNumber",
+    # Human-readable labels    
+
+    "name": {
+        "minCount": 1,
+        "maxCount": 1,
+    },
+
+    "title": {
+        "minCount": 1,
+        "maxCount": 1,
+    },
+
+    "prefLabel": {
+        "minCount": 1,
+        "maxCount": 1,
+    },
+
+    # Identifiers
+    
+    "identifier": {
+        "minCount": 1,
+        "maxCount": 1,
+    },
+
+    "uri": {
+        "minCount": 1,
+        "maxCount": 1,
+    },
+
+    "awardNumber": {
+        "minCount": 1,
+        "maxCount": 1,
+    },
+
+    "netid": {
+        "maxCount": 1,
+    },
+
+    "email": {
+        "maxCount": 1,
+    },
+
 }
 
 
@@ -129,30 +157,35 @@ def generate_shacl(schema: GraphSchema):
             )
 
             #
-            # Required?
+            # Explicit ontology rules
             #
 
-            if prop.name in REQUIRED_PROPERTIES:
+            rules = DESIGN_RULES.get(prop.name, {})
+
+            if "minCount" in rules:
 
                 lines.append(
-                    "        sh:minCount 1 ;"
+                    f"        sh:minCount {rules['minCount']} ;"
+                )
+
+            if "maxCount" in rules:
+
+                lines.append(
+                    f"        sh:maxCount {rules['maxCount']} ;"
                 )
 
             #
-            # Identifier?
+            # Otherwise fall back to inferred identifier
             #
 
-            if (
-                prop.inferred_identifier
-                or prop.name in IDENTIFIER_PROPERTIES
-            ):
+            elif prop.inferred_identifier:
 
                 lines.append(
                     "        sh:maxCount 1 ;"
                 )
 
             #
-            # Enumeration
+            # Suggested enumeration
             #
 
             if (
@@ -172,7 +205,7 @@ def generate_shacl(schema: GraphSchema):
             lines.append("    ] ;")
 
         #
-        # Remove trailing semicolon
+        # Remove trailing semicolon from final property
         #
 
         lines[-1] = lines[-1].rstrip(" ;")
