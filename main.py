@@ -1,9 +1,10 @@
 from ontology_toolkit.connection import get_driver
 from ontology_toolkit.discover_schema import discover_schema
-from ontology_toolkit.printer import print_schema
-from ontology_toolkit.generate_shacl import save_shacl
 from ontology_toolkit.export_rdf import export_rdf
 from ontology_toolkit.generate_ontology import save_ontology
+from ontology_toolkit.generate_shacl import save_shacl
+from ontology_toolkit.neo4j_reader import read_graph
+from ontology_toolkit.printer import print_schema
 from ontology_toolkit.validate_shacl import validate_graph
 
 
@@ -24,6 +25,12 @@ def main():
         schema = discover_schema(driver)
 
         #
+        # Read instance data
+        #
+
+        semantic_graph = read_graph(driver)
+
+        #
         # Generate Ontology
         #
 
@@ -36,7 +43,7 @@ def main():
         # Export RDF
         #
 
-        export_rdf(driver)
+        export_rdf(semantic_graph)
 
         print("\nGenerated RDF:")
         print("graph.ttl")
