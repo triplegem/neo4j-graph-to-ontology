@@ -1,24 +1,27 @@
 # Ontology Toolkit
 
-A Python toolkit for automatically discovering the schema of a Neo4j knowledge graph and generating semantic web artifacts including OWL ontologies, RDF exports, SHACL validation shapes, and validation reports.
+A Python toolkit for discovering the schema of a Neo4j property graph and generating Semantic Web artifacts including OWL ontologies, RDF exports, SHACL shapes, and validation reports.
+
+The toolkit also provides a database-independent semantic graph model that separates instance data from serialization, enabling future support for additional formats such as JSON-LD and RDF-star.
+
+---
 
 ## Overview
 
-The Ontology Toolkit bridges Neo4j property graphs and Semantic Web technologies by automatically analyzing an existing graph and producing standards-compliant semantic representations.
+The Ontology Toolkit bridges Neo4j property graphs and Semantic Web technologies by:
 
-The toolkit performs:
+- Discovering graph schema from Neo4j
+- Analyzing node and relationship properties
+- Generating an OWL ontology
+- Exporting graph instances as RDF/Turtle
+- Generating SHACL validation shapes
+- Validating exported RDF with pySHACL
 
-- Schema discovery
-- Datatype inference
-- Identifier detection
-- Cardinality inference
-- Enumeration inference
-- OWL ontology generation
-- RDF/Turtle export
-- SHACL shape generation
-- SHACL validation
+Internally, Neo4j instance data is first loaded into a reusable `SemanticGraph` object model before serialization. This separation allows future exporters and processors to operate independently of Neo4j.
 
-## Features
+---
+
+## Current Capabilities
 
 ### Schema Discovery
 
@@ -32,14 +35,23 @@ Automatically discovers:
 
 ### Property Analysis
 
-Infers:
+Analyzes discovered properties to identify:
 
 - Datatypes
-- Required properties
-- Nullable properties
+- Required vs. optional properties
 - Identifier candidates
 - Enumerated values
 - Example values
+
+### Semantic Graph Model
+
+Provides a reusable semantic representation of Neo4j instance data through:
+
+- `EntityInstance`
+- `RelationshipInstance`
+- `SemanticGraph`
+
+This layer decouples graph reading from RDF serialization and serves as the foundation for future exporters and graph processing.
 
 ### OWL Ontology Generation
 
@@ -50,59 +62,88 @@ Generates:
 - Datatype properties
 - Domains
 - Ranges
-- Inverse properties
-- Functional properties
+- Inverse properties (where applicable)
+- Functional properties (where applicable)
 - Dublin Core metadata
-- Schema.org alignment
-- SKOS alignment
+- Schema.org mappings
+- SKOS concept relationships
 
 ### RDF Export
 
-Exports the Neo4j graph as RDF/Turtle using:
+Exports graph instances as RDF/Turtle.
+
+Resources receive stable URIs derived from identifier properties whenever available.
+
+Current serialization includes:
 
 - RDF
+- RDFS
 - OWL
 - SKOS
 - Schema.org
-
-Resources receive stable URIs using discovered identifiers whenever possible.
+- Dublin Core
 
 ### SHACL Generation
 
 Automatically generates SHACL NodeShapes including:
 
 - Datatype constraints
-- Required properties
+- Required property constraints
 - Cardinality constraints
 - Enumeration constraints
-- Identifier constraints
 
 ### Validation
 
-Validates exported RDF against generated SHACL shapes using pySHACL.
+Validates exported RDF against generated SHACL shapes using pySHACL and produces a validation report identifying any constraint violations.
 
-Produces a validation report identifying any constraint violations.
+---
+
+## Architecture
+
+```text
+Neo4j Property Graph
+          │
+          ├──────────────┐
+          │              │
+          ▼              ▼
+ Schema Discovery   Neo4j Reader
+          │              │
+          ▼              ▼
+     GraphSchema   SemanticGraph
+          │              │
+          └──────┬───────┘
+                 ▼
+        Semantic Web Outputs
+                 │
+     ┌───────────┼───────────┐
+     ▼           ▼           ▼
+ OWL Ontology  RDF Export  SHACL Shapes
+                               │
+                               ▼
+                        SHACL Validation
+```
 
 ---
 
 ## Project Structure
 
-```
-ontology-toolkit/
+```text
+ontology_toolkit/
 
-├── main.py
-├── ontology_toolkit/
-│   ├── connection.py
-│   ├── discover_schema.py
-│   ├── property_analysis.py
-│   ├── type_inference.py
-│   ├── export_rdf.py
-│   ├── generate_ontology.py
-│   ├── generate_shacl.py
-│   ├── validate_shacl.py
-│   ├── printer.py
-│   ├── models.py
-│   └── vocab.py
+├── connection.py
+├── discover_schema.py
+├── export_rdf.py
+├── generate_ontology.py
+├── generate_shacl.py
+├── models.py
+├── neo4j_reader.py
+├── printer.py
+├── property_analysis.py
+├── semantic_model.py
+├── type_inference.py
+├── uri.py
+├── validate_shacl.py
+└── vocab.py
 ```
 
 ---
@@ -111,7 +152,7 @@ ontology-toolkit/
 
 Running the toolkit produces:
 
-```
+```text
 ontology.ttl
 graph.ttl
 shapes.ttl
@@ -123,35 +164,32 @@ These artifacts include:
 - OWL ontology
 - RDF knowledge graph
 - SHACL validation shapes
-- Validation report
+- SHACL validation report
 
 ---
 
 ## Example Workflow
 
-```
+```text
 Neo4j Property Graph
           │
           ▼
 Schema Discovery
           │
           ▼
-Property Analysis
+GraphSchema
           │
           ▼
-Ontology Generation
+Neo4j Reader
           │
           ▼
-RDF Export
+SemanticGraph
           │
           ▼
-SHACL Generation
+RDF Serialization
           │
           ▼
 SHACL Validation
-          │
-          ▼
-Validation Report
 ```
 
 ---
@@ -162,12 +200,10 @@ Python 3.11+
 
 ### Packages
 
-```
-neo4j
-rdflib
-pyshacl
-python-dotenv
-```
+- neo4j
+- rdflib
+- pyshacl
+- python-dotenv
 
 Install with:
 
@@ -183,7 +219,7 @@ Configure your Neo4j connection in a `.env` file.
 
 Example:
 
-```
+```text
 NEO4J_URI=bolt://localhost:7687
 NEO4J_USERNAME=neo4j
 NEO4J_PASSWORD=password
@@ -202,28 +238,31 @@ python main.py
 - Python
 - Neo4j
 - RDF
+- RDFS
 - OWL
 - SHACL
 - SKOS
 - Schema.org
 - Dublin Core
-- pySHACL
 - rdflib
+- pySHACL
 
 ---
 
 ## Future Enhancements
 
-Potential future improvements include:
+Planned or potential future enhancements include:
 
-- SPARQL endpoint generation
-- Reasoning with OWL reasoners
+- JSON-LD serialization
+- RDF-star serialization
+- SPARQL endpoint support
+- OWL reasoning integration
 - SHACL-AF rules
 - Competency question testing
-- Ontology visualization
-- JSON-LD export
 - VoID metadata generation
 - DCAT dataset descriptions
+- Graph visualization
+- Additional import/export formats
 
 ---
 
