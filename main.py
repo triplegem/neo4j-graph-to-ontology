@@ -1,6 +1,7 @@
 from ontology_toolkit.connection import get_driver
 from ontology_toolkit.discover_schema import discover_schema
 from ontology_toolkit.export_rdf import export_rdf
+from ontology_toolkit.export_jsonld import export_jsonld
 from ontology_toolkit.generate_ontology import save_ontology
 from ontology_toolkit.generate_shacl import save_shacl
 from ontology_toolkit.neo4j_reader import read_graph
@@ -47,6 +48,15 @@ def main():
 
         print("\nGenerated RDF:")
         print("graph.ttl")
+
+        #
+        # Export JSON-LD
+        #
+
+        export_jsonld(semantic_graph)
+
+        print("\nGenerated JSON-LD:")
+        print("graph.jsonld")
 
         #
         # Generate SHACL
