@@ -95,6 +95,15 @@
     kgo:netid "hgx2" ;
     kgo:rank "Professor" .
 
+<https://kg.engineering.cornell.edu/resource/faculty/jd732> a kgo:Faculty,
+        schema:Person ;
+    owl:sameAs <https://kg.engineering.cornell.edu/resource/orcid/0000-0003-2310-6687> ;
+    kgo:affiliatedWith <https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering> ;
+    kgo:email "jd732@cornell.edu" ;
+    kgo:name "Julia Dshemuchadse" ;
+    kgo:netid "jd732" ;
+    kgo:rank "Associate Professor" .
+
 <https://kg.engineering.cornell.edu/resource/campus/weill-cornell-%28nyc%29> a kgo:Campus,
         schema:Place ;
     kgo:name "Weill Cornell (NYC)" .
@@ -131,6 +140,10 @@
 <https://kg.engineering.cornell.edu/resource/orcid/0000-0002-4076-4625> a kgo:ORCID ;
     kgo:identifier "0000-0002-4076-4625" ;
     kgo:uri "https://orcid.org/0000-0002-4076-4625"^^xsd:anyURI .
+
+<https://kg.engineering.cornell.edu/resource/orcid/0000-0003-2310-6687> a kgo:ORCID ;
+    kgo:identifier "0000-0003-2310-6687" ;
+    kgo:uri "https://orcid.org/0000-0003-2310-6687"^^xsd:anyURI .
 
 <https://kg.engineering.cornell.edu/resource/publication/10.1021/nl204561r> a kgo:Publication,
         schema:ScholarlyArticle ;
@@ -176,12 +189,6 @@
     skos:prefLabel "Materials Engineering" ;
     kgo:identifier "materials-engineering" .
 
-<https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering> a kgo:Department,
-        schema:Organization ;
-    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
-    kgo:name "Department of Materials Science and Engineering" ;
-    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
-
 <https://kg.engineering.cornell.edu/resource/department/school-of-electrical-and-computer-engineering> a kgo:Department,
         schema:Organization ;
     kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/cornell-tech-%28nyc%29>,
@@ -208,6 +215,12 @@
     kgo:title "High-mobility holes in gallium nitride and their quantum oscillations" ;
     kgo:uri "https://doi.org/10.1038/s41928-026-01590-8"^^xsd:anyURI ;
     kgo:venue "Nature Electronics" .
+
+<https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "Department of Materials Science and Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
 
 <https://kg.engineering.cornell.edu/resource/university/cornell-university> a kgo:University,
         schema:CollegeOrUniversity ;
