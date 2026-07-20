@@ -4,11 +4,10 @@ Ontology Toolkit
 Export a Neo4j property graph as RDF/Turtle.
 """
 
-from urllib.parse import quote
-
 from rdflib import Graph, Literal
 from rdflib.namespace import RDF, RDFS, OWL, SKOS, XSD
 
+from ontology_toolkit.uri import make_uri
 from ontology_toolkit.vocab import (
     KGO,
     KGR,
@@ -17,42 +16,6 @@ from ontology_toolkit.vocab import (
     STANDARD_PREDICATES,
     relationship_to_predicate,
 )
-
-#
-# Stable URI generation
-#
-
-IDENTIFIER_PROPERTIES = [
-    "identifier",
-    "netid",
-    "uri",
-    "awardNumber",
-    "name",
-]
-
-
-def make_uri(label: str, properties: dict):
-    """
-    Create a stable URI for an instance resource.
-    """
-
-    for key in IDENTIFIER_PROPERTIES:
-
-        if key in properties and properties[key]:
-
-            value = quote(
-                str(properties[key])
-                .lower()
-                .replace(" ", "-")
-            )
-
-            return KGR[f"{label.lower()}/{value}"]
-
-    #
-    # Fallback
-    #
-
-    return KGR[f"{label.lower()}/{id(properties)}"]
 
 
 def add_literal(graph, subject, predicate, value):

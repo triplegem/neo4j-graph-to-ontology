@@ -26,8 +26,8 @@ class EntityInstance:
     # Neo4j elementId (internal only)
     element_id: str
 
-    # Primary Neo4j label
-    label: str
+    # Class (derived from the primary Neo4j label)
+    class_name: str
 
     # Node properties
     properties: dict[str, object] = field(default_factory=dict)

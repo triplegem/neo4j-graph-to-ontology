@@ -8,7 +8,7 @@ from ontology_toolkit.semantic_model import (
 faculty = EntityInstance(
     uri="https://example.org/faculty/chris",
     element_id="1",
-    label="Faculty",
+    class_name="Faculty",
     properties={
         "name": "Chris",
     },
@@ -17,7 +17,7 @@ faculty = EntityInstance(
 publication = EntityInstance(
     uri="https://example.org/publication/1",
     element_id="2",
-    label="Publication",
+    class_name="Publication",
     properties={
         "title": "KG Toolkit",
     },
