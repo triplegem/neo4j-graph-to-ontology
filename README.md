@@ -1,8 +1,8 @@
 # Ontology Toolkit
 
-A Python toolkit for discovering the schema of a Neo4j property graph and generating Semantic Web artifacts including OWL ontologies, RDF exports, SHACL shapes, and validation reports.
+A Python toolkit for discovering the schema of a Neo4j property graph and generating Semantic Web artifacts including OWL ontologies, RDF exports, JSON-LD exports, SHACL shapes, and validation reports.
 
-The toolkit also provides a database-independent semantic graph model that separates instance data from serialization, enabling future support for additional formats such as JSON-LD and RDF-star.
+The toolkit also provides a database-independent semantic graph model that separates instance data from serialization, enabling multiple serialization formats while serving as a foundation for future extensions such as RDF-star.
 
 ---
 
@@ -13,11 +13,11 @@ The Ontology Toolkit bridges Neo4j property graphs and Semantic Web technologies
 - Discovering graph schema from Neo4j
 - Analyzing node and relationship properties
 - Generating an OWL ontology
-- Exporting graph instances as RDF/Turtle
+- Exporting graph instances as RDF/Turtle and JSON-LD
 - Generating SHACL validation shapes
 - Validating exported RDF with pySHACL
 
-Internally, Neo4j instance data is first loaded into a reusable `SemanticGraph` object model before serialization. This separation allows future exporters and processors to operate independently of Neo4j.
+Internally, Neo4j instance data is first loaded into a reusable `SemanticGraph` object model before serialization. This separation allows multiple serializers and future graph processors to operate independently of Neo4j.
 
 ---
 
@@ -32,6 +32,8 @@ Automatically discovers:
 - Node properties
 - Relationship properties
 - Graph topology
+
+Relationship properties are preserved in the semantic graph model for future processing but are not currently represented in exported RDF or JSON-LD.
 
 ### Property Analysis
 
@@ -51,7 +53,7 @@ Provides a reusable semantic representation of Neo4j instance data through:
 - `RelationshipInstance`
 - `SemanticGraph`
 
-This layer decouples graph reading from RDF serialization and serves as the foundation for future exporters and graph processing.
+This layer decouples graph reading from serialization and serves as the foundation for current and future exporters and graph-processing components.
 
 ### OWL Ontology Generation
 
@@ -68,9 +70,9 @@ Generates:
 - Schema.org mappings
 - SKOS concept relationships
 
-### RDF Export
+### RDF and JSON-LD Export
 
-Exports graph instances as RDF/Turtle.
+Exports graph instances as RDF/Turtle and JSON-LD.
 
 Resources receive stable URIs derived from identifier properties whenever available.
 
@@ -83,6 +85,10 @@ Current serialization includes:
 - Schema.org
 - Dublin Core
 
+Relationships are exported as RDF object properties, while literal values become datatype properties.
+
+Relationship metadata (properties attached to Neo4j relationships) is preserved in the semantic graph model but is not currently represented in RDF or JSON-LD.
+
 ### SHACL Generation
 
 Automatically generates SHACL NodeShapes including:
@@ -92,9 +98,13 @@ Automatically generates SHACL NodeShapes including:
 - Cardinality constraints
 - Enumeration constraints
 
+Generated shapes validate node properties and graph structure derived from the discovered schema.
+
 ### Validation
 
-Validates exported RDF against generated SHACL shapes using pySHACL and produces a validation report identifying any constraint violations.
+Validates the generated RDF graph against the generated SHACL shapes using pySHACL and produces a validation report identifying constraint violations.
+
+Validation currently focuses on node properties and graph structure. Relationship metadata is not yet validated.
 
 ---
 
@@ -113,14 +123,14 @@ Neo4j Property Graph
           │              │
           └──────┬───────┘
                  ▼
-        Semantic Web Outputs
+          RDF Graph Builder
                  │
-     ┌───────────┼───────────┐
-     ▼           ▼           ▼
- OWL Ontology  RDF Export  SHACL Shapes
-                               │
-                               ▼
-                        SHACL Validation
+      ┌──────────┼──────────┐
+      ▼          ▼          ▼
+ OWL Ontology  RDF/Turtle  JSON-LD
+                                │
+                                ▼
+                         SHACL Validation
 ```
 
 ---
@@ -132,6 +142,7 @@ ontology_toolkit/
 
 ├── connection.py
 ├── discover_schema.py
+├── export_jsonld.py
 ├── export_rdf.py
 ├── generate_ontology.py
 ├── generate_shacl.py
@@ -143,7 +154,11 @@ ontology_toolkit/
 ├── type_inference.py
 ├── uri.py
 ├── validate_shacl.py
-└── vocab.py
+├── vocab.py
+└── serializers/
+    ├── __init__.py
+    ├── rdf.py
+    └── jsonld.py
 ```
 
 ---
@@ -155,6 +170,7 @@ Running the toolkit produces:
 ```text
 ontology.ttl
 graph.ttl
+graph.jsonld
 shapes.ttl
 validation_report.txt
 ```
@@ -162,7 +178,8 @@ validation_report.txt
 These artifacts include:
 
 - OWL ontology
-- RDF knowledge graph
+- RDF knowledge graph (Turtle)
+- JSON-LD knowledge graph
 - SHACL validation shapes
 - SHACL validation report
 
@@ -186,9 +203,12 @@ Neo4j Reader
 SemanticGraph
           │
           ▼
-RDF Serialization
-          │
-          ▼
+RDF Graph Builder
+      ┌───┴────┐
+      ▼        ▼
+ RDF/Turtle  JSON-LD
+      │
+      ▼
 SHACL Validation
 ```
 
@@ -244,8 +264,21 @@ python main.py
 - SKOS
 - Schema.org
 - Dublin Core
+- JSON-LD
 - rdflib
 - pySHACL
+
+---
+
+## Current Limitations
+
+The toolkit currently has the following limitations:
+
+- Relationship metadata (properties attached to Neo4j relationships) is preserved in the semantic graph model but is not yet represented in RDF or JSON-LD exports.
+- SHACL generation currently validates node properties and graph structure, but does not validate relationship metadata.
+- Schema discovery is based on the contents of an existing Neo4j property graph; the toolkit does not infer ontologies from unstructured text or use LLMs.
+- OWL reasoning is not currently performed as part of ontology generation or validation.
+- RDF-star serialization is not yet supported.
 
 ---
 
@@ -253,9 +286,8 @@ python main.py
 
 Planned or potential future enhancements include:
 
-- JSON-LD serialization
 - RDF-star serialization
-- SPARQL endpoint support
+- SPARQL query support
 - OWL reasoning integration
 - SHACL-AF rules
 - Competency question testing
