@@ -1,100 +1,20 @@
-from ontology_toolkit.connection import get_driver
-from ontology_toolkit.discover_schema import discover_schema
-from ontology_toolkit.export_jsonld import export_jsonld
-from ontology_toolkit.export_rdf import export_rdf
-from ontology_toolkit.export_schema_org import export_schema_org
-from ontology_toolkit.generate_ontology import save_ontology
-from ontology_toolkit.generate_shacl import save_shacl
-from ontology_toolkit.neo4j_reader import read_graph
-from ontology_toolkit.printer import print_schema
-from ontology_toolkit.validate_shacl import validate_graph
+from discover import main as discover_main
+from validate import main as validate_main
 
 
 def main():
 
-    driver = get_driver()
+    print("=" * 60)
+    print("Semantic Graph Toolkit")
+    print("=" * 60)
 
-    try:
+    print("\nStep 1: Discovering schema...")
+    discover_main()
 
-        driver.verify_connectivity()
+    print("\nStep 2: Validating graph...")
+    validate_main()
 
-        print("Connected to Neo4j!")
-
-        #
-        # Discover schema
-        #
-
-        schema = discover_schema(driver)
-
-        #
-        # Read instance data
-        #
-
-        semantic_graph = read_graph(driver)
-
-        #
-        # Export schema.org JSON-LD
-        #
-
-        export_schema_org(semantic_graph)
-
-        print("\nGenerated schema.org JSON-LD:")
-        print("schema_org/")
-
-        #
-        # Generate Ontology
-        #
-
-        save_ontology(schema)
-
-        print("\nGenerated Ontology:")
-        print("ontology.ttl")
-
-        #
-        # Export RDF
-        #
-
-        export_rdf(semantic_graph)
-
-        print("\nGenerated RDF:")
-        print("graph.ttl")
-
-        #
-        # Export JSON-LD
-        #
-
-        export_jsonld(semantic_graph)
-
-        print("\nGenerated JSON-LD:")
-        print("graph.jsonld")
-
-        #
-        # Generate SHACL
-        #
-
-        save_shacl(schema)
-
-        print("\nGenerated SHACL:")
-        print("shapes.ttl")
-
-        #
-        # Validate SHACL
-        #
-
-        validate_graph(
-            "graph.ttl",
-            "shapes.ttl",
-        )
-
-        #
-        # Print discovered schema
-        #
-
-        print_schema(schema)
-
-    finally:
-
-        driver.close()
+    print("\nDone.")
 
 
 if __name__ == "__main__":

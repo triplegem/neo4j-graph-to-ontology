@@ -6,7 +6,7 @@ The toolkit provides a database-independent semantic graph model that separates 
 
 ---
 
-## Overview
+# Overview
 
 The Semantic Graph Toolkit bridges Neo4j property graphs and Semantic Web technologies by:
 
@@ -25,21 +25,75 @@ Rather than serializing directly from Neo4j, the toolkit first loads instance da
 
 ---
 
-## Design Principles
+# Workflow
 
-The toolkit is organized around three independent layers:
+The toolkit provides three entry points.
 
-1. **Schema discovery** from Neo4j
-2. **Database-independent semantic graph representation**
-3. **Serialization and validation**
+## `discover.py`
 
-This separation allows new serialization formats and graph-processing components to be added without changing how graph data is extracted from Neo4j.
+Discovers the semantic schema from Neo4j and generates the semantic contract.
+
+Outputs:
+
+- `ontology.ttl`
+- `shapes.ttl`
+
+This workflow should be run whenever the ontology changes or the graph schema is intentionally updated.
 
 ---
 
-## Current Capabilities
+## `validate.py`
 
-### Schema Discovery
+Reads graph instance data, exports semantic representations, and validates the graph against the existing SHACL shapes.
+
+Outputs:
+
+- `graph.ttl`
+- `graph.jsonld`
+- `schema_org/*.json`
+- `validation_report.txt`
+
+Unlike discovery, this workflow does **not** regenerate the ontology or SHACL shapes. Instead, it validates the current graph against the previously established semantic contract.
+
+---
+
+## `main.py`
+
+A convenience workflow that performs both discovery and validation.
+
+```text
+Discover schema
+        ↓
+Generate ontology.ttl
+Generate shapes.ttl
+        ↓
+Read graph
+        ↓
+Export RDF / JSON-LD / schema.org
+        ↓
+Validate against SHACL
+```
+
+This is useful during development but is not required for routine validation.
+
+---
+
+# Design Principles
+
+The toolkit is organized around four independent layers:
+
+1. Schema discovery
+2. Database-independent semantic graph representation
+3. Serialization and validation
+4. Workflow orchestration
+
+This separation allows serialization formats, validators, and graph-processing components to evolve independently.
+
+---
+
+# Current Capabilities
+
+## Schema Discovery
 
 Automatically discovers:
 
@@ -56,7 +110,7 @@ Relationship properties are preserved in the semantic graph model for future pro
 
 ---
 
-### Property Analysis
+## Property Analysis
 
 Analyzes discovered properties to identify:
 
@@ -68,7 +122,7 @@ Analyzes discovered properties to identify:
 
 ---
 
-### Semantic Graph Model
+## Semantic Graph Model
 
 Provides a reusable semantic representation of Neo4j instance data through:
 
@@ -80,7 +134,7 @@ This layer decouples Neo4j data extraction from serialization, allowing multiple
 
 ---
 
-### OWL Ontology Generation
+## OWL Ontology Generation
 
 Generates:
 
@@ -97,7 +151,7 @@ Generates:
 
 ---
 
-### RDF and JSON-LD Export
+## RDF and JSON-LD Export
 
 Exports graph instances as RDF/Turtle and generic JSON-LD.
 
@@ -114,28 +168,28 @@ Serialization includes:
 
 Relationships are exported as RDF object properties, while literal values become datatype properties.
 
-Relationship metadata (properties attached to Neo4j relationships) is preserved in the semantic graph model but is not currently represented in RDF or JSON-LD.
+Relationship metadata is preserved in the semantic graph model but is not currently represented in RDF or JSON-LD.
 
 ---
 
-### Schema.org JSON-LD Export
+## Schema.org JSON-LD Export
 
 Generates web-oriented schema.org JSON-LD from the same `SemanticGraph` model used for RDF serialization.
 
 Current support includes:
 
-- `Person` serialization for Faculty entities
+- `Person`
 - `affiliation`
 - `knowsAbout`
 - `sameAs`
 
-The exporter generates one schema.org JSON-LD document per supported entity, allowing the toolkit to produce structured data suitable for search engines and other schema.org consumers.
+The exporter generates one schema.org JSON-LD document per supported entity.
 
-Because schema.org serialization operates on the semantic graph rather than directly on Neo4j, additional serializers (such as `Organization`, `ScholarlyArticle`, and `Grant`) can be added without changing the graph extraction process.
+Additional serializers (such as `Organization`, `ScholarlyArticle`, and `Grant`) can be added without changing the graph extraction process.
 
 ---
 
-### SHACL Generation
+## SHACL Generation
 
 Automatically generates SHACL NodeShapes including:
 
@@ -151,9 +205,9 @@ Object property constraints are generated from the discovered relationship topol
 
 ---
 
-### Validation
+## Validation
 
-Validates the generated RDF graph against the generated SHACL shapes using pySHACL and produces a validation report identifying constraint violations.
+Validates exported RDF against the existing SHACL shapes using pySHACL.
 
 Validation verifies:
 
@@ -163,85 +217,125 @@ Validation verifies:
 - Cardinality constraints
 - Enumerated values
 
-Relationship metadata is preserved in the semantic graph model but is not yet validated.
+Because validation uses previously generated SHACL shapes, semantic regressions can be detected without rediscovering the ontology.
 
 ---
 
-## Architecture
+# Architecture
 
 ```text
-                  Neo4j Property Graph
-                           │
-               ┌───────────┴───────────┐
-               │                       │
-               ▼                       ▼
-      Schema Discovery           Neo4j Reader
-               │                       │
-               ▼                       ▼
-        GraphSchema             SemanticGraph
-               │                       │
-               │              ┌────────┴────────┐
-               │              │                 │
-               ▼              ▼                 ▼
-       OWL Generator     RDF Graph Builder   schema.org
-               │              │              Serializer
-               │              │                 │
-               ▼              ▼                 ▼
-        ontology.ttl      graph.ttl      schema_org/*.json
-               │              │
-               │              ▼
-               │         graph.jsonld
-               │              │
-               └──────────────┴──────────────┐
-                                             ▼
-                                      SHACL Validation
+                     discover.py
+                          │
+                          ▼
+                 DiscoveryService
+                          │
+                          ▼
+                Schema Discovery
+                          │
+                          ▼
+                    GraphSchema
+                    │         │
+                    ▼         ▼
+             ontology.ttl  shapes.ttl
+
+
+                     validate.py
+                          │
+                          ▼
+                ValidationService
+                          │
+                          ▼
+                    Neo4j Reader
+                          │
+                          ▼
+                   SemanticGraph
+                   │      │      │
+                   ▼      ▼      ▼
+              RDF     JSON-LD  schema.org
+                   │
+                   ▼
+             SHACL Validation
+
+
+                      main.py
+                          │
+                          ▼
+            Discovery → Validation
 ```
 
 ---
 
-## Generated Outputs
+# Project Structure
 
-Running the toolkit produces:
+```text
+discover.py
+validate.py
+main.py
+
+ontology_toolkit/
+
+    services/
+        discovery.py
+        validation.py
+
+    connection.py
+
+    discover_schema.py
+    neo4j_reader.py
+
+    schema_model.py
+    semantic_model.py
+
+    generate_ontology.py
+    generate_shacl.py
+
+    export_rdf.py
+    export_jsonld.py
+    export_schema_org.py
+
+    validate_shacl.py
+    printer.py
+```
+
+---
+
+# Generated Outputs
+
+Discovery generates:
 
 ```text
 ontology.ttl
+shapes.ttl
+```
+
+Validation generates:
+
+```text
 graph.ttl
 graph.jsonld
+
 schema_org/
     *.json
-shapes.ttl
+
 validation_report.txt
 ```
 
-Artifacts generated include:
-
-- OWL ontology
-- RDF knowledge graph (Turtle)
-- Generic JSON-LD knowledge graph
-- schema.org JSON-LD documents
-- SHACL validation shapes
-- SHACL validation report
-
 ---
 
-## Current Limitations
+# Current Limitations
 
-The toolkit currently has the following limitations:
-
-- Relationship metadata (properties attached to Neo4j relationships) is preserved in the semantic graph model but is not yet represented in RDF or JSON-LD and is therefore not yet validated by SHACL.
+- Relationship metadata is preserved in the semantic graph model but is not yet represented in RDF or JSON-LD and therefore is not yet validated.
 - Schema.org serialization currently supports `Person` entities only.
 - Schema discovery is based on the contents of an existing Neo4j property graph.
-- The current workflow regenerates the discovered ontology and SHACL shapes each time the toolkit is run. A future validation-only mode will validate graph updates against a previously generated semantic contract.
-- OWL reasoning is not currently performed as part of ontology generation or validation.
+- OWL reasoning is not currently performed during ontology generation or validation.
 - RDF-star serialization is not yet supported.
 
 ---
 
-## Future Enhancements
+# Future Enhancements
 
 Potential future enhancements include:
 
-- Separate ontology discovery and validation workflows
 - Relationship property serialization
 - RDF-star serialization
 - Additional schema.org serializers (`Organization`, `ScholarlyArticle`, `Grant`, `Dataset`)
@@ -256,6 +350,6 @@ Potential future enhancements include:
 
 ---
 
-## License
+# License
 
 MIT License

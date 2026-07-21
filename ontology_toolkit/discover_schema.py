@@ -148,13 +148,4 @@ def discover_schema(driver):
             rel.target_labels.add(target)
             rel.allowed_label_pairs.add((source, target))
 
-    print("\n=== Relationship Label Pairs ===")
-
-    for rel in sorted(schema.relationship_types.values(), key=lambda r: r.name):
-        print(f"\n{rel.name}")
-
-        print(f"  Sources: {sorted(rel.source_labels)}")
-        print(f"  Targets: {sorted(rel.target_labels)}")
-        print(f"  Pairs:   {sorted(rel.allowed_label_pairs)}")
-
     return schema

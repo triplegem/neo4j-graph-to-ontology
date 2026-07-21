@@ -1,5 +1,5 @@
 """
-Validate an RDF graph against generated SHACL shapes.
+Validate an RDF graph against SHACL shapes.
 """
 
 from rdflib import Graph
@@ -9,9 +9,21 @@ from pyshacl import validate
 def validate_graph(
     rdf_file="graph.ttl",
     shacl_file="shapes.ttl",
+    report_file="validation_report.txt",
 ):
     """
-    Validate RDF against SHACL shapes.
+    Validate an RDF graph against a SHACL shapes graph.
+
+    Parameters
+    ----------
+    rdf_file : str
+        Path to the RDF graph (Turtle).
+
+    shacl_file : str
+        Path to the SHACL shapes graph.
+
+    report_file : str
+        Path where the validation report will be written.
     """
 
     data_graph = Graph()
@@ -43,9 +55,9 @@ def validate_graph(
     # Save report to disk
     #
 
-    with open("validation_report.txt", "w") as f:
+    with open(report_file, "w", encoding="utf-8") as f:
         f.write(results_text)
 
-    print("Validation report written to validation_report.txt")
+    print(f"Validation report written to {report_file}")
 
     return conforms

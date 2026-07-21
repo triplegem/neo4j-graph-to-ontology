@@ -49,84 +49,40 @@
             }
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0003-2310-6687",
-            "@type": "kgo:ORCID",
-            "kgo:identifier": "0000-0003-2310-6687",
-            "kgo:uri": {
-                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
-                "@value": "https://orcid.org/0000-0003-2310-6687"
-            }
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/concept/nanotechnology",
+            "@id": "https://kg.engineering.cornell.edu/resource/concept/engineering",
             "@type": [
                 "kgo:Concept",
                 "skos:Concept"
             ],
-            "kgo:identifier": "nanotechnology",
-            "skos:broader": {
-                "@id": "https://kg.engineering.cornell.edu/resource/concept/materials-engineering"
-            },
-            "skos:exactMatch": {
-                "@id": "https://kg.engineering.cornell.edu/resource/wikidata/q11468"
-            },
+            "kgo:identifier": "engineering",
             "skos:inScheme": {
                 "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
             },
-            "skos:prefLabel": "Nanotechnology"
+            "skos:prefLabel": "Engineering"
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/department/department-of-earth-and-atmospheric-sciences",
+            "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca",
             "@type": [
-                "kgo:Department",
-                "schema:Organization"
+                "kgo:Campus",
+                "schema:Place"
             ],
-            "kgo:hasLocation": {
-                "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
-            },
-            "kgo:name": "Department of Earth and Atmospheric Sciences",
-            "kgo:subOrganization": [
-                {
-                    "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
-                },
-                {
-                    "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-bowers-college-of-computing-and-information-science"
-                },
-                {
-                    "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences"
-                }
-            ]
+            "kgo:name": "Ithaca"
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics",
+            "@id": "https://kg.engineering.cornell.edu/resource/faculty/jd732",
             "@type": [
-                "kgo:Concept",
-                "skos:Concept"
+                "kgo:Faculty",
+                "schema:Person"
             ],
-            "kgo:identifier": "semiconductor-physics",
-            "skos:broader": {
-                "@id": "https://kg.engineering.cornell.edu/resource/concept/materials-engineering"
+            "kgo:affiliatedWith": {
+                "@id": "https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering"
             },
-            "skos:exactMatch": {
-                "@id": "https://kg.engineering.cornell.edu/resource/wikidata/q4483523"
-            },
-            "skos:inScheme": {
-                "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
-            },
-            "skos:prefLabel": "Semiconductor Physics"
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/department/school-of-civil-and-environmental-engineering",
-            "@type": [
-                "kgo:Department",
-                "schema:Organization"
-            ],
-            "kgo:hasLocation": {
-                "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
-            },
-            "kgo:name": "School of Civil and Environmental Engineering",
-            "kgo:subOrganization": {
-                "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
+            "kgo:email": "jd732@cornell.edu",
+            "kgo:name": "Julia Dshemuchadse",
+            "kgo:netid": "jd732",
+            "kgo:rank": "Associate Professor",
+            "owl:sameAs": {
+                "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0003-2310-6687"
             }
         },
         {
@@ -177,161 +133,36 @@
             }
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/concept/energy-systems",
-            "@type": [
-                "kgo:Concept",
-                "skos:Concept"
-            ],
-            "kgo:identifier": "energy-systems",
-            "skos:broader": {
-                "@id": "https://kg.engineering.cornell.edu/resource/concept/engineering"
-            },
-            "skos:inScheme": {
-                "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
-            },
-            "skos:prefLabel": "Energy Systems"
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca",
-            "@type": [
-                "kgo:Campus",
-                "schema:Place"
-            ],
-            "kgo:name": "Ithaca"
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise",
-            "@type": [
-                "kgo:ConceptScheme",
-                "skos:ConceptScheme"
-            ],
-            "kgo:description": "Controlled vocabulary for describing faculty research expertise across Cornell University.",
-            "kgo:identifier": "cornell-research-expertise",
-            "skos:prefLabel": "Cornell University Research Expertise Concept Scheme"
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/department/r.f.-smith-school-of-chemical-and-biomolecular-engineering",
-            "@type": [
-                "kgo:Department",
-                "schema:Organization"
-            ],
-            "kgo:hasLocation": {
-                "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
-            },
-            "kgo:name": "R.F. Smith School of Chemical and Biomolecular Engineering",
-            "kgo:subOrganization": {
-                "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
-            }
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences",
-            "@type": [
-                "kgo:College",
-                "schema:CollegeOrUniversity"
-            ],
-            "kgo:name": "Cornell College of Agriculture and Life Sciences",
-            "kgo:subOrganization": {
-                "@id": "https://kg.engineering.cornell.edu/resource/university/cornell-university"
-            }
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/concept/engineering",
-            "@type": [
-                "kgo:Concept",
-                "skos:Concept"
-            ],
-            "kgo:identifier": "engineering",
-            "skos:inScheme": {
-                "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
-            },
-            "skos:prefLabel": "Engineering"
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/grant/2016522",
+            "@id": "https://kg.engineering.cornell.edu/resource/grant/2015237",
             "@type": "kgo:Grant",
             "kgo:about": [
                 {
                     "@id": "https://kg.engineering.cornell.edu/resource/concept/nanotechnology"
                 },
                 {
-                    "@id": "https://kg.engineering.cornell.edu/resource/concept/energy-systems"
+                    "@id": "https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics"
                 }
             ],
-            "kgo:awardNumber": "2016522",
+            "kgo:awardNumber": "2015237",
             "kgo:endDate": {
                 "@type": "http://www.w3.org/2001/XMLSchema#date",
-                "@value": "2024-08-31"
+                "@value": "2021-08-31"
             },
-            "kgo:identifier": "2016522",
+            "kgo:identifier": "2015237",
             "kgo:sponsor": "National Science Foundation",
             "kgo:startDate": {
                 "@type": "http://www.w3.org/2001/XMLSchema#date",
-                "@value": "2020-09-01"
+                "@value": "2017-09-01"
             },
-            "kgo:title": "Mobile device-based detection of toxins in food crops to monitor food safety and improve public health"
+            "kgo:title": "Extreme Bandgap Semiconductors"
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/publication/10.1126/science.aau8623",
+            "@id": "https://kg.engineering.cornell.edu/resource/campus/weill-cornell-%28nyc%29",
             "@type": [
-                "kgo:Publication",
-                "schema:ScholarlyArticle"
+                "kgo:Campus",
+                "schema:Place"
             ],
-            "kgo:about": {
-                "@id": "https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics"
-            },
-            "kgo:datePublished": {
-                "@type": "http://www.w3.org/2001/XMLSchema#date",
-                "@value": "2019-01-01"
-            },
-            "kgo:identifier": "10.1126/science.aau8623",
-            "kgo:title": "A polarization-induced 2D hole gas in undoped gallium nitride quantum wells",
-            "kgo:uri": {
-                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
-                "@value": "https://doi.org/10.1126/science.aau8623"
-            },
-            "kgo:venue": "Science"
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/department/school-of-applied-and-engineering-physics",
-            "@type": [
-                "kgo:Department",
-                "schema:Organization"
-            ],
-            "kgo:hasLocation": {
-                "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
-            },
-            "kgo:name": "School of Applied and Engineering Physics",
-            "kgo:subOrganization": {
-                "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
-            }
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0002-4076-4625",
-            "@type": "kgo:ORCID",
-            "kgo:identifier": "0000-0002-4076-4625",
-            "kgo:uri": {
-                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
-                "@value": "https://orcid.org/0000-0002-4076-4625"
-            }
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/department/school-of-operations-research-and-information-engineering",
-            "@type": [
-                "kgo:Department",
-                "schema:Organization"
-            ],
-            "kgo:hasLocation": [
-                {
-                    "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
-                },
-                {
-                    "@id": "https://kg.engineering.cornell.edu/resource/campus/cornell-tech-%28nyc%29"
-                }
-            ],
-            "kgo:name": "School of Operations Research and Information Engineering",
-            "kgo:subOrganization": {
-                "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
-            }
+            "kgo:name": "Weill Cornell (NYC)"
         },
         {
             "@id": "https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering",
@@ -348,40 +179,19 @@
             }
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering",
+            "@id": "https://kg.engineering.cornell.edu/resource/concept/materials-engineering",
             "@type": [
-                "kgo:College",
-                "schema:CollegeOrUniversity"
+                "kgo:Concept",
+                "skos:Concept"
             ],
-            "kgo:name": "Cornell Duffield College of Engineering",
-            "kgo:subOrganization": {
-                "@id": "https://kg.engineering.cornell.edu/resource/university/cornell-university"
-            }
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/campus/cornell-tech-%28nyc%29",
-            "@type": [
-                "kgo:Campus",
-                "schema:Place"
-            ],
-            "kgo:name": "Cornell Tech (NYC)"
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/faculty/jd732",
-            "@type": [
-                "kgo:Faculty",
-                "schema:Person"
-            ],
-            "kgo:affiliatedWith": {
-                "@id": "https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering"
+            "kgo:identifier": "materials-engineering",
+            "skos:broader": {
+                "@id": "https://kg.engineering.cornell.edu/resource/concept/engineering"
             },
-            "kgo:email": "jd732@cornell.edu",
-            "kgo:name": "Julia Dshemuchadse",
-            "kgo:netid": "jd732",
-            "kgo:rank": "Associate Professor",
-            "owl:sameAs": {
-                "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0003-2310-6687"
-            }
+            "skos:inScheme": {
+                "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
+            },
+            "skos:prefLabel": "Materials Engineering"
         },
         {
             "@id": "https://kg.engineering.cornell.edu/resource/university/cornell-university",
@@ -390,6 +200,16 @@
                 "schema:CollegeOrUniversity"
             ],
             "kgo:name": "Cornell University"
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise",
+            "@type": [
+                "kgo:ConceptScheme",
+                "skos:ConceptScheme"
+            ],
+            "kgo:description": "Controlled vocabulary for describing faculty research expertise across Cornell University.",
+            "kgo:identifier": "cornell-research-expertise",
+            "skos:prefLabel": "Cornell University Research Expertise Concept Scheme"
         },
         {
             "@id": "https://kg.engineering.cornell.edu/resource/department/school-of-electrical-and-computer-engineering",
@@ -409,6 +229,28 @@
             "kgo:subOrganization": {
                 "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
             }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/department/department-of-earth-and-atmospheric-sciences",
+            "@type": [
+                "kgo:Department",
+                "schema:Organization"
+            ],
+            "kgo:hasLocation": {
+                "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
+            },
+            "kgo:name": "Department of Earth and Atmospheric Sciences",
+            "kgo:subOrganization": [
+                {
+                    "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
+                },
+                {
+                    "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-bowers-college-of-computing-and-information-science"
+                },
+                {
+                    "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences"
+                }
+            ]
         },
         {
             "@id": "https://kg.engineering.cornell.edu/resource/publication/10.1038/s41928-026-01590-8",
@@ -435,6 +277,40 @@
                 "@value": "https://doi.org/10.1038/s41928-026-01590-8"
             },
             "kgo:venue": "Nature Electronics"
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/department/school-of-civil-and-environmental-engineering",
+            "@type": [
+                "kgo:Department",
+                "schema:Organization"
+            ],
+            "kgo:hasLocation": {
+                "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
+            },
+            "kgo:name": "School of Civil and Environmental Engineering",
+            "kgo:subOrganization": {
+                "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
+            }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences",
+            "@type": [
+                "kgo:College",
+                "schema:CollegeOrUniversity"
+            ],
+            "kgo:name": "Cornell College of Agriculture and Life Sciences",
+            "kgo:subOrganization": {
+                "@id": "https://kg.engineering.cornell.edu/resource/university/cornell-university"
+            }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0002-4076-4625",
+            "@type": "kgo:ORCID",
+            "kgo:identifier": "0000-0002-4076-4625",
+            "kgo:uri": {
+                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
+                "@value": "https://orcid.org/0000-0002-4076-4625"
+            }
         },
         {
             "@id": "https://kg.engineering.cornell.edu/resource/faculty/de54",
@@ -471,12 +347,37 @@
             }
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/campus/weill-cornell-%28nyc%29",
+            "@id": "https://kg.engineering.cornell.edu/resource/concept/energy-systems",
             "@type": [
-                "kgo:Campus",
-                "schema:Place"
+                "kgo:Concept",
+                "skos:Concept"
             ],
-            "kgo:name": "Weill Cornell (NYC)"
+            "kgo:identifier": "energy-systems",
+            "skos:broader": {
+                "@id": "https://kg.engineering.cornell.edu/resource/concept/engineering"
+            },
+            "skos:inScheme": {
+                "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
+            },
+            "skos:prefLabel": "Energy Systems"
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0003-2310-6687",
+            "@type": "kgo:ORCID",
+            "kgo:identifier": "0000-0003-2310-6687",
+            "kgo:uri": {
+                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
+                "@value": "https://orcid.org/0000-0003-2310-6687"
+            }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/wikidata/q11468",
+            "@type": "kgo:Wikidata",
+            "kgo:identifier": "Q11468",
+            "kgo:uri": {
+                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
+                "@value": "https://www.wikidata.org/wiki/Q11468"
+            }
         },
         {
             "@id": "https://kg.engineering.cornell.edu/resource/department/meinig-school-of-biomedical-engineering",
@@ -498,46 +399,39 @@
             }
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/grant/2015237",
-            "@type": "kgo:Grant",
-            "kgo:about": [
-                {
-                    "@id": "https://kg.engineering.cornell.edu/resource/concept/nanotechnology"
-                },
-                {
-                    "@id": "https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics"
-                }
+            "@id": "https://kg.engineering.cornell.edu/resource/department/school-of-applied-and-engineering-physics",
+            "@type": [
+                "kgo:Department",
+                "schema:Organization"
             ],
-            "kgo:awardNumber": "2015237",
-            "kgo:endDate": {
-                "@type": "http://www.w3.org/2001/XMLSchema#date",
-                "@value": "2021-08-31"
+            "kgo:hasLocation": {
+                "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
             },
-            "kgo:identifier": "2015237",
-            "kgo:sponsor": "National Science Foundation",
-            "kgo:startDate": {
-                "@type": "http://www.w3.org/2001/XMLSchema#date",
-                "@value": "2017-09-01"
-            },
-            "kgo:title": "Extreme Bandgap Semiconductors"
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/wikidata/q11468",
-            "@type": "kgo:Wikidata",
-            "kgo:identifier": "Q11468",
-            "kgo:uri": {
-                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
-                "@value": "https://www.wikidata.org/wiki/Q11468"
+            "kgo:name": "School of Applied and Engineering Physics",
+            "kgo:subOrganization": {
+                "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
             }
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0002-1624-9711",
-            "@type": "kgo:ORCID",
-            "kgo:identifier": "0000-0002-1624-9711",
+            "@id": "https://kg.engineering.cornell.edu/resource/publication/10.1126/science.aau8623",
+            "@type": [
+                "kgo:Publication",
+                "schema:ScholarlyArticle"
+            ],
+            "kgo:about": {
+                "@id": "https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics"
+            },
+            "kgo:datePublished": {
+                "@type": "http://www.w3.org/2001/XMLSchema#date",
+                "@value": "2019-01-01"
+            },
+            "kgo:identifier": "10.1126/science.aau8623",
+            "kgo:title": "A polarization-induced 2D hole gas in undoped gallium nitride quantum wells",
             "kgo:uri": {
                 "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
-                "@value": "https://orcid.org/0000-0002-1624-9711"
-            }
+                "@value": "https://doi.org/10.1126/science.aau8623"
+            },
+            "kgo:venue": "Science"
         },
         {
             "@id": "https://kg.engineering.cornell.edu/resource/publication/10.1021/nl204561r",
@@ -566,21 +460,17 @@
             "kgo:venue": "Nano Letters"
         },
         {
-            "@id": "https://kg.engineering.cornell.edu/resource/wikidata/q4483523",
-            "@type": "kgo:Wikidata",
-            "kgo:identifier": "Q4483523",
-            "kgo:uri": {
-                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
-                "@value": "https://www.wikidata.org/wiki/Q4483523"
-            }
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0002-2709-3839",
-            "@type": "kgo:ORCID",
-            "kgo:identifier": "0000-0002-2709-3839",
-            "kgo:uri": {
-                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
-                "@value": "https://orcid.org/0000-0002-2709-3839"
+            "@id": "https://kg.engineering.cornell.edu/resource/department/r.f.-smith-school-of-chemical-and-biomolecular-engineering",
+            "@type": [
+                "kgo:Department",
+                "schema:Organization"
+            ],
+            "kgo:hasLocation": {
+                "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
+            },
+            "kgo:name": "R.F. Smith School of Chemical and Biomolecular Engineering",
+            "kgo:subOrganization": {
+                "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
             }
         },
         {
@@ -592,6 +482,131 @@
             "kgo:name": "Cornell Bowers College of Computing and Information Science",
             "kgo:subOrganization": {
                 "@id": "https://kg.engineering.cornell.edu/resource/university/cornell-university"
+            }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/campus/cornell-tech-%28nyc%29",
+            "@type": [
+                "kgo:Campus",
+                "schema:Place"
+            ],
+            "kgo:name": "Cornell Tech (NYC)"
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/department/school-of-operations-research-and-information-engineering",
+            "@type": [
+                "kgo:Department",
+                "schema:Organization"
+            ],
+            "kgo:hasLocation": [
+                {
+                    "@id": "https://kg.engineering.cornell.edu/resource/campus/ithaca"
+                },
+                {
+                    "@id": "https://kg.engineering.cornell.edu/resource/campus/cornell-tech-%28nyc%29"
+                }
+            ],
+            "kgo:name": "School of Operations Research and Information Engineering",
+            "kgo:subOrganization": {
+                "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
+            }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/concept/nanotechnology",
+            "@type": [
+                "kgo:Concept",
+                "skos:Concept"
+            ],
+            "kgo:identifier": "nanotechnology",
+            "skos:broader": {
+                "@id": "https://kg.engineering.cornell.edu/resource/concept/materials-engineering"
+            },
+            "skos:exactMatch": {
+                "@id": "https://kg.engineering.cornell.edu/resource/wikidata/q11468"
+            },
+            "skos:inScheme": {
+                "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
+            },
+            "skos:prefLabel": "Nanotechnology"
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0002-2709-3839",
+            "@type": "kgo:ORCID",
+            "kgo:identifier": "0000-0002-2709-3839",
+            "kgo:uri": {
+                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
+                "@value": "https://orcid.org/0000-0002-2709-3839"
+            }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/grant/2016522",
+            "@type": "kgo:Grant",
+            "kgo:about": [
+                {
+                    "@id": "https://kg.engineering.cornell.edu/resource/concept/nanotechnology"
+                },
+                {
+                    "@id": "https://kg.engineering.cornell.edu/resource/concept/energy-systems"
+                }
+            ],
+            "kgo:awardNumber": "2016522",
+            "kgo:endDate": {
+                "@type": "http://www.w3.org/2001/XMLSchema#date",
+                "@value": "2024-08-31"
+            },
+            "kgo:identifier": "2016522",
+            "kgo:sponsor": "National Science Foundation",
+            "kgo:startDate": {
+                "@type": "http://www.w3.org/2001/XMLSchema#date",
+                "@value": "2020-09-01"
+            },
+            "kgo:title": "Mobile device-based detection of toxins in food crops to monitor food safety and improve public health"
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering",
+            "@type": [
+                "kgo:College",
+                "schema:CollegeOrUniversity"
+            ],
+            "kgo:name": "Cornell Duffield College of Engineering",
+            "kgo:subOrganization": {
+                "@id": "https://kg.engineering.cornell.edu/resource/university/cornell-university"
+            }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics",
+            "@type": [
+                "kgo:Concept",
+                "skos:Concept"
+            ],
+            "kgo:identifier": "semiconductor-physics",
+            "skos:broader": {
+                "@id": "https://kg.engineering.cornell.edu/resource/concept/materials-engineering"
+            },
+            "skos:exactMatch": {
+                "@id": "https://kg.engineering.cornell.edu/resource/wikidata/q4483523"
+            },
+            "skos:inScheme": {
+                "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
+            },
+            "skos:prefLabel": "Semiconductor Physics"
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/wikidata/q4483523",
+            "@type": "kgo:Wikidata",
+            "kgo:identifier": "Q4483523",
+            "kgo:uri": {
+                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
+                "@value": "https://www.wikidata.org/wiki/Q4483523"
+            }
+        },
+        {
+            "@id": "https://kg.engineering.cornell.edu/resource/orcid/0000-0002-1624-9711",
+            "@type": "kgo:ORCID",
+            "kgo:identifier": "0000-0002-1624-9711",
+            "kgo:uri": {
+                "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
+                "@value": "https://orcid.org/0000-0002-1624-9711"
             }
         },
         {
@@ -607,21 +622,6 @@
             "kgo:subOrganization": {
                 "@id": "https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering"
             }
-        },
-        {
-            "@id": "https://kg.engineering.cornell.edu/resource/concept/materials-engineering",
-            "@type": [
-                "kgo:Concept",
-                "skos:Concept"
-            ],
-            "kgo:identifier": "materials-engineering",
-            "skos:broader": {
-                "@id": "https://kg.engineering.cornell.edu/resource/concept/engineering"
-            },
-            "skos:inScheme": {
-                "@id": "https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise"
-            },
-            "skos:prefLabel": "Materials Engineering"
         }
     ]
 }
