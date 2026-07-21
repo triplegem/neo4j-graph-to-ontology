@@ -60,8 +60,15 @@ class RelationshipType:
 
     name: str
     count: int = 0
+
+    # Labels that participate in this relationship
     source_labels: set[str] = field(default_factory=set)
     target_labels: set[str] = field(default_factory=set)
+
+    # Preserve the discovered source → target label combinations
+    allowed_label_pairs: set[tuple[str, str]] = field(default_factory=set)
+
+    # Relationship properties
     properties: dict[str, PropertyDefinition] = field(default_factory=dict)
 
 

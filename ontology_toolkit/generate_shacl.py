@@ -225,22 +225,23 @@ def generate_shacl(schema: GraphSchema):
             key=lambda r: r.name
         ):
 
-            #
-            # Only relationships originating from this node
-            #
-
-            if node.label not in relationship.source_labels:
-                continue
-
             predicate = relationship_to_predicate(
                 relationship.name
             )
 
             path = shacl_path(predicate)
 
-            for target_label in sorted(
-                relationship.target_labels
+            #
+            # Generate one constraint for each discovered
+            # source → target label combination.
+            #
+
+            for source_label, target_label in sorted(
+                relationship.allowed_label_pairs
             ):
+
+                if source_label != node.label:
+                    continue
 
                 lines.append("    sh:property [")
 
