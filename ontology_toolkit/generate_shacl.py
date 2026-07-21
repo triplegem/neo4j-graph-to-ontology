@@ -6,7 +6,7 @@ Generate SHACL Shapes from a discovered graph schema.
 
 from pathlib import Path
 
-from ontology_toolkit.models import GraphSchema
+from ontology_toolkit.schema_model import GraphSchema
 from ontology_toolkit.vocab import relationship_to_predicate
 
 

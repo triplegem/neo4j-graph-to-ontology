@@ -1,4 +1,4 @@
-from ontology_toolkit.models import (
+from ontology_toolkit.schema_model import (
     GraphSchema,
     NodeType,
     RelationshipType,

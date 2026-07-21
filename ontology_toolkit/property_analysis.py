@@ -7,7 +7,7 @@ Analyzes all observed values for a property and produces a
 PropertyDefinition containing inferred metadata.
 """
 
-from ontology_toolkit.models import PropertyDefinition
+from ontology_toolkit.schema_model import PropertyDefinition
 from ontology_toolkit.type_inference import infer_property_type
 
 

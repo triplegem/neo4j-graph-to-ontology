@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://kg.engineering.cornell.edu/resource/faculty/jd732",
+  "name": "Julia Dshemuchadse",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Department of Materials Science and Engineering"
+  },
+  "sameAs": [
+    "https://orcid.org/0000-0003-2310-6687"
+  ]
+}

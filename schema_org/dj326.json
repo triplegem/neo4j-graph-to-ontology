@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://kg.engineering.cornell.edu/resource/faculty/dj326",
+  "name": "Debdeep Jena",
+  "affiliation": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Department of Materials Science and Engineering"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "School of Electrical and Computer Engineering"
+    }
+  ],
+  "knowsAbout": [
+    "Energy Systems",
+    "Nanotechnology",
+    "Semiconductor Physics"
+  ],
+  "sameAs": [
+    "https://orcid.org/0000-0002-4076-4625"
+  ]
+}

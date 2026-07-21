@@ -1,7 +1,8 @@
 from ontology_toolkit.connection import get_driver
 from ontology_toolkit.discover_schema import discover_schema
-from ontology_toolkit.export_rdf import export_rdf
 from ontology_toolkit.export_jsonld import export_jsonld
+from ontology_toolkit.export_rdf import export_rdf
+from ontology_toolkit.export_schema_org import export_schema_org
 from ontology_toolkit.generate_ontology import save_ontology
 from ontology_toolkit.generate_shacl import save_shacl
 from ontology_toolkit.neo4j_reader import read_graph
@@ -30,6 +31,15 @@ def main():
         #
 
         semantic_graph = read_graph(driver)
+
+        #
+        # Export schema.org JSON-LD
+        #
+
+        export_schema_org(semantic_graph)
+
+        print("\nGenerated schema.org JSON-LD:")
+        print("schema_org/")
 
         #
         # Generate Ontology

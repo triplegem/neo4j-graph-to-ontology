@@ -1,4 +1,4 @@
-from ontology_toolkit.models import GraphSchema
+from ontology_toolkit.schema_model import GraphSchema
 
 
 def print_schema(schema: GraphSchema):
