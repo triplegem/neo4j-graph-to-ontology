@@ -7,6 +7,7 @@ Generate SHACL Shapes from a discovered graph schema.
 from pathlib import Path
 
 from ontology_toolkit.models import GraphSchema
+from ontology_toolkit.vocab import relationship_to_predicate
 
 
 PREFIXES = """
@@ -43,7 +44,7 @@ XSD_TYPES = {
 # Standard vocabulary mappings
 #
 
-STANDARD_SHACL_PATHS = {
+STANDARD_PATHS = {
     "prefLabel": "skos:prefLabel",
     "broader": "skos:broader",
     "inScheme": "skos:inScheme",
@@ -52,11 +53,13 @@ STANDARD_SHACL_PATHS = {
 }
 
 
+#
 # Explicit ontology design rules
+#
 
 DESIGN_RULES = {
 
-    # Human-readable labels    
+    # Human-readable labels
 
     "name": {
         "minCount": 1,
@@ -74,7 +77,7 @@ DESIGN_RULES = {
     },
 
     # Identifiers
-    
+
     "identifier": {
         "minCount": 1,
         "maxCount": 1,
@@ -106,6 +109,18 @@ def shacl_datatype(property_definition):
     return XSD_TYPES.get(
         property_definition.data_type,
         "xsd:string"
+    )
+
+
+def shacl_path(name: str) -> str:
+    """
+    Return the SHACL path for a property or relationship,
+    reusing standard vocabularies where applicable.
+    """
+
+    return STANDARD_PATHS.get(
+        name,
+        f"kgo:{name}"
     )
 
 
@@ -143,10 +158,7 @@ def generate_shacl(schema: GraphSchema):
             # Reuse standard vocabularies
             #
 
-            path = STANDARD_SHACL_PATHS.get(
-                prop.name,
-                f"kgo:{prop.name}"
-            )
+            path = shacl_path(prop.name)
 
             lines.append(
                 f"        sh:path {path} ;"
@@ -203,6 +215,48 @@ def generate_shacl(schema: GraphSchema):
                 )
 
             lines.append("    ] ;")
+
+        #
+        # Outgoing relationships
+        #
+
+        for relationship in sorted(
+            schema.relationship_types.values(),
+            key=lambda r: r.name
+        ):
+
+            #
+            # Only relationships originating from this node
+            #
+
+            if node.label not in relationship.source_labels:
+                continue
+
+            predicate = relationship_to_predicate(
+                relationship.name
+            )
+
+            path = shacl_path(predicate)
+
+            for target_label in sorted(
+                relationship.target_labels
+            ):
+
+                lines.append("    sh:property [")
+
+                lines.append(
+                    f"        sh:path {path} ;"
+                )
+
+                lines.append(
+                    "        sh:nodeKind sh:IRI ;"
+                )
+
+                lines.append(
+                    f"        sh:class kgo:{target_label} ;"
+                )
+
+                lines.append("    ] ;")
 
         #
         # Remove trailing semicolon from final property

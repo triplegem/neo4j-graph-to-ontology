@@ -1,2 +1,94 @@
 Validation Report
-Conforms: True
+Conforms: False
+Results (13):
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:College ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/college/cornell-bowers-college-of-computing-and-information-science>
+	Value Node: <https://kg.engineering.cornell.edu/resource/university/cornell-university>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:College
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:College ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences>
+	Value Node: <https://kg.engineering.cornell.edu/resource/university/cornell-university>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:College
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:College ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Value Node: <https://kg.engineering.cornell.edu/resource/university/cornell-university>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:College
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/department-of-earth-and-atmospheric-sciences>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/department-of-earth-and-atmospheric-sciences>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/meinig-school-of-biomedical-engineering>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/r.f.-smith-school-of-chemical-and-biomolecular-engineering>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/school-of-applied-and-engineering-physics>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/school-of-civil-and-environmental-engineering>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/school-of-electrical-and-computer-engineering>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/school-of-operations-research-and-information-engineering>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
+Constraint Violation in ClassConstraintComponent (http://www.w3.org/ns/shacl#ClassConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:class kgo:University ; sh:nodeKind sh:IRI ; sh:path kgo:subOrganization ]
+	Focus Node: <https://kg.engineering.cornell.edu/resource/department/sibley-school-of-mechanical-and-aerospace-engineering>
+	Value Node: <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering>
+	Result Path: kgo:subOrganization
+	Message: Value does not have class kgo:University
