@@ -4,16 +4,12 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://kg.engineering.cornell.edu/resource/college/cornell-bowers-college-of-computing-and-information-science> a kgo:College,
-        schema:CollegeOrUniversity ;
-    kgo:name "Cornell Bowers College of Computing and Information Science" ;
-    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/university/cornell-university> .
-
 <https://kg.engineering.cornell.edu/resource/department/department-of-earth-and-atmospheric-sciences> a kgo:Department,
         schema:Organization ;
     kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
     kgo:name "Department of Earth and Atmospheric Sciences" ;
-    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences>,
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-bowers-college-of-computing-and-information-science>,
+        <https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences>,
         <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
 
 <https://kg.engineering.cornell.edu/resource/department/meinig-school-of-biomedical-engineering> a kgo:Department,
@@ -107,6 +103,11 @@
 <https://kg.engineering.cornell.edu/resource/campus/weill-cornell-%28nyc%29> a kgo:Campus,
         schema:Place ;
     kgo:name "Weill Cornell (NYC)" .
+
+<https://kg.engineering.cornell.edu/resource/college/cornell-bowers-college-of-computing-and-information-science> a kgo:College,
+        schema:CollegeOrUniversity ;
+    kgo:name "Cornell Bowers College of Computing and Information Science" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/university/cornell-university> .
 
 <https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences> a kgo:College,
         schema:CollegeOrUniversity ;

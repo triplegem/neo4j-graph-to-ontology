@@ -130,19 +130,31 @@ def discover_schema(driver):
             MATCH (a)-[r]->(b)
 
             RETURN DISTINCT
-
                 labels(a)[0] AS source,
-
                 type(r) AS relationship,
-
                 labels(b)[0] AS target
+
+            ORDER BY relationship, source, target
         """)
 
         for record in result:
 
             rel = schema.relationship_types[record["relationship"]]
 
-            rel.source_labels.add(record["source"])
-            rel.target_labels.add(record["target"])
+            source = record["source"]
+            target = record["target"]
+
+            rel.source_labels.add(source)
+            rel.target_labels.add(target)
+            rel.allowed_label_pairs.add((source, target))
+
+    print("\n=== Relationship Label Pairs ===")
+
+    for rel in sorted(schema.relationship_types.values(), key=lambda r: r.name):
+        print(f"\n{rel.name}")
+
+        print(f"  Sources: {sorted(rel.source_labels)}")
+        print(f"  Targets: {sorted(rel.target_labels)}")
+        print(f"  Pairs:   {sorted(rel.allowed_label_pairs)}")
 
     return schema

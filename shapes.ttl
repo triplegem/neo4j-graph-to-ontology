@@ -26,6 +26,11 @@ kgo:CollegeShape
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path kgo:subOrganization ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:University ;
     ]
 .
 
@@ -43,6 +48,21 @@ kgo:ConceptShape
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path skos:broader ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Concept ;
+    ] ;
+    sh:property [
+        sh:path skos:exactMatch ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Wikidata ;
+    ] ;
+    sh:property [
+        sh:path skos:inScheme ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:ConceptScheme ;
     ]
 .
 
@@ -75,6 +95,16 @@ kgo:DepartmentShape
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path kgo:hasLocation ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Campus ;
+    ] ;
+    sh:property [
+        sh:path kgo:subOrganization ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:College ;
     ]
 .
 
@@ -101,6 +131,36 @@ kgo:FacultyShape
         sh:path kgo:rank ;
         sh:datatype xsd:string ;
         sh:in ( "Associate Professor" "Professor" ) ;
+    ] ;
+    sh:property [
+        sh:path kgo:affiliatedWith ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Department ;
+    ] ;
+    sh:property [
+        sh:path kgo:authorOf ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Publication ;
+    ] ;
+    sh:property [
+        sh:path kgo:hasLocation ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Campus ;
+    ] ;
+    sh:property [
+        sh:path kgo:investigatorOn ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Grant ;
+    ] ;
+    sh:property [
+        sh:path kgo:knowsAbout ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Concept ;
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:ORCID ;
     ]
 .
 
@@ -136,6 +196,11 @@ kgo:GrantShape
         sh:datatype xsd:string ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path kgo:about ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Concept ;
     ]
 .
 
@@ -184,6 +249,11 @@ kgo:PublicationShape
     sh:property [
         sh:path kgo:venue ;
         sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path kgo:about ;
+        sh:nodeKind sh:IRI ;
+        sh:class kgo:Concept ;
     ]
 .
 
