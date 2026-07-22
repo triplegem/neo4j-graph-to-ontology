@@ -48,3 +48,20 @@ def make_uri(class_name: str, properties: dict):
     #
 
     return KGR[f"{class_name.lower()}/{id(properties)}"]
+
+
+def make_relationship_uri(
+    relationship_type: str,
+    element_id: str,
+):
+    """
+    Create a stable URI for a relationship resource.
+
+    Relationship resources are identified using their Neo4j
+    relationship type together with the Neo4j elementId.
+    """
+
+    relationship = quote(relationship_type.lower())
+    element = quote(element_id)
+
+    return KGR[f"relationship/{relationship}/{element}"]
