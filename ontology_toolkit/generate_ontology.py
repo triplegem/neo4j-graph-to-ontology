@@ -33,6 +33,7 @@ from ontology_toolkit.ontology_common import (
     write_metadata,
     collect_property_domains,
     write_classes,
+    write_datatype_properties,
 )
 
 #
@@ -87,113 +88,11 @@ def save_ontology(schema, filename="ontology.ttl"):
     # ----------------------------------------------------------------
     #
 
-    emitted_properties = set()
+    write_datatype_properties(
+        graph,
+        property_domains,
+    )
 
-    for label, node in sorted(schema.node_types.items()):
-
-        for prop in sorted(
-            node.properties.values(),
-            key=lambda p: p.name
-        ):
-
-            #
-            # Skip properties already emitted
-            #
-
-            if prop.name in emitted_properties:
-                continue
-
-            emitted_properties.add(prop.name)
-
-            #
-            # Reuse standard vocabularies
-            #
-
-            if prop.name in STANDARD_PREDICATES:
-                continue
-
-            predicate = KGO[prop.name]
-
-            graph.add((
-                predicate,
-                RDF.type,
-                OWL.DatatypeProperty
-            ))
-
-            #
-            # Functional property
-            #
-            # Only if:
-            #   - inferred unique
-            #   - used by exactly one class
-            #
-
-            classes = property_domains[prop.name]["classes"]
-
-            if (
-                prop.unique
-                and len(classes) == 1
-            ):
-
-                graph.add((
-                    predicate,
-                    RDF.type,
-                    OWL.FunctionalProperty
-                ))
-
-            #
-            # Label
-            #
-
-            graph.add((
-                predicate,
-                RDFS.label,
-                Literal(make_label(prop.name))
-            ))
-
-            #
-            # Comment
-            #
-
-            graph.add((
-                predicate,
-                RDFS.comment,
-                Literal(property_comment(prop.name))
-            ))
-
-            #
-            # Domain
-            #
-            # IMPORTANT:
-            # Only emit when exactly one class owns
-            # the property. Otherwise OWL interprets
-            # multiple domains as intersection.
-            #
-
-            if len(classes) == 1:
-
-                owner = next(iter(classes))
-
-                graph.add((
-                    predicate,
-                    RDFS.domain,
-                    KGO[owner]
-                ))
-
-            #
-            # Range
-            #
-
-            datatype = DATATYPE_MAPPING.get(prop.data_type)
-
-            if datatype is not None:
-
-                graph.add((
-                    predicate,
-                    RDFS.range,
-                    datatype
-                ))
-        #
     # ----------------------------------------------------------------
     # Object Properties
     # ----------------------------------------------------------------

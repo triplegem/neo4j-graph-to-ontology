@@ -248,3 +248,95 @@ def write_classes(graph, schema):
                 RDFS.subClassOf,
                 URIRef(CLASS_ALIGNMENT[label])
             ))
+
+def write_datatype_properties(
+    graph,
+    property_domains,
+):
+    """
+    Write OWL datatype properties.
+    """
+
+    for prop_name in sorted(property_domains):
+
+        #
+        # Reuse standard vocabularies
+        #
+
+        if prop_name in STANDARD_PREDICATES:
+            continue
+
+        predicate = KGO[prop_name]
+
+        graph.add((
+            predicate,
+            RDF.type,
+            OWL.DatatypeProperty
+        ))
+
+        classes = property_domains[prop_name]["classes"]
+
+        #
+        # Functional property
+        #
+
+        prop = property_domains[prop_name]["properties"][0]
+
+        if (
+            prop.unique
+            and len(classes) == 1
+        ):
+
+            graph.add((
+                predicate,
+                RDF.type,
+                OWL.FunctionalProperty
+            ))
+
+        #
+        # Label
+        #
+
+        graph.add((
+            predicate,
+            RDFS.label,
+            Literal(make_label(prop_name))
+        ))
+
+        #
+        # Comment
+        #
+
+        graph.add((
+            predicate,
+            RDFS.comment,
+            Literal(property_comment(prop_name))
+        ))
+
+        #
+        # Domain
+        #
+
+        if len(classes) == 1:
+
+            owner = next(iter(classes))
+
+            graph.add((
+                predicate,
+                RDFS.domain,
+                KGO[owner]
+            ))
+
+        #
+        # Range
+        #
+
+        datatype = DATATYPE_MAPPING.get(prop.data_type)
+
+        if datatype is not None:
+
+            graph.add((
+                predicate,
+                RDFS.range,
+                datatype
+            ))
