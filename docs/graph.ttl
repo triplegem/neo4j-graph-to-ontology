@@ -1,0 +1,267 @@
+@prefix kgo: <https://kg.engineering.cornell.edu/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://kg.engineering.cornell.edu/resource/department/department-of-earth-and-atmospheric-sciences> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "Department of Earth and Atmospheric Sciences" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-bowers-college-of-computing-and-information-science>,
+        <https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences>,
+        <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/department/meinig-school-of-biomedical-engineering> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca>,
+        <https://kg.engineering.cornell.edu/resource/campus/weill-cornell-%28nyc%29> ;
+    kgo:name "Meinig School of Biomedical Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/department/r.f.-smith-school-of-chemical-and-biomolecular-engineering> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "R.F. Smith School of Chemical and Biomolecular Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/department/school-of-applied-and-engineering-physics> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "School of Applied and Engineering Physics" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/department/school-of-civil-and-environmental-engineering> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "School of Civil and Environmental Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/department/school-of-operations-research-and-information-engineering> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/cornell-tech-%28nyc%29>,
+        <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "School of Operations Research and Information Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/faculty/de54> a kgo:Faculty,
+        schema:Person ;
+    owl:sameAs <https://kg.engineering.cornell.edu/resource/orcid/0000-0002-1624-9711> ;
+    kgo:affiliatedWith <https://kg.engineering.cornell.edu/resource/department/sibley-school-of-mechanical-and-aerospace-engineering> ;
+    kgo:authorOf <https://kg.engineering.cornell.edu/resource/publication/10.1021/nl204561r> ;
+    kgo:email "de54@cornell.edu" ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:investigatorOn <https://kg.engineering.cornell.edu/resource/grant/2016522> ;
+    kgo:knowsAbout <https://kg.engineering.cornell.edu/resource/concept/energy-systems>,
+        <https://kg.engineering.cornell.edu/resource/concept/nanotechnology> ;
+    kgo:name "David Erickson" ;
+    kgo:netid "de54" ;
+    kgo:rank "Professor" .
+
+<https://kg.engineering.cornell.edu/resource/faculty/dj326> a kgo:Faculty,
+        schema:Person ;
+    owl:sameAs <https://kg.engineering.cornell.edu/resource/orcid/0000-0002-4076-4625> ;
+    kgo:affiliatedWith <https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering>,
+        <https://kg.engineering.cornell.edu/resource/department/school-of-electrical-and-computer-engineering> ;
+    kgo:authorOf <https://kg.engineering.cornell.edu/resource/publication/10.1038/s41928-026-01590-8>,
+        <https://kg.engineering.cornell.edu/resource/publication/10.1126/science.aau8623> ;
+    kgo:email "djena@cornell.edu" ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:investigatorOn <https://kg.engineering.cornell.edu/resource/grant/2015237> ;
+    kgo:knowsAbout <https://kg.engineering.cornell.edu/resource/concept/energy-systems>,
+        <https://kg.engineering.cornell.edu/resource/concept/nanotechnology>,
+        <https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics> ;
+    kgo:name "Debdeep Jena" ;
+    kgo:netid "dj326" ;
+    kgo:rank "Professor" .
+
+<https://kg.engineering.cornell.edu/resource/faculty/hgx2> a kgo:Faculty,
+        schema:Person ;
+    owl:sameAs <https://kg.engineering.cornell.edu/resource/orcid/0000-0002-2709-3839> ;
+    kgo:affiliatedWith <https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering>,
+        <https://kg.engineering.cornell.edu/resource/department/school-of-electrical-and-computer-engineering> ;
+    kgo:authorOf <https://kg.engineering.cornell.edu/resource/publication/10.1038/s41928-026-01590-8> ;
+    kgo:email "grace.xing@cornell.edu" ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:investigatorOn <https://kg.engineering.cornell.edu/resource/grant/2015237> ;
+    kgo:knowsAbout <https://kg.engineering.cornell.edu/resource/concept/energy-systems>,
+        <https://kg.engineering.cornell.edu/resource/concept/nanotechnology>,
+        <https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics> ;
+    kgo:name "Huili Grace Xing" ;
+    kgo:netid "hgx2" ;
+    kgo:rank "Professor" .
+
+<https://kg.engineering.cornell.edu/resource/faculty/jd732> a kgo:Faculty,
+        schema:Person ;
+    owl:sameAs <https://kg.engineering.cornell.edu/resource/orcid/0000-0003-2310-6687> ;
+    kgo:affiliatedWith <https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering> ;
+    kgo:email "jd732@cornell.edu" ;
+    kgo:name "Julia Dshemuchadse" ;
+    kgo:netid "jd732" ;
+    kgo:rank "Associate Professor" .
+
+<https://kg.engineering.cornell.edu/resource/campus/weill-cornell-%28nyc%29> a kgo:Campus,
+        schema:Place ;
+    kgo:name "Weill Cornell (NYC)" .
+
+<https://kg.engineering.cornell.edu/resource/college/cornell-bowers-college-of-computing-and-information-science> a kgo:College,
+        schema:CollegeOrUniversity ;
+    kgo:name "Cornell Bowers College of Computing and Information Science" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/university/cornell-university> .
+
+<https://kg.engineering.cornell.edu/resource/college/cornell-college-of-agriculture-and-life-sciences> a kgo:College,
+        schema:CollegeOrUniversity ;
+    kgo:name "Cornell College of Agriculture and Life Sciences" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/university/cornell-university> .
+
+<https://kg.engineering.cornell.edu/resource/department/sibley-school-of-mechanical-and-aerospace-engineering> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "Sibley School of Mechanical and Aerospace Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/grant/2016522> a kgo:Grant ;
+    kgo:about <https://kg.engineering.cornell.edu/resource/concept/energy-systems>,
+        <https://kg.engineering.cornell.edu/resource/concept/nanotechnology> ;
+    kgo:awardNumber "2016522" ;
+    kgo:endDate "2024-08-31"^^xsd:date ;
+    kgo:identifier "2016522" ;
+    kgo:sponsor "National Science Foundation" ;
+    kgo:startDate "2020-09-01"^^xsd:date ;
+    kgo:title "Mobile device-based detection of toxins in food crops to monitor food safety and improve public health" .
+
+<https://kg.engineering.cornell.edu/resource/orcid/0000-0002-1624-9711> a kgo:ORCID ;
+    kgo:identifier "0000-0002-1624-9711" ;
+    kgo:uri "https://orcid.org/0000-0002-1624-9711"^^xsd:anyURI .
+
+<https://kg.engineering.cornell.edu/resource/orcid/0000-0002-2709-3839> a kgo:ORCID ;
+    kgo:identifier "0000-0002-2709-3839" ;
+    kgo:uri "https://orcid.org/0000-0002-2709-3839"^^xsd:anyURI .
+
+<https://kg.engineering.cornell.edu/resource/orcid/0000-0002-4076-4625> a kgo:ORCID ;
+    kgo:identifier "0000-0002-4076-4625" ;
+    kgo:uri "https://orcid.org/0000-0002-4076-4625"^^xsd:anyURI .
+
+<https://kg.engineering.cornell.edu/resource/orcid/0000-0003-2310-6687> a kgo:ORCID ;
+    kgo:identifier "0000-0003-2310-6687" ;
+    kgo:uri "https://orcid.org/0000-0003-2310-6687"^^xsd:anyURI .
+
+<https://kg.engineering.cornell.edu/resource/publication/10.1021/nl204561r> a kgo:Publication,
+        schema:ScholarlyArticle ;
+    kgo:about <https://kg.engineering.cornell.edu/resource/concept/energy-systems>,
+        <https://kg.engineering.cornell.edu/resource/concept/nanotechnology> ;
+    kgo:datePublished "2012-01-01"^^xsd:date ;
+    kgo:identifier "10.1021/nl204561r" ;
+    kgo:title "Controlled photonic manipulation of proteins and other nanomaterials" ;
+    kgo:uri "https://doi.org/10.1021/nl204561r"^^xsd:anyURI ;
+    kgo:venue "Nano Letters" .
+
+<https://kg.engineering.cornell.edu/resource/publication/10.1126/science.aau8623> a kgo:Publication,
+        schema:ScholarlyArticle ;
+    kgo:about <https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics> ;
+    kgo:datePublished "2019-01-01"^^xsd:date ;
+    kgo:identifier "10.1126/science.aau8623" ;
+    kgo:title "A polarization-induced 2D hole gas in undoped gallium nitride quantum wells" ;
+    kgo:uri "https://doi.org/10.1126/science.aau8623"^^xsd:anyURI ;
+    kgo:venue "Science" .
+
+<https://kg.engineering.cornell.edu/resource/wikidata/q11468> a kgo:Wikidata ;
+    kgo:identifier "Q11468" ;
+    kgo:uri "https://www.wikidata.org/wiki/Q11468"^^xsd:anyURI .
+
+<https://kg.engineering.cornell.edu/resource/wikidata/q4483523> a kgo:Wikidata ;
+    kgo:identifier "Q4483523" ;
+    kgo:uri "https://www.wikidata.org/wiki/Q4483523"^^xsd:anyURI .
+
+<https://kg.engineering.cornell.edu/resource/campus/cornell-tech-%28nyc%29> a kgo:Campus,
+        schema:Place ;
+    kgo:name "Cornell Tech (NYC)" .
+
+<https://kg.engineering.cornell.edu/resource/concept/engineering> a skos:Concept,
+        kgo:Concept ;
+    skos:inScheme <https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise> ;
+    skos:prefLabel "Engineering" ;
+    kgo:identifier "engineering" .
+
+<https://kg.engineering.cornell.edu/resource/concept/materials-engineering> a skos:Concept,
+        kgo:Concept ;
+    skos:broader <https://kg.engineering.cornell.edu/resource/concept/engineering> ;
+    skos:inScheme <https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise> ;
+    skos:prefLabel "Materials Engineering" ;
+    kgo:identifier "materials-engineering" .
+
+<https://kg.engineering.cornell.edu/resource/department/school-of-electrical-and-computer-engineering> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/cornell-tech-%28nyc%29>,
+        <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "School of Electrical and Computer Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/grant/2015237> a kgo:Grant ;
+    kgo:about <https://kg.engineering.cornell.edu/resource/concept/nanotechnology>,
+        <https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics> ;
+    kgo:awardNumber "2015237" ;
+    kgo:endDate "2021-08-31"^^xsd:date ;
+    kgo:identifier "2015237" ;
+    kgo:sponsor "National Science Foundation" ;
+    kgo:startDate "2017-09-01"^^xsd:date ;
+    kgo:title "Extreme Bandgap Semiconductors" .
+
+<https://kg.engineering.cornell.edu/resource/publication/10.1038/s41928-026-01590-8> a kgo:Publication,
+        schema:ScholarlyArticle ;
+    kgo:about <https://kg.engineering.cornell.edu/resource/concept/nanotechnology>,
+        <https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics> ;
+    kgo:datePublished "2026-01-01"^^xsd:date ;
+    kgo:identifier "10.1038/s41928-026-01590-8" ;
+    kgo:title "High-mobility holes in gallium nitride and their quantum oscillations" ;
+    kgo:uri "https://doi.org/10.1038/s41928-026-01590-8"^^xsd:anyURI ;
+    kgo:venue "Nature Electronics" .
+
+<https://kg.engineering.cornell.edu/resource/department/department-of-materials-science-and-engineering> a kgo:Department,
+        schema:Organization ;
+    kgo:hasLocation <https://kg.engineering.cornell.edu/resource/campus/ithaca> ;
+    kgo:name "Department of Materials Science and Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> .
+
+<https://kg.engineering.cornell.edu/resource/university/cornell-university> a kgo:University,
+        schema:CollegeOrUniversity ;
+    kgo:name "Cornell University" .
+
+<https://kg.engineering.cornell.edu/resource/concept/energy-systems> a skos:Concept,
+        kgo:Concept ;
+    skos:broader <https://kg.engineering.cornell.edu/resource/concept/engineering> ;
+    skos:inScheme <https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise> ;
+    skos:prefLabel "Energy Systems" ;
+    kgo:identifier "energy-systems" .
+
+<https://kg.engineering.cornell.edu/resource/concept/semiconductor-physics> a skos:Concept,
+        kgo:Concept ;
+    skos:broader <https://kg.engineering.cornell.edu/resource/concept/materials-engineering> ;
+    skos:exactMatch <https://kg.engineering.cornell.edu/resource/wikidata/q4483523> ;
+    skos:inScheme <https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise> ;
+    skos:prefLabel "Semiconductor Physics" ;
+    kgo:identifier "semiconductor-physics" .
+
+<https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise> a skos:ConceptScheme,
+        kgo:ConceptScheme ;
+    skos:prefLabel "Cornell University Research Expertise Concept Scheme" ;
+    kgo:description "Controlled vocabulary for describing faculty research expertise across Cornell University." ;
+    kgo:identifier "cornell-research-expertise" .
+
+<https://kg.engineering.cornell.edu/resource/concept/nanotechnology> a skos:Concept,
+        kgo:Concept ;
+    skos:broader <https://kg.engineering.cornell.edu/resource/concept/materials-engineering> ;
+    skos:exactMatch <https://kg.engineering.cornell.edu/resource/wikidata/q11468> ;
+    skos:inScheme <https://kg.engineering.cornell.edu/resource/conceptscheme/cornell-research-expertise> ;
+    skos:prefLabel "Nanotechnology" ;
+    kgo:identifier "nanotechnology" .
+
+<https://kg.engineering.cornell.edu/resource/college/cornell-duffield-college-of-engineering> a kgo:College,
+        schema:CollegeOrUniversity ;
+    kgo:name "Cornell Duffield College of Engineering" ;
+    kgo:subOrganization <https://kg.engineering.cornell.edu/resource/university/cornell-university> .
+
+<https://kg.engineering.cornell.edu/resource/campus/ithaca> a kgo:Campus,
+        schema:Place ;
+    kgo:name "Ithaca" .
+
