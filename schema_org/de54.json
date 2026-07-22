@@ -2,16 +2,5 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://kg.engineering.cornell.edu/resource/faculty/de54",
-  "name": "David Erickson",
-  "affiliation": {
-    "@type": "CollegeOrUniversity",
-    "name": "Sibley School of Mechanical and Aerospace Engineering"
-  },
-  "knowsAbout": [
-    "Energy Systems",
-    "Nanotechnology"
-  ],
-  "sameAs": [
-    "https://orcid.org/0000-0002-1624-9711"
-  ]
+  "name": "David Erickson"
 }

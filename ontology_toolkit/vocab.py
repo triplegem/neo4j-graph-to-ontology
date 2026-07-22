@@ -84,3 +84,19 @@ def relationship_to_predicate(name: str) -> str:
         word.capitalize()
         for word in words[1:]
     )
+
+
+def relationship_to_class(name: str) -> str:
+    """
+    Convert Neo4j relationship names to ontology relationship classes.
+
+    AUTHOR_OF -> AuthorOfRelationship
+    SAME_AS -> SameAsRelationship
+    """
+
+    words = name.lower().split("_")
+
+    return "".join(
+        word.capitalize()
+        for word in words
+    ) + "Relationship"
