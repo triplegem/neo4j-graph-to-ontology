@@ -15,7 +15,10 @@ from ontology_toolkit.uri import (
     make_uri,
     make_relationship_uri,
 )
-from ontology_toolkit.vocab import relationship_to_predicate
+from ontology_toolkit.vocab import (
+    relationship_to_class,
+    relationship_to_predicate,
+)
 
 
 def read_graph(driver: Driver) -> SemanticGraph:
@@ -104,6 +107,9 @@ def _read_relationships(
                 ),
                 element_id=record["id"],
                 relationship_type=record["rel"],
+                relationship_class=relationship_to_class(
+                    record["rel"]
+                ),
                 predicate=relationship_to_predicate(
                     record["rel"]
                 ),
