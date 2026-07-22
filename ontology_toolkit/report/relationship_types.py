@@ -1,6 +1,6 @@
 def render_relationship_types(schema):
 
-    html = "<h2>Relationship Types</h2>"
+    html = "<h2 id=\"relationship-types\">Relationship Types</h2>"
     html += '<div class="cards">'
 
     for relationship in sorted(

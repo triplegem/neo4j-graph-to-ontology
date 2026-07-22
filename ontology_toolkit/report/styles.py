@@ -58,4 +58,37 @@ td {
 h3 {
     margin-top: 0;
 }
+
+pre {
+    background: #f7f7f7;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    line-height: 1.6;
+    font-family: SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th,
+td {
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+th {
+    background: #f3f4f6;
+    font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
 """

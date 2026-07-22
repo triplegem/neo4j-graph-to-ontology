@@ -1,6 +1,6 @@
 def render_node_types(schema):
 
-    html = "<h2>Node Types</h2>"
+    html = "<h2 id=\"node-types\">Node Types</h2>"
     html += '<div class="cards">'
 
     for node in sorted(schema.node_types.values(), key=lambda n: n.label):
