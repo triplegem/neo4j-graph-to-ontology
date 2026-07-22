@@ -22,6 +22,7 @@ from ontology_toolkit.vocab import (
     CLASS_ALIGNMENT,
     DATATYPE_MAPPING,
     STANDARD_PREDICATES,
+    relationship_to_predicate,
 )
 
 def make_label(name: str) -> str:
@@ -339,4 +340,125 @@ def write_datatype_properties(
                 predicate,
                 RDFS.range,
                 datatype
+            ))
+
+def write_object_properties(
+    graph,
+    schema,
+):
+    INVERSE_PROPERTIES = {
+
+        "authorOf": "hasAuthor",
+        "affiliatedWith": "hasFaculty",
+        "investigatorOn": "hasInvestigator",
+        "hasLocation": "locationOf",
+        "subOrganization": "hasSubOrganization",
+
+    }
+
+    emitted_relationships = set()
+
+    for rel in sorted(
+        schema.relationship_types.values(),
+        key=lambda r: r.name
+    ):
+
+        predicate_name = relationship_to_predicate(
+            rel.name
+        )
+
+        #
+        # Reuse SKOS / OWL predicates
+        #
+
+        if predicate_name in STANDARD_PREDICATES:
+            continue
+
+        if predicate_name in emitted_relationships:
+            continue
+
+        emitted_relationships.add(predicate_name)
+
+        predicate = KGO[predicate_name]
+
+        graph.add((
+            predicate,
+            RDF.type,
+            OWL.ObjectProperty
+        ))
+
+        graph.add((
+            predicate,
+            RDFS.label,
+            Literal(make_label(predicate_name))
+        ))
+
+        graph.add((
+            predicate,
+            RDFS.comment,
+            Literal(property_comment(predicate_name))
+        ))
+
+        #
+        # Domain
+        #
+
+        if len(rel.source_labels) == 1:
+
+            graph.add((
+                predicate,
+                RDFS.domain,
+                KGO[next(iter(rel.source_labels))]
+            ))
+
+        #
+        # Range
+        #
+
+        if len(rel.target_labels) == 1:
+
+            graph.add((
+                predicate,
+                RDFS.range,
+                KGO[next(iter(rel.target_labels))]
+            ))
+
+        #
+        # Automatically create inverse properties
+        #
+
+        if predicate_name in INVERSE_PROPERTIES:
+
+            inverse_name = INVERSE_PROPERTIES[predicate_name]
+
+            inverse = KGO[inverse_name]
+
+            graph.add((
+                inverse,
+                RDF.type,
+                OWL.ObjectProperty
+            ))
+
+            graph.add((
+                inverse,
+                RDFS.label,
+                Literal(make_label(inverse_name))
+            ))
+
+            graph.add((
+                inverse,
+                RDFS.comment,
+                Literal(f"Inverse of {predicate_name}.")
+            ))
+
+            graph.add((
+                inverse,
+                OWL.inverseOf,
+                predicate
+            ))
+
+            graph.add((
+                predicate,
+                OWL.inverseOf,
+                inverse
             ))
