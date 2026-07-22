@@ -27,14 +27,7 @@ def export_schema_org(
 
     count = 0
 
-    for entity in graph.entities:
-
-        #
-        # Faculty -> schema.org Person
-        #
-
-        if entity.class_name != "Faculty":
-            continue
+    for entity in graph.entities_by_class("Faculty"):
 
         document = serialize_person(entity, graph)
 
@@ -44,8 +37,7 @@ def export_schema_org(
             or f"person_{count}"
         )
 
-        with open(
-            output / f"{filename}.json",
+        with (output / f"{filename}.json").open(
             "w",
             encoding="utf-8",
         ) as f:

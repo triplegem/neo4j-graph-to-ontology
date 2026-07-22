@@ -76,7 +76,8 @@ class SemanticGraph:
     """
     Instance-level graph.
 
-    This is the runtime counterpart to GraphSchema.
+    This is the runtime counterpart to GraphSchema and serves as
+    the canonical in-memory representation of graph instance data.
     """
 
     entities: list[EntityInstance] = field(default_factory=list)
@@ -96,6 +97,65 @@ class SemanticGraph:
     def is_empty(self) -> bool:
         """Return True if the graph contains no entities or relationships."""
         return len(self) == 0
+
+    def get_entity(self, uri: str) -> EntityInstance | None:
+        """
+        Return the entity with the given URI, or None if not found.
+        """
+        return next(
+            (entity for entity in self.entities if entity.uri == uri),
+            None,
+        )
+
+    def entities_by_class(self, class_name: str) -> list[EntityInstance]:
+        """
+        Return all entities belonging to the specified class.
+        """
+        return [
+            entity
+            for entity in self.entities
+            if entity.class_name == class_name
+        ]
+
+    def outgoing(
+        self,
+        source_uri: str,
+        predicate: str | None = None,
+    ) -> list[RelationshipInstance]:
+        """
+        Return outgoing relationships from the specified entity.
+
+        If a predicate is supplied, only matching relationships are returned.
+        """
+        return [
+            relationship
+            for relationship in self.relationships
+            if relationship.source_uri == source_uri
+            and (
+                predicate is None
+                or relationship.predicate == predicate
+            )
+        ]
+
+    def incoming(
+        self,
+        target_uri: str,
+        predicate: str | None = None,
+    ) -> list[RelationshipInstance]:
+        """
+        Return incoming relationships to the specified entity.
+
+        If a predicate is supplied, only matching relationships are returned.
+        """
+        return [
+            relationship
+            for relationship in self.relationships
+            if relationship.target_uri == target_uri
+            and (
+                predicate is None
+                or relationship.predicate == predicate
+            )
+        ]
 
     def __len__(self) -> int:
         """

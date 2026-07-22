@@ -4,46 +4,10 @@ schema_org.py
 Schema.org serializers built on top of the SemanticGraph model.
 """
 
-from typing import Optional
-
 from ..semantic_model import (
     EntityInstance,
-    RelationshipInstance,
     SemanticGraph,
 )
-
-
-# ----------------------------------------------------------------------
-# Graph helpers
-# ----------------------------------------------------------------------
-
-def _get_entity(
-    graph: SemanticGraph,
-    uri: str,
-) -> Optional[EntityInstance]:
-    """
-    Return an entity by URI.
-    """
-    for entity in graph.entities:
-        if entity.uri == uri:
-            return entity
-    return None
-
-
-def _outgoing(
-    graph: SemanticGraph,
-    source_uri: str,
-    relationship_type: str,
-) -> list[RelationshipInstance]:
-    """
-    Return outgoing relationships of a given Neo4j relationship type.
-    """
-    return [
-        rel
-        for rel in graph.relationships
-        if rel.source_uri == source_uri
-        and rel.relationship_type == relationship_type
-    ]
 
 
 # ----------------------------------------------------------------------
@@ -65,7 +29,11 @@ def serialize_person(
     data = {
         "@context": "https://schema.org",
         "@type": "Person",
-        "@id": f"{profile_url}#person" if profile_url else person.uri,
+        "@id": (
+            f"{profile_url}#person"
+            if profile_url
+            else person.uri
+        ),
         "name": person.properties.get("name"),
     }
 
@@ -86,22 +54,23 @@ def serialize_person(
     # worksFor
     # --------------------------------------------------
 
-    for rel in _outgoing(graph, person.uri, "WORKS_FOR"):
+    for relationship in graph.outgoing(person.uri, "WORKS_FOR"):
 
-        university = _get_entity(graph, rel.target_uri)
+        university = graph.get_entity(relationship.target_uri)
 
-        if university:
+        if not university:
+            continue
 
-            works_for = {
-                "@type": "CollegeOrUniversity",
-                "name": university.properties.get("name"),
-            }
+        works_for = {
+            "@type": "CollegeOrUniversity",
+            "name": university.properties.get("name"),
+        }
 
-            if university.properties.get("url"):
-                works_for["@id"] = university.properties["url"]
+        if university.properties.get("url"):
+            works_for["@id"] = university.properties["url"]
 
-            data["worksFor"] = works_for
-            break
+        data["worksFor"] = works_for
+        break
 
     # --------------------------------------------------
     # affiliation
@@ -109,21 +78,27 @@ def serialize_person(
 
     affiliations = []
 
-    for rel in _outgoing(graph, person.uri, "AFFILIATED_WITH"):
+    for relationship in graph.outgoing(
+        person.uri,
+        "AFFILIATED_WITH",
+    ):
 
-        department = _get_entity(graph, rel.target_uri)
+        department = graph.get_entity(
+            relationship.target_uri
+        )
 
-        if department:
+        if not department:
+            continue
 
-            affiliation = {
-                "@type": "CollegeOrUniversity",
-                "name": department.properties.get("name"),
-            }
+        affiliation = {
+            "@type": "CollegeOrUniversity",
+            "name": department.properties.get("name"),
+        }
 
-            if department.properties.get("url"):
-                affiliation["@id"] = department.properties["url"]
+        if department.properties.get("url"):
+            affiliation["@id"] = department.properties["url"]
 
-            affiliations.append(affiliation)
+        affiliations.append(affiliation)
 
     if affiliations:
         data["affiliation"] = (
@@ -138,9 +113,14 @@ def serialize_person(
 
     knows_about = []
 
-    for rel in _outgoing(graph, person.uri, "KNOWS_ABOUT"):
+    for relationship in graph.outgoing(
+        person.uri,
+        "KNOWS_ABOUT",
+    ):
 
-        concept = _get_entity(graph, rel.target_uri)
+        concept = graph.get_entity(
+            relationship.target_uri
+        )
 
         if not concept:
             continue
@@ -164,9 +144,14 @@ def serialize_person(
 
     same_as = []
 
-    for rel in _outgoing(graph, person.uri, "SAME_AS"):
+    for relationship in graph.outgoing(
+        person.uri,
+        "SAME_AS",
+    ):
 
-        identifier = _get_entity(graph, rel.target_uri)
+        identifier = graph.get_entity(
+            relationship.target_uri
+        )
 
         if not identifier:
             continue
