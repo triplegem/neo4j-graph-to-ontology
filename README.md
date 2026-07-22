@@ -379,6 +379,12 @@ Potential future enhancements include:
 
 ---
 
+# AI Reviews and Responses
+- CLAUDE_REVIEW.md
+- CHATGPT_CLAUDE_REVIEW_RESPONSE.md
+
+---
+
 # License
 
 MIT License
