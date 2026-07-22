@@ -29,6 +29,9 @@ from ontology_toolkit.ontology_common import (
     make_label,
     class_comment,
     property_comment,
+    bind_namespaces,
+    write_metadata,
+    collect_property_domains,
 )
 
 #
@@ -45,14 +48,7 @@ def save_ontology(schema, filename="ontology.ttl"):
     # Register namespaces
     #
 
-    graph.bind("kgo", KGO)
-    graph.bind("schema", SCHEMA)
-    graph.bind("rdf", RDF)
-    graph.bind("rdfs", RDFS)
-    graph.bind("owl", OWL)
-    graph.bind("xsd", XSD)
-    graph.bind("skos", SKOS)
-    graph.bind("dcterms", DCTERMS)
+    bind_namespaces(graph)
 
     #
     # ----------------------------------------------------------------
@@ -60,47 +56,7 @@ def save_ontology(schema, filename="ontology.ttl"):
     # ----------------------------------------------------------------
     #
 
-    ontology = KGO[""]
-
-    graph.add((ontology, RDF.type, OWL.Ontology))
-
-    graph.add((
-        ontology,
-        RDFS.label,
-        Literal("Cornell Engineering Faculty Expertise Ontology")
-    ))
-
-    graph.add((
-        ontology,
-        RDFS.comment,
-        Literal(
-            "Ontology supporting an engineering faculty expertise knowledge graph."
-        )
-    ))
-
-    graph.add((
-        ontology,
-        DCTERMS.creator,
-        Literal("Chris Lastovicka")
-    ))
-
-    graph.add((
-        ontology,
-        DCTERMS.created,
-        Literal(str(date.today()), datatype=XSD.date)
-    ))
-
-    graph.add((
-        ontology,
-        DCTERMS.title,
-        Literal("Faculty Expertise Ontology")
-    ))
-
-    graph.add((
-        ontology,
-        OWL.versionInfo,
-        Literal("1.0")
-    ))
+    write_metadata(graph)
 
     #
     # ----------------------------------------------------------------
@@ -114,22 +70,7 @@ def save_ontology(schema, filename="ontology.ttl"):
     # ----------------------------------------------------------------
     #
 
-    property_domains = {}
-
-    for label, node in schema.node_types.items():
-
-        for prop in node.properties.values():
-
-            property_domains.setdefault(
-                prop.name,
-                {
-                    "classes": set(),
-                    "properties": []
-                }
-            )
-
-            property_domains[prop.name]["classes"].add(label)
-            property_domains[prop.name]["properties"].append(prop)
+    property_domains = collect_property_domains(schema)
 
     #
     # ----------------------------------------------------------------

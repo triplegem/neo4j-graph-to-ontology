@@ -4,6 +4,25 @@ Ontology Toolkit
 Shared utilities for ontology generation.
 """
 
+from datetime import date
+from rdflib import Literal
+
+from rdflib.namespace import (
+    RDF,
+    RDFS,
+    OWL,
+    XSD,
+    SKOS,
+    DCTERMS,
+)
+
+from ontology_toolkit.vocab import (
+    KGO,
+    SCHEMA,
+    CLASS_ALIGNMENT,
+    DATATYPE_MAPPING,
+    STANDARD_PREDICATES,
+)
 
 def make_label(name: str) -> str:
     """
@@ -118,3 +137,94 @@ def property_comment(name: str) -> str:
         name,
         f"Ontology property '{make_label(name)}'."
     )
+
+def bind_namespaces(graph):
+    """
+    Register namespaces used throughout the ontology.
+    """
+
+    graph.bind("kgo", KGO)
+    graph.bind("schema", SCHEMA)
+    graph.bind("rdf", RDF)
+    graph.bind("rdfs", RDFS)
+    graph.bind("owl", OWL)
+    graph.bind("xsd", XSD)
+    graph.bind("skos", SKOS)
+    graph.bind("dcterms", DCTERMS)
+
+def write_metadata(graph):
+    """
+    Write ontology metadata.
+    """
+
+    ontology = KGO[""]
+
+    graph.add((ontology, RDF.type, OWL.Ontology))
+
+    graph.add((
+        ontology,
+        RDFS.label,
+        Literal("Cornell Engineering Faculty Expertise Ontology")
+    ))
+
+    graph.add((
+        ontology,
+        RDFS.comment,
+        Literal(
+            "Ontology supporting an engineering faculty expertise knowledge graph."
+        )
+    ))
+
+    graph.add((
+        ontology,
+        DCTERMS.creator,
+        Literal("Chris Lastovicka")
+    ))
+
+    graph.add((
+        ontology,
+        DCTERMS.created,
+        Literal(str(date.today()), datatype=XSD.date)
+    ))
+
+    graph.add((
+        ontology,
+        DCTERMS.title,
+        Literal("Faculty Expertise Ontology")
+    ))
+
+    graph.add((
+        ontology,
+        OWL.versionInfo,
+        Literal("1.0")
+    ))
+
+def collect_property_domains(schema):
+    """
+    Collect property usage information.
+
+    We use this to determine:
+
+    1. Which classes use each property
+    2. Whether a property should be Functional
+    3. Whether a domain can safely be emitted
+    """
+
+    property_domains = {}
+
+    for label, node in schema.node_types.items():
+
+        for prop in node.properties.values():
+
+            property_domains.setdefault(
+                prop.name,
+                {
+                    "classes": set(),
+                    "properties": []
+                }
+            )
+
+            property_domains[prop.name]["classes"].add(label)
+            property_domains[prop.name]["properties"].append(prop)
+
+    return property_domains
