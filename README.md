@@ -14,8 +14,9 @@ The Semantic Graph Toolkit bridges Neo4j property graphs and Semantic Web techno
 - Analyzing node and relationship properties
 - Discovering semantic graph topology (source→target label pairs)
 - Building a reusable semantic graph model
-- Generating an OWL ontology
-- Exporting graph instances as RDF/Turtle
+- Generating OWL ontologies
+- Exporting graph instances as binary RDF/Turtle
+- Exporting graph instances as n-ary RDF/Turtle
 - Exporting generic JSON-LD
 - Exporting schema.org JSON-LD
 - Generating SHACL validation shapes
@@ -36,6 +37,7 @@ Discovers the semantic schema from Neo4j and generates the semantic contract.
 Outputs:
 
 - `ontology.ttl`
+- `ontology_nary.ttl`
 - `shapes.ttl`
 
 This workflow should be run whenever the ontology changes or the graph schema is intentionally updated.
@@ -53,7 +55,7 @@ Outputs:
 - `schema_org/*.json`
 - `validation_report.txt`
 
-Unlike discovery, this workflow does **not** regenerate the ontology or SHACL shapes. Instead, it validates the current graph against the previously established semantic contract.
+Unlike discovery, this workflow does **not** regenerate the ontologies or SHACL shapes. Instead, it validates the current graph against the previously established semantic contract.
 
 ---
 
@@ -65,11 +67,12 @@ A convenience workflow that performs both discovery and validation.
 Discover schema
         ↓
 Generate ontology.ttl
+Generate ontology_nary.ttl
 Generate shapes.ttl
         ↓
 Read graph
         ↓
-Export RDF / JSON-LD / schema.org
+Export RDF / RDF (n-ary) / JSON-LD / schema.org
         ↓
 Validate against SHACL
 ```
@@ -106,7 +109,7 @@ Automatically discovers:
 
 Relationship topology is preserved in the discovered schema, allowing semantic relationship constraints to be generated without creating invalid source/target combinations.
 
-Relationship properties are preserved in the semantic graph model for future processing but are not currently represented in exported RDF or JSON-LD.
+Relationship properties are preserved in the semantic graph model for downstream serializers.
 
 ---
 
@@ -136,6 +139,12 @@ This layer decouples Neo4j data extraction from serialization, allowing multiple
 
 ## OWL Ontology Generation
 
+Generates two ontology variants:
+
+### Binary ontology (`ontology.ttl`)
+
+Represents relationships as OWL object properties.
+
 Generates:
 
 - OWL classes
@@ -143,11 +152,25 @@ Generates:
 - Datatype properties
 - Domains
 - Ranges
-- Inverse properties (where applicable)
 - Functional properties (where applicable)
 - Dublin Core metadata
 - Schema.org mappings
 - SKOS concept relationships
+
+### N-ary ontology (`ontology_nary.ttl`)
+
+Represents relationships as first-class resources.
+
+Generates:
+
+- `Entity` base class
+- `Relationship` base class
+- Relationship subclasses
+- Shared `source` and `target` object properties
+- Datatype properties
+- Dublin Core metadata
+
+The n-ary ontology mirrors the toolkit's semantic graph model and supports representing relationship metadata directly.
 
 ---
 
@@ -156,6 +179,11 @@ Generates:
 Exports graph instances as RDF/Turtle and generic JSON-LD.
 
 Resources receive stable URIs derived from identifier properties whenever available.
+
+Current RDF serializers include:
+
+- Binary RDF
+- N-ary RDF
 
 Serialization includes:
 
@@ -166,9 +194,9 @@ Serialization includes:
 - Schema.org
 - Dublin Core
 
-Relationships are exported as RDF object properties, while literal values become datatype properties.
+The binary serializer represents relationships as RDF object properties.
 
-Relationship metadata is preserved in the semantic graph model but is not currently represented in RDF or JSON-LD.
+The n-ary serializer represents relationships as first-class resources, preserving relationship properties such as metadata.
 
 ---
 
@@ -236,7 +264,10 @@ Because validation uses previously generated SHACL shapes, semantic regressions 
                     GraphSchema
                     │         │
                     ▼         ▼
-             ontology.ttl  shapes.ttl
+          ontology.ttl   ontology_nary.ttl
+                    │
+                    ▼
+               shapes.ttl
 
 
                      validate.py
@@ -249,18 +280,12 @@ Because validation uses previously generated SHACL shapes, semantic regressions 
                           │
                           ▼
                    SemanticGraph
-                   │      │      │
-                   ▼      ▼      ▼
-              RDF     JSON-LD  schema.org
-                   │
-                   ▼
-             SHACL Validation
-
-
-                      main.py
-                          │
-                          ▼
-            Discovery → Validation
+                ┌────────┼────────┐
+                ▼        ▼        ▼
+           RDF      RDF (n-ary) JSON-LD
+                │                 │
+                ▼                 ▼
+         SHACL Validation    schema.org
 ```
 
 ---
@@ -287,9 +312,11 @@ ontology_toolkit/
     semantic_model.py
 
     generate_ontology.py
+    generate_ontology_nary.py
     generate_shacl.py
 
     export_rdf.py
+    export_rdf_nary.py
     export_jsonld.py
     export_schema_org.py
 
@@ -305,6 +332,7 @@ Discovery generates:
 
 ```text
 ontology.ttl
+ontology_nary.ttl
 shapes.ttl
 ```
 
@@ -312,6 +340,7 @@ Validation generates:
 
 ```text
 graph.ttl
+graph_nary.ttl
 graph.jsonld
 
 schema_org/
@@ -324,11 +353,11 @@ validation_report.txt
 
 # Current Limitations
 
-- Relationship metadata is preserved in the semantic graph model but is not yet represented in RDF or JSON-LD and therefore is not yet validated.
+- Generic JSON-LD currently follows the binary RDF model and does not yet represent relationship resources using the n-ary model.
 - Schema.org serialization currently supports `Person` entities only.
 - Schema discovery is based on the contents of an existing Neo4j property graph.
 - OWL reasoning is not currently performed during ontology generation or validation.
-- RDF-star serialization is not yet supported.
+- RDF-star serialization is planned but not yet supported.
 
 ---
 
@@ -336,8 +365,8 @@ validation_report.txt
 
 Potential future enhancements include:
 
-- Relationship property serialization
 - RDF-star serialization
+- Generic JSON-LD n-ary serialization
 - Additional schema.org serializers (`Organization`, `ScholarlyArticle`, `Grant`, `Dataset`)
 - SPARQL query support
 - OWL reasoning integration

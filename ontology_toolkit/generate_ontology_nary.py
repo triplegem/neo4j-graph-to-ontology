@@ -33,8 +33,9 @@ from ontology_toolkit.ontology_common import (
     write_metadata,
     collect_property_domains,
     write_classes,
+    write_entity_hierarchy,
     write_datatype_properties,
-    write_object_properties,
+    write_nary_relationship_model,
 )
 
 #
@@ -81,7 +82,15 @@ def save_ontology(schema, filename="ontology_nary.ttl"):
     # ----------------------------------------------------------------
     #
 
-    write_classes(graph, schema)
+    write_classes(
+        graph,
+        schema,
+    )
+
+    write_entity_hierarchy(
+        graph,
+        schema,
+    )
     
     #
     # ----------------------------------------------------------------
@@ -95,15 +104,14 @@ def save_ontology(schema, filename="ontology_nary.ttl"):
     )
 
     # ----------------------------------------------------------------
-    # Object Properties
+    # Relationship Properties
     # ----------------------------------------------------------------
     #
 
-    write_object_properties(
+    write_nary_relationship_model(
         graph,
         schema,
     )
-
     #
     # ----------------------------------------------------------------
     # Serialize

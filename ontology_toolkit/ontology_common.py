@@ -462,3 +462,195 @@ def write_object_properties(
                 OWL.inverseOf,
                 inverse
             ))
+
+def write_nary_relationship_model(
+    graph,
+    schema,
+):
+    """
+    Write the relationship model for the n-ary ontology.
+    """
+
+    #
+    # Base entity class
+    #
+
+    graph.add((
+        KGO.Entity,
+        RDF.type,
+        OWL.Class,
+    ))
+
+    graph.add((
+        KGO.Entity,
+        RDFS.label,
+        Literal("Entity"),
+    ))
+
+    graph.add((
+        KGO.Entity,
+        RDFS.comment,
+        Literal(
+            "Base class for entity instances in the knowledge graph."
+        ),
+    ))
+
+    #
+    # Base relationship class
+    #
+
+    graph.add((
+        KGO.Relationship,
+        RDF.type,
+        OWL.Class,
+    ))
+
+    graph.add((
+        KGO.Relationship,
+        RDFS.label,
+        Literal("Relationship"),
+    ))
+
+    graph.add((
+        KGO.Relationship,
+        RDFS.comment,
+        Literal(
+            "Base class for relationship instances in the n-ary ontology."
+        ),
+    ))
+
+    #
+    # Relationship subclasses
+    #
+
+    for relationship_type in schema.relationship_types:
+
+        class_name = relationship_type.title().replace("_", "") + "Relationship"
+
+        relationship_class = KGO[class_name]
+
+        graph.add((
+            relationship_class,
+            RDF.type,
+            OWL.Class,
+        ))
+
+        graph.add((
+            relationship_class,
+            RDFS.subClassOf,
+            KGO.Relationship,
+        ))
+
+        graph.add((
+            relationship_class,
+            RDFS.label,
+            Literal(make_label(class_name)),
+        ))
+
+        graph.add((
+            relationship_class,
+            RDFS.comment,
+            Literal(
+                f"Represents a {relationship_type} relationship."
+            ),
+        ))
+
+    #
+    # Shared relationship properties
+    #
+
+    graph.add((
+        KGO.source,
+        RDF.type,
+        OWL.ObjectProperty,
+    ))
+
+    graph.add((
+        KGO.source,
+        RDFS.label,
+        Literal("source"),
+    ))
+
+    graph.add((
+        KGO.source,
+        RDFS.comment,
+        Literal(
+            "The source entity of a relationship."
+        ),
+    ))
+
+    graph.add((
+        KGO.source,
+        RDFS.domain,
+        KGO.Relationship,
+    ))
+
+    graph.add((
+        KGO.source,
+        RDFS.range,
+        KGO.Entity,
+    ))
+
+    graph.add((
+        KGO.target,
+        RDF.type,
+        OWL.ObjectProperty,
+    ))
+
+    graph.add((
+        KGO.target,
+        RDFS.label,
+        Literal("target"),
+    ))
+
+    graph.add((
+        KGO.target,
+        RDFS.comment,
+        Literal(
+            "The target entity of a relationship."
+        ),
+    ))
+
+    graph.add((
+        KGO.target,
+        RDFS.domain,
+        KGO.Relationship,
+    ))
+
+    graph.add((
+        KGO.target,
+        RDFS.range,
+        KGO.Entity,
+    ))
+
+def write_entity_hierarchy(
+    graph,
+    schema,
+):
+    """
+    Make every node class a subclass of kgo:Entity.
+    """
+
+    for label in sorted(schema.node_types):
+
+        graph.add((
+            KGO[label],
+            RDFS.subClassOf,
+            KGO.Entity,
+        ))
+
+def write_entity_hierarchy(
+    graph,
+    schema,
+):
+    """
+    Make every node class a subclass of kgo:Entity.
+    """
+
+    for label in sorted(schema.node_types):
+
+        graph.add((
+            KGO[label],
+            RDFS.subClassOf,
+            KGO.Entity,
+        ))
