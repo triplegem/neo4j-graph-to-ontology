@@ -1,105 +1,29 @@
 """
 Ontology Toolkit
 
-Serialize a SemanticGraph as RDF/Turtle.
+Serialize a SemanticGraph as n-ary RDF/Turtle.
 """
 
-from rdflib import Graph, Literal
-from rdflib.namespace import RDF, RDFS, OWL, SKOS, XSD
+from rdflib import Graph
+from rdflib.namespace import RDF
 
+from ontology_toolkit.export_common import (
+    bind_namespaces,
+    export_entities,
+    add_literal,
+)
 from ontology_toolkit.semantic_model import SemanticGraph
 from ontology_toolkit.vocab import (
     KGO,
-    KGR,
-    SCHEMA,
-    CLASS_ALIGNMENT,
-    STANDARD_PREDICATES,
 )
-
-
-def add_literal(graph, subject, predicate, value):
-    """
-    Add a literal using the most appropriate XSD datatype.
-    """
-
-    if value is None:
-        return
-
-    if isinstance(value, bool):
-
-        graph.add((
-            subject,
-            predicate,
-            Literal(value, datatype=XSD.boolean)
-        ))
-        return
-
-    if isinstance(value, int):
-
-        graph.add((
-            subject,
-            predicate,
-            Literal(value, datatype=XSD.integer)
-        ))
-        return
-
-    if isinstance(value, float):
-
-        graph.add((
-            subject,
-            predicate,
-            Literal(value, datatype=XSD.decimal)
-        ))
-        return
-
-    text = str(value)
-
-    #
-    # ISO date
-    #
-
-    if (
-        len(text) == 10
-        and text[4] == "-"
-        and text[7] == "-"
-    ):
-
-        graph.add((
-            subject,
-            predicate,
-            Literal(text, datatype=XSD.date)
-        ))
-        return
-
-    #
-    # URI
-    #
-
-    if text.startswith("http://") or text.startswith("https://"):
-
-        graph.add((
-            subject,
-            predicate,
-            Literal(text, datatype=XSD.anyURI)
-        ))
-        return
-
-    #
-    # Default string
-    #
-
-    graph.add((
-        subject,
-        predicate,
-        Literal(text)
-    ))
 
 
 def build_graph_nary(
     semantic_graph: SemanticGraph,
 ) -> Graph:
     """
-    Build an RDFLib Graph from a SemanticGraph.
+    Build an RDFLib Graph from a SemanticGraph using
+    n-ary relationship resources.
     """
 
     graph = Graph()
@@ -108,80 +32,67 @@ def build_graph_nary(
     # Register namespaces
     #
 
-    graph.bind("kgo", KGO)
-    graph.bind("kgr", KGR)
-    graph.bind("schema", SCHEMA)
-    graph.bind("rdf", RDF)
-    graph.bind("rdfs", RDFS)
-    graph.bind("owl", OWL)
-    graph.bind("skos", SKOS)
-    graph.bind("xsd", XSD)
+    bind_namespaces(graph)
 
     #
     # Export entities
     #
 
-    for entity in semantic_graph.entities:
-
-        subject = entity.uri
-        class_name = entity.class_name
-
-        #
-        # Local ontology class
-        #
-
-        graph.add((
-            subject,
-            RDF.type,
-            KGO[class_name]
-        ))
-
-        #
-        # Standard vocabulary alignment
-        #
-
-        if class_name in CLASS_ALIGNMENT:
-
-            graph.add((
-                subject,
-                RDF.type,
-                CLASS_ALIGNMENT[class_name]
-            ))
-
-        #
-        # Datatype properties
-        #
-
-        for key, value in entity.properties.items():
-
-            predicate = STANDARD_PREDICATES.get(
-                key,
-                KGO[key]
-            )
-
-            add_literal(
-                graph,
-                subject,
-                predicate,
-                value,
-            )
+    export_entities(
+        graph,
+        semantic_graph,
+    )
 
     #
-    # Export relationships
+    # Export relationships as resources
     #
 
     for relationship in semantic_graph.relationships:
 
-        predicate = STANDARD_PREDICATES.get(
-            relationship.predicate,
-            KGO[relationship.predicate]
-        )
+        relationship_uri = relationship.uri
+
+        #
+        # Relationship type
+        #
 
         graph.add((
+            relationship_uri,
+            RDF.type,
+            KGO[relationship.relationship_class],
+        ))
+
+        #
+        # Source
+        #
+
+        graph.add((
+            relationship_uri,
+            KGO.source,
             relationship.source_uri,
-            predicate,
+        ))
+
+        #
+        # Target
+        #
+
+        graph.add((
+            relationship_uri,
+            KGO.target,
             relationship.target_uri,
         ))
+
+        #
+        # Relationship properties
+        #
+
+        for key, value in relationship.properties.items():
+
+            add_literal(
+                graph,
+                relationship_uri,
+                KGO[key],
+                value,
+            )
 
     return graph
 
@@ -191,10 +102,12 @@ def serialize_rdf_nary(
     filename: str = "graph_nary.ttl",
 ):
     """
-    Serialize a SemanticGraph as RDF/Turtle.
+    Serialize a SemanticGraph as n-ary RDF/Turtle.
     """
 
-    graph = build_graph_nary(semantic_graph)
+    graph = build_graph_nary(
+        semantic_graph,
+    )
 
     graph.serialize(
         destination=filename,

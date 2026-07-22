@@ -1,7 +1,7 @@
 """
 Ontology Toolkit
 
-Export a SemanticGraph as RDF/Turtle using the n-ary relationship pattern.
+Export a SemanticGraph as n-ary RDF/Turtle.
 """
 
 from ontology_toolkit.serializers.rdf_nary import serialize_rdf_nary
@@ -13,7 +13,7 @@ def export_rdf_nary(
     filename: str = "graph_nary.ttl",
 ):
     """
-    Export a SemanticGraph as RDF/Turtle using the n-ary relationship pattern.
+    Export a SemanticGraph as n-ary RDF/Turtle.
     """
 
     return serialize_rdf_nary(

@@ -187,4 +187,3 @@ def export_entities(
                 predicate,
                 value,
             )
-}
