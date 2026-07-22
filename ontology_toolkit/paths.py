@@ -18,3 +18,5 @@ SHAPES = OUTPUT_DIR / "shapes.ttl"
 VALIDATION_REPORT = OUTPUT_DIR / "validation_report.txt"
 
 SCHEMA_ORG_DIR = OUTPUT_DIR / "schema_org"
+
+DOCS_DIR = PROJECT_ROOT / "docs"
