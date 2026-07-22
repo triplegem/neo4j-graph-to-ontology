@@ -11,7 +11,10 @@ from ontology_toolkit.semantic_model import (
     RelationshipInstance,
     SemanticGraph,
 )
-from ontology_toolkit.uri import make_uri
+from ontology_toolkit.uri import (
+    make_uri,
+    make_relationship_uri,
+)
 from ontology_toolkit.vocab import relationship_to_predicate
 
 
@@ -95,6 +98,10 @@ def _read_relationships(
         for record in result:
 
             relationship = RelationshipInstance(
+                uri=make_relationship_uri(
+                    record["rel"],
+                    record["id"],
+                ),
                 element_id=record["id"],
                 relationship_type=record["rel"],
                 predicate=relationship_to_predicate(
