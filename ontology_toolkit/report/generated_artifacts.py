@@ -1,24 +1,30 @@
-from pathlib import Path
+from ontology_toolkit.paths import (
+    ONTOLOGY,
+    ONTOLOGY_NARY,
+    GRAPH,
+    GRAPH_JSONLD,
+    SHAPES,
+    VALIDATION_REPORT,
+    SCHEMA_ORG_DIR,
+)
 
 
 def render_generated_artifacts():
 
-    html = "<h2 id=\"generated-artifacts\">Generated Artifacts</h2>"
+    html = '<h2 id="generated-artifacts">Generated Artifacts</h2>'
     html += '<div class="cards">'
 
     artifacts = [
-        ("ontology.ttl", "OWL ontology"),
-        ("ontology_nary.ttl", "N-ary OWL ontology"),
-        ("graph.ttl", "RDF graph"),
-        ("graph.jsonld", "JSON-LD export"),
-        ("shapes.ttl", "SHACL shapes"),
-        ("validation_report.txt", "SHACL validation report"),
-        ("schema_org/", "schema.org JSON-LD"),
+        (ONTOLOGY, "OWL ontology"),
+        (ONTOLOGY_NARY, "N-ary OWL ontology"),
+        (GRAPH, "RDF graph"),
+        (GRAPH_JSONLD, "JSON-LD export"),
+        (SHAPES, "SHACL shapes"),
+        (VALIDATION_REPORT, "SHACL validation report"),
+        (SCHEMA_ORG_DIR, "schema.org JSON-LD"),
     ]
 
-    for filename, description in artifacts:
-
-        path = Path(filename)
+    for path, description in artifacts:
 
         exists = path.exists()
 
@@ -48,7 +54,7 @@ def render_generated_artifacts():
         html += f"""
 <div class="card">
 
-<h3>{filename}</h3>
+<h3>{path.name}</h3>
 
 <p>{description}</p>
 

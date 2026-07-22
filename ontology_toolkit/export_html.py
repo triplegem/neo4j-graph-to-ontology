@@ -1,4 +1,9 @@
-from pathlib import Path
+from ontology_toolkit.paths import (
+    REPORT,
+    ONTOLOGY,
+    ONTOLOGY_NARY,
+    GRAPH,
+)
 
 from ontology_toolkit.report.layout import render_page
 from ontology_toolkit.report.overview import render_overview
@@ -15,27 +20,42 @@ from ontology_toolkit.report.table_of_contents import (
     render_table_of_contents,
 )
 from ontology_toolkit.report.schema_summary import render_schema_summary
+from ontology_toolkit.report.rdf_viewer import render_rdf_file
+
 
 def export_html(schema, semantic_graph):
 
     body = ""
 
-
     body += render_table_of_contents()
     body += render_overview(schema, semantic_graph)
     body += render_schema_summary(schema)
+    body += render_pipeline()
     body += render_node_types(schema)
     body += render_relationship_types(schema)
     body += render_generated_artifacts()
-    body += render_pipeline()
-    body += render_semantic_graph(semantic_graph)
+
+    body += render_rdf_file(
+        ONTOLOGY,
+        "OWL Ontology",
+    )
+
+    body += render_rdf_file(
+        GRAPH,
+        "RDF Graph",
+    )
+
+    body += render_rdf_file(
+        ONTOLOGY_NARY,
+        "N-ary Ontology",
+    )
 
     html = render_page(
         title="Semantic Graph Report",
         body=body,
     )
 
-    Path("report.html").write_text(
+    REPORT.write_text(
         html,
         encoding="utf-8",
     )

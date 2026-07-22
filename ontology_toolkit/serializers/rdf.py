@@ -4,6 +4,8 @@ Ontology Toolkit
 Serialize a SemanticGraph as RDF/Turtle.
 """
 
+from pathlib import Path
+
 from rdflib import Graph
 
 from ontology_toolkit.export_common import (
@@ -63,7 +65,7 @@ def build_graph(
 
 def serialize_rdf(
     semantic_graph: SemanticGraph,
-    filename: str = "graph.ttl",
+    filename: str | Path,
 ):
     """
     Serialize a SemanticGraph as RDF/Turtle.

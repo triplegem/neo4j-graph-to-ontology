@@ -5,15 +5,15 @@ Export schema.org JSON-LD documents.
 """
 
 import json
-from pathlib import Path
 
+from ontology_toolkit.paths import SCHEMA_ORG_DIR
 from ontology_toolkit.semantic_model import SemanticGraph
 from ontology_toolkit.serializers.schema_org import serialize_person
 
 
 def export_schema_org(
     graph: SemanticGraph,
-    output_dir: str = "schema_org",
+    output_dir=SCHEMA_ORG_DIR,
 ) -> None:
     """
     Export schema.org JSON-LD documents.
@@ -22,8 +22,7 @@ def export_schema_org(
     Additional serializers can be registered here in the future.
     """
 
-    output = Path(output_dir)
-    output.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     count = 0
 
@@ -37,7 +36,7 @@ def export_schema_org(
             or f"person_{count}"
         )
 
-        with (output / f"{filename}.json").open(
+        with (output_dir / f"{filename}.json").open(
             "w",
             encoding="utf-8",
         ) as f:

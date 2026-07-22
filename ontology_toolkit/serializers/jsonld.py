@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from ontology_toolkit.semantic_model import SemanticGraph
 from ontology_toolkit.serializers.rdf import build_graph
 
@@ -11,7 +13,7 @@ JSONLD_CONTEXT = {
 
 def serialize_jsonld(
     semantic_graph: SemanticGraph,
-    filename="graph.jsonld",
+    filename: str | Path,
 ):
     """
     Serialize a SemanticGraph as JSON-LD.

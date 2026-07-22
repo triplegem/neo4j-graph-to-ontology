@@ -8,6 +8,7 @@ from pathlib import Path
 
 from ontology_toolkit.schema_model import GraphSchema
 from ontology_toolkit.vocab import relationship_to_predicate
+from ontology_toolkit.paths import SHAPES
 
 
 PREFIXES = """
@@ -271,13 +272,9 @@ def generate_shacl(schema: GraphSchema):
     return "\n".join(lines)
 
 
-def save_shacl(schema: GraphSchema, filename="shapes.ttl"):
-
+def save_shacl(schema, filename=SHAPES):
     ttl = generate_shacl(schema)
 
-    Path(filename).write_text(
-        ttl,
-        encoding="utf-8"
-    )
+    filename.write_text(ttl, encoding="utf-8")
 
     return filename

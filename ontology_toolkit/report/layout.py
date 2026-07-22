@@ -24,6 +24,31 @@ def render_page(title, body):
 
 {body}
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {{
+
+    const nav = document.querySelector(".toc");
+
+    if (!nav) return;
+
+    const stickyPoint = nav.offsetTop;
+
+    let compact = false;
+
+    window.addEventListener("scroll", () => {{
+
+        const shouldCompact = window.scrollY > stickyPoint;
+
+        if (shouldCompact !== compact) {{
+            compact = shouldCompact;
+            nav.classList.toggle("compact", compact);
+        }}
+
+    }});
+
+}});
+</script>
+
 </body>
 
 </html>

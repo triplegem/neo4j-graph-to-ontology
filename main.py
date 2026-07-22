@@ -2,6 +2,7 @@ from discover import main as discover_main
 from validate import main as validate_main
 
 from ontology_toolkit.export_html import export_html
+from ontology_toolkit.paths import REPORT
 
 
 def main():
@@ -19,7 +20,7 @@ def main():
     export_html(schema, semantic_graph)
 
     print("\nGenerated HTML Report:")
-    print("report.html")
+    print(REPORT)
 
     print("\nDone.")
 

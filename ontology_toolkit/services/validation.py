@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from ontology_toolkit.connection import get_driver
 from ontology_toolkit.neo4j_reader import read_graph
 
@@ -8,6 +6,14 @@ from ontology_toolkit.export_jsonld import export_jsonld
 from ontology_toolkit.export_schema_org import export_schema_org
 
 from ontology_toolkit.validate_shacl import validate_graph
+
+from ontology_toolkit.paths import (
+    GRAPH,
+    GRAPH_JSONLD,
+    SCHEMA_ORG_DIR,
+    SHAPES,
+    VALIDATION_REPORT,
+)
 
 
 class ValidationService:
@@ -18,9 +24,9 @@ class ValidationService:
         # Ensure a semantic contract exists
         #
 
-        if not Path("shapes.ttl").exists():
+        if not SHAPES.exists():
             raise FileNotFoundError(
-                "No shapes.ttl found. Run discover.py first to generate "
+                "No SHACL shapes found. Run discover.py first to generate "
                 "the ontology and SHACL shapes."
             )
 
@@ -45,7 +51,7 @@ class ValidationService:
             export_schema_org(semantic_graph)
 
             print("\nGenerated schema.org JSON-LD:")
-            print("schema_org/")
+            print(SCHEMA_ORG_DIR)
 
             #
             # Export RDF
@@ -54,7 +60,7 @@ class ValidationService:
             export_rdf(semantic_graph)
 
             print("\nGenerated RDF:")
-            print("graph.ttl")
+            print(GRAPH)
 
             #
             # Export JSON-LD
@@ -63,16 +69,16 @@ class ValidationService:
             export_jsonld(semantic_graph)
 
             print("\nGenerated JSON-LD:")
-            print("graph.jsonld")
+            print(GRAPH_JSONLD)
 
             #
             # Validate against the existing semantic contract
             #
 
             validate_graph(
-                rdf_file="graph.ttl",
-                shacl_file="shapes.ttl",
-                report_file="validation_report.txt",
+                rdf_file=GRAPH,
+                shacl_file=SHAPES,
+                report_file=VALIDATION_REPORT,
             )
 
             return semantic_graph

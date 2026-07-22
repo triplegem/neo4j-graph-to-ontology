@@ -4,6 +4,7 @@ from ontology_toolkit.generate_ontology import save_ontology
 from ontology_toolkit.generate_ontology_nary import save_ontology as save_nary_ontology
 from ontology_toolkit.generate_shacl import save_shacl
 from ontology_toolkit.printer import print_schema
+from ontology_toolkit.paths import ONTOLOGY, ONTOLOGY_NARY, SHAPES
 
 
 class DiscoveryService:
@@ -24,15 +25,15 @@ class DiscoveryService:
             save_nary_ontology(schema)
 
             print("\nGenerated Binary Ontology:")
-            print("ontology.ttl")
+            print(ONTOLOGY)
 
             print("\nGenerated N-ary Ontology:")
-            print("ontology_nary.ttl")
+            print(ONTOLOGY_NARY)
 
             save_shacl(schema)
 
             print("\nGenerated SHACL:")
-            print("shapes.ttl")
+            print(SHAPES)
 
             print_schema(schema)
 

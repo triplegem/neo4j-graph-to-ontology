@@ -15,89 +15,217 @@ body {
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 24px;
-    background: #fafafa;
-    color: #222;
+    background: #fbfaf7;
+    color: #4f5b66;
+    line-height: 1.6;
 }
+
+h1,
+h2,
+h3 {
+    color: #2f3b45;
+    font-weight: 600;
+}
+
+h1 {
+    margin-bottom: 0.25em;
+}
+
+h2 {
+    margin-top: 2em;
+    padding-bottom: 0.35em;
+    border-bottom: 1px solid #e8e3dc;
+    color:#b31b1b;
+}
+
+p {
+    color: #55616c;
+}
+
+a {
+    color: #5f7ea8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Summary cards */
 
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-    margin-top: 30px;
+    margin: 30px 0;
 }
 
 .card {
-    background: white;
-    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    border: 1px solid #e8e3dc;
     border-radius: 12px;
     padding: 24px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .label {
-    color: #666;
-    font-size: .9rem;
+    color: #7b848d;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
 }
 
 .value {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     font-weight: 700;
+    color: #2f3b45;
     margin-top: 8px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 12px;
-}
-
-th {
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    padding: 8px 0;
-}
-
-td {
-    padding: 6px 0;
-    border-bottom: 1px solid #f2f2f2;
-}
-
-h3 {
-    margin-top: 0;
-}
-
-pre {
-    background: #f7f7f7;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 20px;
-    overflow-x: auto;
-    line-height: 1.6;
-    font-family: SFMono-Regular, Menlo, Consolas, monospace;
-}
+/* Tables */
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 30px;
+    margin: 18px 0 30px;
+    background: #ffffff;
+    border: 1px solid #e8e3dc;
 }
 
 th,
 td {
-    padding: 10px 12px;
-    border: 1px solid #e5e7eb;
+    padding: 10px 14px;
     text-align: left;
 }
 
 th {
-    background: #f3f4f6;
+    background: #f4f1eb;
+    color: #2f3b45;
     font-weight: 600;
+    border-bottom: 1px solid #e8e3dc;
+}
+
+td {
+    border-bottom: 1px solid #f0ece6;
 }
 
 tbody tr:nth-child(even) {
-    background: #fafafa;
+    background: #fcfbf9;
+}
+
+/* Code / Turtle */
+
+pre,
+.rdf-viewer {
+    background: #f6f5f2;
+    border: 1px solid #e5dfd7;
+    border-left: 5px solid #5f7ea8;
+    border-radius: 8px;
+    padding: 20px;
+    overflow: auto;
+    max-height: 700px;
+
+    font-family:
+        "SF Mono",
+        "IBM Plex Mono",
+        Menlo,
+        Consolas,
+        monospace;
+
+    font-size: 13px;
+    line-height: 1.6;
+    color: #3f4448;
+    white-space: pre;
+}
+
+/* Inline code */
+
+code {
+    font-family:
+        "SF Mono",
+        "IBM Plex Mono",
+        Menlo,
+        Consolas,
+        monospace;
+}
+
+/* Horizontal rule */
+
+hr {
+    border: none;
+    border-top: 1px solid #e8e3dc;
+    margin: 40px 0;
+}
+
+/* Report Header */
+
+.report-header {
+    margin-bottom: 24px;
+}
+
+/* Sticky navigation */
+
+.toc {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 30px 0 40px;
+    padding: 18px;
+    background: rgba(248,246,242,.96);
+    backdrop-filter: blur(10px);
+    border: 1px solid #e8e3dc;
+    border-radius: 12px;
+    transition:
+        padding .25s ease,
+        box-shadow .25s ease,
+        border-radius .25s ease,
+        gap .25s ease;
+}
+
+.toc a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: #4f5b66;
+    text-decoration: none;
+    font-size: .95rem;
+    font-weight: 500;
+    transition: all .2s ease;
+}
+
+.toc a:hover {
+    background: #5f7ea8;
+    color: white;
+}
+
+/* Compact sticky version */
+
+.toc.compact {
+    padding: 8px 14px;
+    gap: 8px;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+.toc.compact a {
+    padding: 5px 12px;
+    font-size: .88rem;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 50px;
+}
+
+h2[id] {
+    scroll-margin-top: 50px;
+}
+
+[id] {
+    scroll-margin-top: 50px;
 }
 
 
@@ -109,22 +237,33 @@ tbody tr:nth-child(even) {
 <body>
 
 
-<h2>Contents</h2>
+<header class="report-header">
 
-<ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#pipeline">Semantic Pipeline</a></li>
-    <li><a href="#semantic-graph">Semantic Graph</a></li>
-    <li><a href="#node-types">Node Types</a></li>
-    <li><a href="#relationship-types">Relationship Types</a></li>
-    <li><a href="#generated-artifacts">Generated Artifacts</a></li>
-</ul>
+    <p id="semantic-graph"></p>
 
-<h1>Semantic Graph Report</h1>
+    <h1>Faculty Expertise Semantic Graph Report</h1>
 
-<p>
-Generated by the Semantic Graph Toolkit
-</p>
+    <p class="subtitle">
+        Generated by the Semantic Graph Toolkit (GitHub: <a href="https://github.com/triplegem/neo4j-graph-to-ontology/">triplegem/neo4j-graph-to-ontology</a>)
+    </p>
+
+</header>
+
+<nav class="toc">
+
+    <a href="#semantic-graph">◈ Semantic Graph</a>
+
+    <a href="#pipeline">⇄ Pipeline</a>
+
+    <a href="#node-types">▣ Node Types</a>
+
+    <a href="#relationship-types">◇ Relationships</a>
+
+    <a href="#generated-artifacts">◫ Artifacts</a>
+
+    <a href="#viewers">📖 Viewers</a>
+
+</nav>
 
 <h2 id="overview">Overview</h2>
 
@@ -321,6 +460,41 @@ report.
 
 </tbody>
 </table>
+
+<h2 id="pipeline">Semantic Pipeline</h2>
+
+<div class="card">
+
+<p>
+This toolkit transforms a Neo4j property graph into a
+database-independent semantic graph model that serves as the
+foundation for multiple Semantic Web serializations.
+</p>
+
+<pre>
+
+Neo4j Property Graph
+        │
+        ▼
+Schema Discovery
+        │
+        ▼
+GraphSchema
+        │
+        ▼
+SemanticGraph
+        │
+        ├── ontology.ttl
+        ├── ontology_nary.ttl
+        ├── graph.ttl
+        ├── graph.jsonld
+        ├── schema.org JSON-LD
+        ├── shapes.ttl
+        └── validation_report.txt
+
+</pre>
+
+</div>
 <h2 id="node-types">Node Types</h2><div class="cards">
 <div class="card">
 
@@ -967,9 +1141,9 @@ College, University
 
 <p>OWL ontology</p>
 
-<p><strong>Status:</strong> ✅ Generated</p>
+<p><strong>Status:</strong> ❌ Missing</p>
 
-<p><strong>Size:</strong> 6.9 KB</p>
+<p><strong>Size:</strong> —</p>
 
 </div>
 
@@ -979,9 +1153,9 @@ College, University
 
 <p>N-ary OWL ontology</p>
 
-<p><strong>Status:</strong> ✅ Generated</p>
+<p><strong>Status:</strong> ❌ Missing</p>
 
-<p><strong>Size:</strong> 7.6 KB</p>
+<p><strong>Size:</strong> —</p>
 
 </div>
 
@@ -991,9 +1165,9 @@ College, University
 
 <p>RDF graph</p>
 
-<p><strong>Status:</strong> ✅ Generated</p>
+<p><strong>Status:</strong> ❌ Missing</p>
 
-<p><strong>Size:</strong> 15.6 KB</p>
+<p><strong>Size:</strong> —</p>
 
 </div>
 
@@ -1045,64 +1219,52 @@ College, University
 
 </div>
 </div>
-<h2 id="pipeline">Semantic Pipeline</h2>
+<p id="viewers"></p>
+<h2>OWL Ontology</h2>
 
 <div class="card">
-
-<p>
-This toolkit transforms a Neo4j property graph into a
-database-independent semantic graph model that serves as the
-foundation for multiple Semantic Web serializations.
-</p>
-
-<pre>
-
-Neo4j Property Graph
-        │
-        ▼
-Schema Discovery
-        │
-        ▼
-GraphSchema
-        │
-        ▼
-SemanticGraph
-        │
-        ├── ontology.ttl
-        ├── ontology_nary.ttl
-        ├── graph.ttl
-        ├── graph.jsonld
-        ├── schema.org JSON-LD
-        ├── shapes.ttl
-        └── validation_report.txt
-
-</pre>
-
+<p><strong>ontology.ttl</strong> was not found.</p>
 </div>
 
-<h2 id="semantic-graph">Semantic Graph</h2>
+<p id="viewers"></p>
+<h2>RDF Graph</h2>
 
-<div class="cards">
-
-    <div class="card">
-        <div class="label">Entities</div>
-        <div class="value">37</div>
-    </div>
-
-    <div class="card">
-        <div class="label">Relationships</div>
-        <div class="value">74</div>
-    </div>
-
+<div class="card">
+<p><strong>graph.ttl</strong> was not found.</p>
 </div>
 
-<p>
-The SemanticGraph is a database-independent representation of the
-instance data extracted from the property graph. It provides a
-stable semantic model that can be serialized into RDF, JSON-LD,
-schema.org JSON-LD, and other Semantic Web formats.
-</p>
+<p id="viewers"></p>
+<h2>N-ary Ontology</h2>
 
+<div class="card">
+<p><strong>ontology_nary.ttl</strong> was not found.</p>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const nav = document.querySelector(".toc");
+
+    if (!nav) return;
+
+    const stickyPoint = nav.offsetTop;
+
+    let compact = false;
+
+    window.addEventListener("scroll", () => {
+
+        const shouldCompact = window.scrollY > stickyPoint;
+
+        if (shouldCompact !== compact) {
+            compact = shouldCompact;
+            nav.classList.toggle("compact", compact);
+        }
+
+    });
+
+});
+</script>
 
 </body>
 

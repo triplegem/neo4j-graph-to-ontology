@@ -2,27 +2,33 @@
 Validate an RDF graph against SHACL shapes.
 """
 
+from ontology_toolkit.paths import (
+    GRAPH,
+    SHAPES,
+    VALIDATION_REPORT,
+)
+
 from rdflib import Graph
 from pyshacl import validate
 
 
 def validate_graph(
-    rdf_file="graph.ttl",
-    shacl_file="shapes.ttl",
-    report_file="validation_report.txt",
+    rdf_file=GRAPH,
+    shacl_file=SHAPES,
+    report_file=VALIDATION_REPORT,
 ):
     """
     Validate an RDF graph against a SHACL shapes graph.
 
     Parameters
     ----------
-    rdf_file : str
+    rdf_file : Path
         Path to the RDF graph (Turtle).
 
-    shacl_file : str
+    shacl_file : Path
         Path to the SHACL shapes graph.
 
-    report_file : str
+    report_file : Path
         Path where the validation report will be written.
     """
 
@@ -55,8 +61,10 @@ def validate_graph(
     # Save report to disk
     #
 
-    with open(report_file, "w", encoding="utf-8") as f:
-        f.write(results_text)
+    report_file.write_text(
+        results_text,
+        encoding="utf-8",
+    )
 
     print(f"Validation report written to {report_file}")
 

@@ -5,6 +5,7 @@ Generate an OWL ontology from the discovered graph schema.
 """
 
 from datetime import date
+from ontology_toolkit.paths import ONTOLOGY
 
 from rdflib import Graph, Literal
 from rdflib.namespace import (
@@ -43,7 +44,7 @@ from ontology_toolkit.ontology_common import (
 # --------------------------------------------------------------------
 #
 
-def save_ontology(schema, filename="ontology.ttl"):
+def save_ontology(schema, filename=ONTOLOGY):
 
     graph = Graph()
 
