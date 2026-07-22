@@ -638,19 +638,3 @@ def write_entity_hierarchy(
             RDFS.subClassOf,
             KGO.Entity,
         ))
-
-def write_entity_hierarchy(
-    graph,
-    schema,
-):
-    """
-    Make every node class a subclass of kgo:Entity.
-    """
-
-    for label in sorted(schema.node_types):
-
-        graph.add((
-            KGO[label],
-            RDFS.subClassOf,
-            KGO.Entity,
-        ))
