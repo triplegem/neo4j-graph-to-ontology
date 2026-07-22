@@ -32,6 +32,7 @@ from ontology_toolkit.ontology_common import (
     bind_namespaces,
     write_metadata,
     collect_property_domains,
+    write_classes,
 )
 
 #
@@ -78,40 +79,9 @@ def save_ontology(schema, filename="ontology.ttl"):
     # ----------------------------------------------------------------
     #
 
-    for label, node in sorted(schema.node_types.items()):
-
-        cls = KGO[label]
-
-        graph.add((
-            cls,
-            RDF.type,
-            OWL.Class
-        ))
-
-        graph.add((
-            cls,
-            RDFS.label,
-            Literal(label)
-        ))
-
-        graph.add((
-            cls,
-            RDFS.comment,
-            Literal(class_comment(label))
-        ))
-
-        #
-        # Align with standard vocabularies
-        #
-
-        if label in CLASS_ALIGNMENT:
-
-            graph.add((
-                cls,
-                RDFS.subClassOf,
-                CLASS_ALIGNMENT[label]
-            ))
-        #
+    write_classes(graph, schema)
+    
+    #
     # ----------------------------------------------------------------
     # Datatype Properties
     # ----------------------------------------------------------------

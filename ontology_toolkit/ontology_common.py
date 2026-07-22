@@ -5,7 +5,7 @@ Shared utilities for ontology generation.
 """
 
 from datetime import date
-from rdflib import Literal
+from rdflib import Literal, URIRef
 
 from rdflib.namespace import (
     RDF,
@@ -228,3 +228,23 @@ def collect_property_domains(schema):
             property_domains[prop.name]["properties"].append(prop)
 
     return property_domains
+
+def write_classes(graph, schema):
+    """
+    Write OWL classes for each node label.
+    """
+
+    for label in sorted(schema.node_types):
+
+        cls = KGO[label]
+
+        graph.add((cls, RDF.type, OWL.Class))
+        graph.add((cls, RDFS.label, Literal(label)))
+        graph.add((cls, RDFS.comment, Literal(class_comment(label))))
+
+        if label in CLASS_ALIGNMENT:
+            graph.add((
+                cls,
+                RDFS.subClassOf,
+                URIRef(CLASS_ALIGNMENT[label])
+            ))
