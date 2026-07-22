@@ -3,7 +3,7 @@ from ontology_toolkit.services.validation import ValidationService
 
 def main():
 
-    ValidationService().run()
+    return ValidationService().run()
 
 
 if __name__ == "__main__":

@@ -75,6 +75,8 @@ class ValidationService:
                 report_file="validation_report.txt",
             )
 
+            return semantic_graph
+
         finally:
 
             driver.close()

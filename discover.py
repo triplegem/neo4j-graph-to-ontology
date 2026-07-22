@@ -3,7 +3,7 @@ from ontology_toolkit.services.discovery import DiscoveryService
 
 def main():
 
-    DiscoveryService().run()
+    return DiscoveryService().run()
 
 
 if __name__ == "__main__":

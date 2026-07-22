@@ -1,6 +1,8 @@
 from discover import main as discover_main
 from validate import main as validate_main
 
+from ontology_toolkit.export_html import export_html
+
 
 def main():
 
@@ -9,10 +11,15 @@ def main():
     print("=" * 60)
 
     print("\nStep 1: Discovering schema...")
-    discover_main()
+    schema = discover_main()
 
     print("\nStep 2: Validating graph...")
-    validate_main()
+    semantic_graph = validate_main()
+
+    export_html(schema, semantic_graph)
+
+    print("\nGenerated HTML Report:")
+    print("report.html")
 
     print("\nDone.")
 

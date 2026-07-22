@@ -36,6 +36,8 @@ class DiscoveryService:
 
             print_schema(schema)
 
+            return schema
+
         finally:
 
             driver.close()
