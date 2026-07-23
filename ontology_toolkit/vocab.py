@@ -7,6 +7,7 @@ Shared ontology vocabulary definitions.
 from rdflib import Namespace
 from rdflib.namespace import RDF, RDFS, OWL, SKOS, XSD
 
+from ontology_toolkit.alignments import ClassAlignment
 from ontology_toolkit.config import (
     ONTOLOGY_NAMESPACE,
     RESOURCE_NAMESPACE,
@@ -25,15 +26,55 @@ SCHEMA = Namespace(SCHEMA_NAMESPACE)
 # Align local classes with well-known vocabularies
 #
 
-CLASS_ALIGNMENT = {
-    "Faculty": SCHEMA.Person,
-    "Publication": SCHEMA.ScholarlyArticle,
-    "Department": SCHEMA.Organization,
-    "College": SCHEMA.CollegeOrUniversity,
-    "University": SCHEMA.CollegeOrUniversity,
-    "Campus": SCHEMA.Place,
-    "Concept": SKOS.Concept,
-    "ConceptScheme": SKOS.ConceptScheme,
+CLASS_ALIGNMENTS = {
+    "Faculty": [
+        ClassAlignment(
+            target=SCHEMA.Person,
+            relation=RDFS.subClassOf,
+        ),
+    ],
+    "Publication": [
+        ClassAlignment(
+            target=SCHEMA.ScholarlyArticle,
+            relation=RDFS.subClassOf,
+        ),
+    ],
+    "Department": [
+        ClassAlignment(
+            target=SCHEMA.Organization,
+            relation=RDFS.subClassOf,
+        ),
+    ],
+    "College": [
+        ClassAlignment(
+            target=SCHEMA.CollegeOrUniversity,
+            relation=RDFS.subClassOf,
+        ),
+    ],
+    "University": [
+        ClassAlignment(
+            target=SCHEMA.CollegeOrUniversity,
+            relation=RDFS.subClassOf,
+        ),
+    ],
+    "Campus": [
+        ClassAlignment(
+            target=SCHEMA.Place,
+            relation=RDFS.subClassOf,
+        ),
+    ],
+    "Concept": [
+        ClassAlignment(
+            target=SKOS.Concept,
+            relation=RDFS.subClassOf,
+        ),
+    ],
+    "ConceptScheme": [
+        ClassAlignment(
+            target=SKOS.ConceptScheme,
+            relation=RDFS.subClassOf,
+        ),
+    ],
 }
 
 #

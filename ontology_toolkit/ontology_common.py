@@ -19,7 +19,7 @@ from rdflib.namespace import (
 from ontology_toolkit.vocab import (
     KGO,
     SCHEMA,
-    CLASS_ALIGNMENT,
+    CLASS_ALIGNMENTS,
     DATATYPE_MAPPING,
     STANDARD_PREDICATES,
     relationship_to_predicate,
@@ -243,11 +243,11 @@ def write_classes(graph, schema):
         graph.add((cls, RDFS.label, Literal(label)))
         graph.add((cls, RDFS.comment, Literal(class_comment(label))))
 
-        if label in CLASS_ALIGNMENT:
+        for alignment in CLASS_ALIGNMENTS.get(label, []):
             graph.add((
                 cls,
-                RDFS.subClassOf,
-                URIRef(CLASS_ALIGNMENT[label])
+                alignment.relation,
+                alignment.target,
             ))
 
 def write_datatype_properties(
