@@ -51,7 +51,7 @@ def export_html(schema, semantic_graph):
     )
 
     html = render_page(
-        title="Semantic Graph Report",
+        title="Report: Neo4j to Ontology",
         body=body,
     )
 
