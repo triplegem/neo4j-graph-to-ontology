@@ -10,11 +10,18 @@ from ontology_toolkit.schema_model import GraphSchema
 from ontology_toolkit.vocab import relationship_to_predicate
 from ontology_toolkit.paths import SHAPES
 
+from ontology_toolkit.config import (
+    ONTOLOGY_PREFIX,
+    RESOURCE_PREFIX,
+    ONTOLOGY_NAMESPACE,
+    RESOURCE_NAMESPACE,
+)
 
-PREFIXES = """
+
+PREFIXES = f"""
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix kgo: <https://kg.engineering.cornell.edu/ontology#> .
-@prefix kgr: <https://kg.engineering.cornell.edu/resource/> .
+@prefix {ONTOLOGY_PREFIX}: <{ONTOLOGY_NAMESPACE}> .
+@prefix {RESOURCE_PREFIX}: <{RESOURCE_NAMESPACE}> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .

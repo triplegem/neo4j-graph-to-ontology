@@ -1,13 +1,24 @@
 from pathlib import Path
 
+from ontology_toolkit.config import (
+    ONTOLOGY_PREFIX,
+    ONTOLOGY_NAMESPACE,
+    SCHEMA_PREFIX,
+    SCHEMA_NAMESPACE,
+    SKOS_PREFIX,
+    SKOS_NAMESPACE,
+    OWL_PREFIX,
+    OWL_NAMESPACE,
+)
 from ontology_toolkit.semantic_model import SemanticGraph
 from ontology_toolkit.serializers.rdf import build_graph
 
+
 JSONLD_CONTEXT = {
-    "schema": "https://schema.org/",
-    "skos": "http://www.w3.org/2004/02/skos/core#",
-    "owl": "http://www.w3.org/2002/07/owl#",
-    "kgo": "https://kg.engineering.cornell.edu/ontology#",
+    SCHEMA_PREFIX: SCHEMA_NAMESPACE,
+    SKOS_PREFIX: SKOS_NAMESPACE,
+    OWL_PREFIX: OWL_NAMESPACE,
+    ONTOLOGY_PREFIX: ONTOLOGY_NAMESPACE,
 }
 
 

@@ -7,13 +7,19 @@ Shared ontology vocabulary definitions.
 from rdflib import Namespace
 from rdflib.namespace import RDF, RDFS, OWL, SKOS, XSD
 
+from ontology_toolkit.config import (
+    ONTOLOGY_NAMESPACE,
+    RESOURCE_NAMESPACE,
+    SCHEMA_NAMESPACE,
+)
+
 #
 # Namespaces
 #
 
-KGO = Namespace("https://kg.engineering.cornell.edu/ontology#")
-KGR = Namespace("https://kg.engineering.cornell.edu/resource/")
-SCHEMA = Namespace("https://schema.org/")
+KGO = Namespace(ONTOLOGY_NAMESPACE)
+KGR = Namespace(RESOURCE_NAMESPACE)
+SCHEMA = Namespace(SCHEMA_NAMESPACE)
 
 #
 # Align local classes with well-known vocabularies
