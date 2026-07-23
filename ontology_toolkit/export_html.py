@@ -1,3 +1,5 @@
+from datetime import datetime, UTC
+
 from ontology_toolkit.paths import (
     REPORT,
     ONTOLOGY,
@@ -25,7 +27,11 @@ from ontology_toolkit.report.rdf_viewer import render_rdf_file
 
 def export_html(schema, semantic_graph):
 
-    body = ""
+    generated = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    body = f"""
+<p><strong>Generated:</strong> {generated}</p>
+"""
 
     body += render_table_of_contents()
     body += render_overview(schema, semantic_graph)
