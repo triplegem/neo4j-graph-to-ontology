@@ -19,11 +19,12 @@ from rdflib.namespace import (
 from ontology_toolkit.vocab import (
     KGO,
     SCHEMA,
-    CLASS_ALIGNMENTS,
     DATATYPE_MAPPING,
     STANDARD_PREDICATES,
     relationship_to_predicate,
 )
+
+from ontology_toolkit.profiles.faculty import FACULTY_PROFILE
 
 def make_label(name: str) -> str:
     """
@@ -243,7 +244,7 @@ def write_classes(graph, schema):
         graph.add((cls, RDFS.label, Literal(label)))
         graph.add((cls, RDFS.comment, Literal(class_comment(label))))
 
-        for alignment in CLASS_ALIGNMENTS.get(label, []):
+        for alignment in FACULTY_PROFILE.class_alignments.get(label, []):
             graph.add((
                 cls,
                 alignment.relation,

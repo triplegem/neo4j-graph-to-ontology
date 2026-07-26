@@ -1,13 +1,13 @@
 """
 Ontology Toolkit
 
-Shared ontology vocabulary definitions.
+Shared namespaces, datatype mappings, standard predicates,
+and helper functions used across ontology generation and RDF serialization.
 """
 
 from rdflib import Namespace
-from rdflib.namespace import RDF, RDFS, OWL, SKOS, XSD
+from rdflib.namespace import OWL, SKOS, XSD
 
-from ontology_toolkit.alignments import ClassAlignment
 from ontology_toolkit.config import (
     ONTOLOGY_NAMESPACE,
     RESOURCE_NAMESPACE,
@@ -21,61 +21,6 @@ from ontology_toolkit.config import (
 KGO = Namespace(ONTOLOGY_NAMESPACE)
 KGR = Namespace(RESOURCE_NAMESPACE)
 SCHEMA = Namespace(SCHEMA_NAMESPACE)
-
-#
-# Align local classes with well-known vocabularies
-#
-
-CLASS_ALIGNMENTS = {
-    "Faculty": [
-        ClassAlignment(
-            target=SCHEMA.Person,
-            relation=RDFS.subClassOf,
-        ),
-    ],
-    "Publication": [
-        ClassAlignment(
-            target=SCHEMA.ScholarlyArticle,
-            relation=RDFS.subClassOf,
-        ),
-    ],
-    "Department": [
-        ClassAlignment(
-            target=SCHEMA.Organization,
-            relation=RDFS.subClassOf,
-        ),
-    ],
-    "College": [
-        ClassAlignment(
-            target=SCHEMA.CollegeOrUniversity,
-            relation=RDFS.subClassOf,
-        ),
-    ],
-    "University": [
-        ClassAlignment(
-            target=SCHEMA.CollegeOrUniversity,
-            relation=RDFS.subClassOf,
-        ),
-    ],
-    "Campus": [
-        ClassAlignment(
-            target=SCHEMA.Place,
-            relation=RDFS.subClassOf,
-        ),
-    ],
-    "Concept": [
-        ClassAlignment(
-            target=SKOS.Concept,
-            relation=RDFS.subClassOf,
-        ),
-    ],
-    "ConceptScheme": [
-        ClassAlignment(
-            target=SKOS.ConceptScheme,
-            relation=RDFS.subClassOf,
-        ),
-    ],
-}
 
 #
 # Reuse standard predicates

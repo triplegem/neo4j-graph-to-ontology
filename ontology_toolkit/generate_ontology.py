@@ -20,7 +20,6 @@ from rdflib.namespace import (
 from ontology_toolkit.vocab import (
     KGO,
     SCHEMA,
-    CLASS_ALIGNMENT,
     DATATYPE_MAPPING,
     STANDARD_PREDICATES,
     relationship_to_predicate,

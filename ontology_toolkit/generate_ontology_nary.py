@@ -20,11 +20,12 @@ from rdflib.namespace import (
 from ontology_toolkit.vocab import (
     KGO,
     SCHEMA,
-    CLASS_ALIGNMENT,
     DATATYPE_MAPPING,
     STANDARD_PREDICATES,
     relationship_to_predicate,
 )
+
+from ontology_toolkit.profiles.faculty import FACULTY_PROFILE
 
 from ontology_toolkit.ontology_common import (
     make_label,

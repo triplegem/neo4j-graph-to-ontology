@@ -12,9 +12,10 @@ from ontology_toolkit.vocab import (
     KGO,
     KGR,
     SCHEMA,
-    CLASS_ALIGNMENT,
     STANDARD_PREDICATES,
 )
+
+from ontology_toolkit.profiles.faculty import FACULTY_PROFILE
 
 
 def bind_namespaces(graph: Graph) -> None:
@@ -162,12 +163,12 @@ def export_entities(
         # Standard vocabulary alignment
         #
 
-        if class_name in CLASS_ALIGNMENT:
+        for alignment in FACULTY_PROFILE.class_alignments.get(class_name, []):
 
             graph.add((
                 subject,
                 RDF.type,
-                CLASS_ALIGNMENT[class_name],
+                alignment.target,
             ))
 
         #
