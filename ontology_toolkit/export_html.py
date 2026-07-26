@@ -5,6 +5,9 @@ from ontology_toolkit.paths import (
     ONTOLOGY,
     ONTOLOGY_NARY,
     GRAPH,
+    GRAPH_NARY,
+    GRAPH_INFERRED,
+    GRAPH_INFERRED_CLEAN,
 )
 
 from ontology_toolkit.report.layout import render_page
@@ -41,19 +44,60 @@ def export_html(schema, semantic_graph):
     body += render_relationship_types(schema)
     body += render_generated_artifacts()
 
+    #
+    # RDF / OWL Viewers
+    #
+
+    body += """
+<p id="viewers"></p>
+
+<h2>Viewers</h2>
+
+<div class="viewer-nav">
+
+    <a href="#ontology">OWL Ontology</a>
+
+    <a href="#ontology-nary">N-ary OWL</a>
+
+    <a href="#graph">Binary RDF</a>
+
+    <a href="#graph-nary">N-ary RDF</a>
+
+    <a href="#graph-inferred">Inferred RDF</a>
+
+    <a href="#graph-inferred-clean">Cleaned RDF</a>
+
+</div>
+"""
+
     body += render_rdf_file(
         ONTOLOGY,
         "OWL Ontology",
     )
 
     body += render_rdf_file(
-        GRAPH,
-        "RDF Graph",
+        ONTOLOGY_NARY,
+        "N-ary OWL Ontology",
     )
 
     body += render_rdf_file(
-        ONTOLOGY_NARY,
-        "N-ary Ontology",
+        GRAPH,
+        "Binary RDF Graph",
+    )
+
+    body += render_rdf_file(
+        GRAPH_NARY,
+        "N-ary RDF Graph",
+    )
+
+    body += render_rdf_file(
+        GRAPH_INFERRED,
+        "OWL RL Inferred RDF Graph",
+    )
+
+    body += render_rdf_file(
+        GRAPH_INFERRED_CLEAN,
+        "Cleaned Inferred RDF Graph",
     )
 
     html = render_page(

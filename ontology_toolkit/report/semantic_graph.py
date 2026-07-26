@@ -20,7 +20,6 @@ def render_semantic_graph(semantic_graph):
 <p>
 The SemanticGraph is a database-independent representation of the
 instance data extracted from the property graph. It provides a
-stable semantic model that can be serialized into RDF, JSON-LD,
-schema.org JSON-LD, and other Semantic Web formats.
+stable semantic model that can be serialized into RDF, JSON-LD, schema.org JSON-LD, and used as the basis for provenance-aware RDF generation and OWL RL reasoning.
 </p>
 """

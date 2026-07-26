@@ -114,7 +114,7 @@ pre,
     border-radius: 8px;
     padding: 20px;
     overflow: auto;
-    max-height: 700px;
+    max-height: 750px;
 
     font-family:
         "SF Mono",
@@ -217,6 +217,34 @@ h2[id] {
 
 [id] {
     scroll-margin-top: 50px;
+}
+
+.viewer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0 36px;
+    padding: 18px;
+    background: #f8f6f2;
+    border: 1px solid #e8e3dc;
+    border-radius: 12px;
+}
+
+.viewer-nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: #4f5b66;
+    text-decoration: none;
+    font-size: .95rem;
+    font-weight: 500;
+    transition: all .2s ease;
+}
+
+.viewer-nav a:hover {
+    background: #5f7ea8;
+    color: white;
 }
 
 """

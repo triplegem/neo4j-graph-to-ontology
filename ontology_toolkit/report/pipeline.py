@@ -8,7 +8,10 @@ def render_pipeline():
 <p>
 This toolkit transforms a Neo4j property graph into a
 database-independent semantic graph model that serves as the
-foundation for multiple Semantic Web serializations.
+foundation for multiple Semantic Web serializations. Generated
+RDF can be enriched with provenance metadata and OWL RL reasoning
+to produce inferred knowledge while preserving traceability to
+the original property graph.
 </p>
 
 <pre>
@@ -27,10 +30,26 @@ SemanticGraph
         ├── ontology.ttl
         ├── ontology_nary.ttl
         ├── graph.ttl
+        ├── graph_nary.ttl
         ├── graph.jsonld
         ├── schema.org JSON-LD
         ├── shapes.ttl
         └── validation_report.txt
+        │
+        ▼
+RDF Export with Provenance
+        │
+        ▼
+OWL RL Reasoning
+        │
+        ▼
+graph_inferred.ttl
+        │
+        ▼
+Inference Cleanup
+        │
+        ▼
+graph_inferred_clean.ttl
 
 </pre>
 
