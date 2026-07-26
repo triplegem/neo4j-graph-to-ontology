@@ -17,7 +17,10 @@ def render_rdf_file(filename, title):
 
     if not path.exists():
         return f"""
-<h3 id="{section_id}">{title}</h3>
+<h3 id="{section_id}">
+    {title}
+    <span class="viewer-filename">{path.name}</span>
+</h3>
 
 <div class="card">
 <p><strong>{path.name}</strong> was not found.</p>
@@ -27,13 +30,14 @@ def render_rdf_file(filename, title):
     rdf = path.read_text(encoding="utf-8")
 
     return f"""
-<h3 id="{section_id}">{title}</h3>
+<h3 id="{section_id}">
+    {title}
+    <span class="viewer-filename">{path.name}</span>
+</h3>
 
 <div class="card">
 
-<p><strong>{path.name}</strong></p>
-
-<pre class="rdf-viewer"><code>{escape(rdf)}</code></pre>
+<pre class="rdf-viewer"><code class="language-turtle">{escape(rdf)}</code></pre>
 
 </div>
 """

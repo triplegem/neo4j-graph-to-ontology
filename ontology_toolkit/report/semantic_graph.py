@@ -17,9 +17,9 @@ def render_semantic_graph(semantic_graph):
 
 </div>
 
+<div class="report-text">
 <p>
-The SemanticGraph is a database-independent representation of the
-instance data extracted from the property graph. It provides a
-stable semantic model that can be serialized into RDF, JSON-LD, schema.org JSON-LD, and used as the basis for provenance-aware RDF generation and OWL RL reasoning.
+The Semantic Graph Toolkit discovers the schema of a Neo4j property graph and generates Semantic Web artifacts including OWL ontologies, RDF graphs, JSON-LD, schema.org JSON-LD, SHACL shapes, validation reports, provenance-aware RDF, and OWL RL inferred knowledge graphs.
 </p>
+</div>
 """

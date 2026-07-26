@@ -5,6 +5,7 @@ def render_pipeline():
 
 <div class="card">
 
+<div class="report-text">
 <p>
 This toolkit transforms a Neo4j property graph into a
 database-independent semantic graph model that serves as the
@@ -13,6 +14,7 @@ RDF can be enriched with provenance metadata and OWL RL reasoning
 to produce inferred knowledge while preserving traceability to
 the original property graph.
 </p>
+</div>
 
 <pre>
 

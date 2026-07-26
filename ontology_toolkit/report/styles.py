@@ -1,15 +1,33 @@
 def get_styles():
 
     return """
+/* ==========================================================================
+   Base Layout
+   ========================================================================== */
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 40px auto;
-    padding: 0 24px;
+    padding: 0 20px;
     background: #fbfaf7;
     color: #4f5b66;
     line-height: 1.6;
 }
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 50px;
+}
+
+.report-text {
+    max-width: 75ch;
+}
+
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
 
 h1,
 h2,
@@ -26,7 +44,25 @@ h2 {
     margin-top: 2em;
     padding-bottom: 0.35em;
     border-bottom: 1px solid #e8e3dc;
-    color:#b31b1b;
+    color: #b31b1b;
+}
+
+h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 28px 0 8px;
+}
+
+.viewer-filename {
+    font-size: .78rem;
+    font-weight: 400;
+    color: #555;
+    font-family:
+        "SF Mono",
+        Menlo,
+        Consolas,
+        monospace;
 }
 
 p {
@@ -42,7 +78,10 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Summary cards */
+
+/* ==========================================================================
+   Summary Cards
+   ========================================================================== */
 
 .cards {
     display: grid;
@@ -59,6 +98,11 @@ a:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
+.viewer-content .card {
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
 .label {
     color: #7b848d;
     font-size: 0.85rem;
@@ -73,10 +117,14 @@ a:hover {
     margin-top: 8px;
 }
 
-/* Tables */
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
 
 table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     margin: 18px 0 30px;
     background: #ffffff;
@@ -87,6 +135,8 @@ th,
 td {
     padding: 10px 14px;
     text-align: left;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 th {
@@ -104,32 +154,29 @@ tbody tr:nth-child(even) {
     background: #fcfbf9;
 }
 
-/* Code / Turtle */
 
-pre,
+/* ==========================================================================
+   RDF / Turtle Viewer
+   ========================================================================== */
+
 .rdf-viewer {
-    background: #f6f5f2;
     border: 1px solid #e5dfd7;
-    border-left: 5px solid #5f7ea8;
+    border-left: 3px solid #5f7ea8;
     border-radius: 8px;
-    padding: 20px;
     overflow: auto;
-    max-height: 750px;
-
-    font-family:
-        "SF Mono",
-        "IBM Plex Mono",
-        Menlo,
-        Consolas,
-        monospace;
-
-    font-size: 13px;
-    line-height: 1.6;
-    color: #3f4448;
-    white-space: pre;
+    max-height: 900px;
 }
 
-/* Inline code */
+.viewer-content pre[class*="language-"] {
+    margin: 0 !important;
+    padding: 10px 12px !important;
+}
+
+.viewer-content pre[class*="language-"],
+.viewer-content code[class*="language-"] {
+    font-size: .80rem !important;
+    line-height: 1.4 !important;
+}
 
 code {
     font-family:
@@ -140,7 +187,10 @@ code {
         monospace;
 }
 
-/* Horizontal rule */
+
+/* ==========================================================================
+   Report Structure
+   ========================================================================== */
 
 hr {
     border: none;
@@ -148,13 +198,26 @@ hr {
     margin: 40px 0;
 }
 
-/* Report Header */
-
 .report-header {
     margin-bottom: 24px;
 }
 
-/* Sticky navigation */
+.report-footer {
+    margin-top: 80px;
+    padding-bottom: 40px;
+    color: #7b848d;
+    font-size: .9rem;
+    text-align: center;
+}
+
+.report-footer a {
+    color: #5f7ea8;
+}
+
+
+/* ==========================================================================
+   Sticky Top Navigation
+   ========================================================================== */
 
 .toc {
     position: sticky;
@@ -193,8 +256,6 @@ hr {
     color: white;
 }
 
-/* Compact sticky version */
-
 .toc.compact {
     padding: 8px 14px;
     gap: 8px;
@@ -206,38 +267,49 @@ hr {
     padding: 5px 12px;
     font-size: .88rem;
 }
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 50px;
-}
 
-h2[id] {
-    scroll-margin-top: 50px;
-}
-
+h2[id],
+h3[id],
 [id] {
-    scroll-margin-top: 50px;
+    scroll-margin-top: 60px;
+}
+
+
+/* ==========================================================================
+   Viewer Layout
+   ========================================================================== */
+
+.viewer-layout {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+    margin-top: 24px;
+}
+
+.viewer-content {
+    min-width: 0;
 }
 
 .viewer-nav {
+    position: sticky;
+    top: var(--viewer-nav-top, 80px);
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin: 24px 0 36px;
-    padding: 18px;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px;
     background: #f8f6f2;
     border: 1px solid #e8e3dc;
     border-radius: 12px;
 }
 
 .viewer-nav a {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 14px;
-    border-radius: 999px;
+    display: block;
+    padding: 8px 10px;
+    border-radius: 8px;
     color: #4f5b66;
     text-decoration: none;
-    font-size: .95rem;
+    font-size: .88rem;
     font-weight: 500;
     transition: all .2s ease;
 }
@@ -247,4 +319,31 @@ h2[id] {
     color: white;
 }
 
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+    .report-text {
+        max-width: none;
+    }
+
+    .viewer-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .viewer-nav {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+    }
+
+    h3 {
+        flex-wrap: wrap;
+    }
+
+}
 """

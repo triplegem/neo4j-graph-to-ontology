@@ -53,21 +53,25 @@ def export_html(schema, semantic_graph):
 
 <h2>Viewers</h2>
 
-<div class="viewer-nav">
+<div class="viewer-layout">
 
-    <a href="#ontology">OWL Ontology</a>
+    <aside class="viewer-nav">
 
-    <a href="#ontology-nary">N-ary OWL</a>
+        <a href="#ontology">OWL Ontology</a>
 
-    <a href="#graph">Binary RDF</a>
+        <a href="#ontology-nary">N-ary OWL</a>
 
-    <a href="#graph-nary">N-ary RDF</a>
+        <a href="#graph">Binary RDF</a>
 
-    <a href="#graph-inferred">Inferred RDF</a>
+        <a href="#graph-nary">N-ary RDF</a>
 
-    <a href="#graph-inferred-clean">Cleaned RDF</a>
+        <a href="#graph-inferred">Inferred RDF</a>
 
-</div>
+        <a href="#graph-inferred-clean">Cleaned Inferred RDF</a>
+
+    </aside>
+
+    <div class="viewer-content">
 """
 
     body += render_rdf_file(
@@ -99,6 +103,12 @@ def export_html(schema, semantic_graph):
         GRAPH_INFERRED_CLEAN,
         "Cleaned Inferred RDF Graph",
     )
+
+    body += """
+    </div>
+
+</div>
+"""
 
     html = render_page(
         title="Report: Neo4j to Ontology",
