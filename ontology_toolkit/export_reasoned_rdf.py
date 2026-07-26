@@ -1,7 +1,12 @@
 from rdflib import Graph
 
 from ontology_toolkit.clean_inferred import clean_inferred_graph
-from ontology_toolkit.paths import GRAPH_INFERRED, GRAPH_INFERRED_CLEAN, ONTOLOGY
+from ontology_toolkit.export_common import bind_namespaces
+from ontology_toolkit.paths import (
+    GRAPH_INFERRED,
+    GRAPH_INFERRED_CLEAN,
+    ONTOLOGY,
+)
 from ontology_toolkit.reasoning import apply_reasoning
 
 
@@ -12,6 +17,7 @@ def export_reasoned_rdf(graph: Graph, filename=GRAPH_INFERRED):
     """
 
     reasoned_graph = Graph()
+    bind_namespaces(reasoned_graph)
 
     reasoned_graph.parse(ONTOLOGY, format="turtle")
 
@@ -25,4 +31,5 @@ def export_reasoned_rdf(graph: Graph, filename=GRAPH_INFERRED):
 
     # Clean output
     clean_graph = clean_inferred_graph(reasoned_graph)
+    bind_namespaces(clean_graph)
     clean_graph.serialize(GRAPH_INFERRED_CLEAN, format="turtle")

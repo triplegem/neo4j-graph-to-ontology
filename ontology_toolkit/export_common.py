@@ -16,7 +16,10 @@ from ontology_toolkit.vocab import (
     STANDARD_PREDICATES,
 )
 
-from ontology_toolkit.profiles import ACTIVE_PROFILES
+from ontology_toolkit.profiles import (
+    ACTIVE_PROFILES,
+    VIVO,
+)
 
 
 def bind_namespaces(graph: Graph) -> None:
@@ -27,6 +30,7 @@ def bind_namespaces(graph: Graph) -> None:
     graph.bind("kgo", KGO)
     graph.bind("kgr", KGR)
     graph.bind("schema", SCHEMA)
+    graph.bind("vivo", VIVO)
     graph.bind("prov", PROV)
     graph.bind("rdf", RDF)
     graph.bind("rdfs", RDFS)
@@ -34,7 +38,7 @@ def bind_namespaces(graph: Graph) -> None:
     graph.bind("skos", SKOS)
     graph.bind("xsd", XSD)
 
-
+    
 def add_literal(
     graph: Graph,
     subject,
