@@ -27,17 +27,28 @@ from ontology_toolkit.report.table_of_contents import (
 from ontology_toolkit.report.schema_summary import render_schema_summary
 from ontology_toolkit.report.rdf_viewer import render_rdf_file
 
+from ontology_toolkit.profiles import ACTIVE_PROFILES
+
 
 def export_html(schema, semantic_graph):
 
     generated = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    profile_names = " • ".join(
+        profile.name
+        for profile in ACTIVE_PROFILES
+    )
 
     body = f"""
 <p><strong>Generated:</strong> {generated}</p>
 """
 
     body += render_table_of_contents()
-    body += render_overview(schema, semantic_graph)
+    body += render_overview(
+        schema,
+        semantic_graph,
+        profile_names,
+    )
     body += render_schema_summary(schema)
     body += render_pipeline()
     body += render_node_types(schema)

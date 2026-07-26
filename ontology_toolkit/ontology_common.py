@@ -24,7 +24,7 @@ from ontology_toolkit.vocab import (
     relationship_to_predicate,
 )
 
-from ontology_toolkit.profiles.faculty import FACULTY_PROFILE
+from ontology_toolkit.profiles import ACTIVE_PROFILES, VIVO
 
 def make_label(name: str) -> str:
     """
@@ -140,6 +140,7 @@ def property_comment(name: str) -> str:
         f"Ontology property '{make_label(name)}'."
     )
 
+
 def bind_namespaces(graph):
     """
     Register namespaces used throughout the ontology.
@@ -147,6 +148,7 @@ def bind_namespaces(graph):
 
     graph.bind("kgo", KGO)
     graph.bind("schema", SCHEMA)
+    graph.bind("vivo", VIVO)
     graph.bind("rdf", RDF)
     graph.bind("rdfs", RDFS)
     graph.bind("owl", OWL)
@@ -201,6 +203,7 @@ def write_metadata(graph):
         Literal("1.0")
     ))
 
+
 def collect_property_domains(schema):
     """
     Collect property usage information.
@@ -244,12 +247,15 @@ def write_classes(graph, schema):
         graph.add((cls, RDFS.label, Literal(label)))
         graph.add((cls, RDFS.comment, Literal(class_comment(label))))
 
-        for alignment in FACULTY_PROFILE.class_alignments.get(label, []):
-            graph.add((
-                cls,
-                alignment.relation,
-                alignment.target,
-            ))
+        for profile in ACTIVE_PROFILES:
+
+            for alignment in profile.class_alignments.get(label, []):
+
+                graph.add((
+                    cls,
+                    alignment.relation,
+                    alignment.target,
+                ))
 
 def write_datatype_properties(
     graph,

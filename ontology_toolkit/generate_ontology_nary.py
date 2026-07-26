@@ -25,7 +25,7 @@ from ontology_toolkit.vocab import (
     relationship_to_predicate,
 )
 
-from ontology_toolkit.profiles.faculty import FACULTY_PROFILE
+from ontology_toolkit.profiles import ACTIVE_PROFILES
 
 from ontology_toolkit.ontology_common import (
     make_label,

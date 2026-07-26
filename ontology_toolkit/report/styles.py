@@ -117,6 +117,12 @@ a:hover {
     margin-top: 8px;
 }
 
+.overview-meta {
+    margin-top: 1.25rem;
+    color: #666;
+    font-size: 0.95rem;
+}
+
 
 /* ==========================================================================
    Tables

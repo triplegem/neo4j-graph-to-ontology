@@ -1,57 +1,48 @@
-from rdflib.namespace import RDFS, SKOS
+from rdflib import Namespace
+from rdflib.namespace import RDFS
 
 from ontology_toolkit.alignments import ClassAlignment
 from ontology_toolkit.ontology_profile import OntologyProfile
-from ontology_toolkit.vocab import SCHEMA
+
+VIVO = Namespace("http://vivoweb.org/ontology/core#")
 
 
-FACULTY_PROFILE = OntologyProfile(
+VIVO_PROFILE = OntologyProfile(
+    name="VIVO",
     class_alignments={
         "Faculty": [
             ClassAlignment(
-                target=SCHEMA.Person,
-                relation=RDFS.subClassOf,
-            ),
-        ],
-        "Publication": [
-            ClassAlignment(
-                target=SCHEMA.ScholarlyArticle,
+                target=VIVO.FacultyMember,
                 relation=RDFS.subClassOf,
             ),
         ],
         "Department": [
             ClassAlignment(
-                target=SCHEMA.Organization,
+                target=VIVO.Department,
                 relation=RDFS.subClassOf,
             ),
         ],
         "College": [
             ClassAlignment(
-                target=SCHEMA.CollegeOrUniversity,
+                target=VIVO.College,
                 relation=RDFS.subClassOf,
             ),
         ],
         "University": [
             ClassAlignment(
-                target=SCHEMA.CollegeOrUniversity,
+                target=VIVO.University,
                 relation=RDFS.subClassOf,
             ),
         ],
-        "Campus": [
+        "Publication": [
             ClassAlignment(
-                target=SCHEMA.Place,
+                target=VIVO.InformationResource,
                 relation=RDFS.subClassOf,
             ),
         ],
-        "Concept": [
+        "Grant": [
             ClassAlignment(
-                target=SKOS.Concept,
-                relation=RDFS.subClassOf,
-            ),
-        ],
-        "ConceptScheme": [
-            ClassAlignment(
-                target=SKOS.ConceptScheme,
+                target=VIVO.Grant,
                 relation=RDFS.subClassOf,
             ),
         ],

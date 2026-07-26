@@ -111,10 +111,10 @@ The Semantic Graph Toolkit is organized around four independent architectural la
 
 1. **Schema discovery** – learns the semantic structure of a Neo4j property graph.
 2. **Semantic graph representation** – provides a reusable, database-independent model of graph instances.
-3. **Semantic processing** – generates ontologies, serializations, validation artifacts, provenance, reasoning results, and reports.
+3. **Semantic processing** – generates ontologies, semantic serializations, validation artifacts, provenance, reasoning results, and reports.
 4. **Workflow orchestration** – coordinates discovery, validation, and reporting pipelines.
 
-By separating these concerns, serialization formats, validators, reasoning engines, and future graph-processing components can evolve independently while sharing the same semantic graph representation.
+By separating these concerns, serialization formats, ontology profiles, validators, reasoning engines, and future graph-processing components can evolve independently while sharing the same semantic graph representation.
 
 ---
 
@@ -168,9 +168,8 @@ Generates:
 - Datatype properties
 - Domains
 - Ranges
-- Functional properties (where applicable)
 - Dublin Core metadata
-- Schema.org mappings
+- Ontology profile alignments
 - SKOS concept relationships
 
 ### N-ary Ontology (`ontology_nary.ttl`)
@@ -188,7 +187,16 @@ Generates:
 
 The n-ary ontology mirrors the toolkit's semantic graph model, enabling relationship metadata to be represented directly while providing a foundation for richer semantic modeling.
 
-Ontology profiles further separate reusable toolkit infrastructure from project-specific semantic alignments, allowing the same toolkit to support multiple domain ontologies.
+### Ontology Profiles
+
+Ontology profiles separate the toolkit's internal semantic model from external vocabularies, allowing the same semantic graph to align with multiple ontology ecosystems without modifying the core model.
+
+Current profiles include:
+
+- **Schema.org**
+- **VIVO**
+
+Additional profiles can be added independently to support other vocabularies and domain ontologies.
 
 ---
 
@@ -211,9 +219,12 @@ Generated RDF incorporates vocabulary from:
 - OWL
 - SKOS
 - Schema.org
+- VIVO
 - Dublin Core
 
-The binary serializer represents relationships as RDF object properties, while the n-ary serializer models relationships as first-class resources, preserving relationship metadata and providing compatibility with richer semantic representations.
+The binary serializer represents relationships as RDF object properties, while the n-ary serializer models relationships as first-class resources, preserving relationship metadata and supporting richer semantic representations.
+
+Because serialization operates on the shared semantic graph, additional RDF vocabularies can be incorporated through ontology profiles without changing the serialization architecture.
 
 ---
 

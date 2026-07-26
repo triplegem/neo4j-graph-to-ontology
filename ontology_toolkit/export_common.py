@@ -16,7 +16,7 @@ from ontology_toolkit.vocab import (
     STANDARD_PREDICATES,
 )
 
-from ontology_toolkit.profiles.faculty import FACULTY_PROFILE
+from ontology_toolkit.profiles import ACTIVE_PROFILES
 
 
 def bind_namespaces(graph: Graph) -> None:
@@ -165,13 +165,15 @@ def export_entities(
         # Standard vocabulary alignment
         #
 
-        for alignment in FACULTY_PROFILE.class_alignments.get(class_name, []):
+        for profile in ACTIVE_PROFILES:
 
-            graph.add((
-                subject,
-                RDF.type,
-                alignment.target,
-            ))
+            for alignment in profile.class_alignments.get(class_name, []):
+
+                graph.add((
+                    subject,
+                    RDF.type,
+                    alignment.target,
+                ))
 
         #
         # Datatype properties

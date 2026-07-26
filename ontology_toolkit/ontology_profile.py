@@ -8,8 +8,16 @@ from ontology_toolkit.alignments import (
 
 @dataclass
 class OntologyProfile:
-    class_alignments: dict[str, list[ClassAlignment]] = field(default_factory=dict)
+    name: str
 
-    property_alignments: dict[str, list[PropertyAlignment]] = field(default_factory=dict)
+    class_alignments: dict[str, list[ClassAlignment]] = field(
+        default_factory=dict,
+    )
 
-    design_rules: dict = field(default_factory=dict)
+    property_alignments: dict[str, list[PropertyAlignment]] = field(
+        default_factory=dict,
+    )
+
+    design_rules: dict = field(
+        default_factory=dict,
+    )

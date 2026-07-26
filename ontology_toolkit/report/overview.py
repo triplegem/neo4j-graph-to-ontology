@@ -1,4 +1,8 @@
-def render_overview(schema, semantic_graph):
+def render_overview(
+    schema,
+    semantic_graph,
+    profile_names,
+):
 
     return f"""
 <h2 id="overview">Overview</h2>
@@ -26,4 +30,8 @@ def render_overview(schema, semantic_graph):
     </div>
 
 </div>
+
+<p class="overview-meta">
+    <strong>Ontology Profiles:</strong> {profile_names}
+</p>
 """
