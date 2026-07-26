@@ -438,7 +438,6 @@ report.html
 - Generic JSON-LD currently follows the binary RDF model and does not yet represent relationship resources using the n-ary model.
 - schema.org serialization currently supports `Person` entities only.
 - Schema discovery operates on the contents of an existing Neo4j property graph.
-- RDF-star serialization is not yet implemented.
 
 ---
 
@@ -446,7 +445,6 @@ report.html
 
 Potential future enhancements include:
 
-- RDF-star serialization
 - Generic JSON-LD n-ary serialization
 - Additional schema.org serializers (`Organization`, `ScholarlyArticle`, `Grant`, `Dataset`)
 - SPARQL query support
@@ -457,6 +455,7 @@ Potential future enhancements include:
 - Graph visualization
 - Additional ontology profiles
 - Additional import and export formats
+- Optional RDF-star serialization
 
 ---
 
