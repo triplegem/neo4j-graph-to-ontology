@@ -80,4 +80,4 @@ def serialize_rdf(
         format="turtle",
     )
 
-    return filename
+    return graph

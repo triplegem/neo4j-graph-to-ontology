@@ -22,3 +22,6 @@ VALIDATION_REPORT = OUTPUT_DIR / "validation_report.txt"
 SCHEMA_ORG_DIR = OUTPUT_DIR / "schema_org"
 
 DOCS_DIR = PROJECT_ROOT / "docs"
+
+GRAPH_INFERRED = OUTPUT_DIR / "graph_inferred.ttl"
+GRAPH_INFERRED_CLEAN = OUTPUT_DIR / "graph_inferred_clean.ttl"

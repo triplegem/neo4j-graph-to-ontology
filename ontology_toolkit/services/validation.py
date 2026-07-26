@@ -3,6 +3,7 @@ from ontology_toolkit.neo4j_reader import read_graph
 
 from ontology_toolkit.export_rdf import export_rdf
 from ontology_toolkit.export_rdf_nary import export_rdf_nary
+from ontology_toolkit.export_reasoned_rdf import export_reasoned_rdf
 from ontology_toolkit.export_jsonld import export_jsonld
 from ontology_toolkit.export_schema_org import export_schema_org
 
@@ -60,6 +61,9 @@ class ValidationService:
             #
 
             export_rdf(semantic_graph)
+            
+            graph = export_rdf(semantic_graph)
+            export_reasoned_rdf(graph)
 
             print("\nGenerated RDF:")
             print(GRAPH)
