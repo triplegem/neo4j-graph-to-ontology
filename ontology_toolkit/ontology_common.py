@@ -284,17 +284,6 @@ def write_datatype_properties(
 
         prop = property_domains[prop_name]["properties"][0]
 
-        if (
-            prop.unique
-            and len(classes) == 1
-        ):
-
-            graph.add((
-                predicate,
-                RDF.type,
-                OWL.FunctionalProperty
-            ))
-
         #
         # Label
         #
