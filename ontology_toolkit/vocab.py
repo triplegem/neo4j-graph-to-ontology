@@ -30,14 +30,10 @@ PROV = Namespace(PROV_NAMESPACE)
 
 STANDARD_PREDICATES = {
 
-    # SKOS
     "prefLabel": SKOS.prefLabel,
     "broader": SKOS.broader,
     "inScheme": SKOS.inScheme,
-    "exactMatch": SKOS.exactMatch,
 
-    # OWL
-    "sameAs": OWL.sameAs,
 }
 
 #
