@@ -12,6 +12,7 @@ from ontology_toolkit.config import (
     ONTOLOGY_NAMESPACE,
     RESOURCE_NAMESPACE,
     SCHEMA_NAMESPACE,
+    PROV_NAMESPACE,
 )
 
 #
@@ -21,6 +22,7 @@ from ontology_toolkit.config import (
 KGO = Namespace(ONTOLOGY_NAMESPACE)
 KGR = Namespace(RESOURCE_NAMESPACE)
 SCHEMA = Namespace(SCHEMA_NAMESPACE)
+PROV = Namespace(PROV_NAMESPACE)
 
 #
 # Reuse standard predicates

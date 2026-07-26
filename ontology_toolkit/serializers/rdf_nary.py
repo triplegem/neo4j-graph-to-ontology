@@ -6,7 +6,7 @@ Serialize a SemanticGraph as n-ary RDF/Turtle.
 
 from pathlib import Path
 
-from rdflib import Graph
+from rdflib import Graph, Literal
 from rdflib.namespace import RDF
 
 from ontology_toolkit.export_common import (
@@ -15,7 +15,11 @@ from ontology_toolkit.export_common import (
     add_literal,
 )
 from ontology_toolkit.semantic_model import SemanticGraph
-from ontology_toolkit.vocab import KGO
+
+from ontology_toolkit.vocab import (
+    KGO,
+    PROV,
+)
 
 
 def build_graph_nary(
@@ -67,6 +71,12 @@ def build_graph_nary(
             relationship_uri,
             KGO.target,
             relationship.target_uri,
+        ))
+
+        graph.add((
+            relationship_uri,
+            PROV.wasDerivedFrom,
+            Literal(relationship.element_id),
         ))
 
         for key, value in relationship.properties.items():

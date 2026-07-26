@@ -12,6 +12,7 @@ from ontology_toolkit.vocab import (
     KGO,
     KGR,
     SCHEMA,
+    PROV,
     STANDARD_PREDICATES,
 )
 
@@ -26,6 +27,7 @@ def bind_namespaces(graph: Graph) -> None:
     graph.bind("kgo", KGO)
     graph.bind("kgr", KGR)
     graph.bind("schema", SCHEMA)
+    graph.bind("prov", PROV)
     graph.bind("rdf", RDF)
     graph.bind("rdfs", RDFS)
     graph.bind("owl", OWL)

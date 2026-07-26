@@ -8,6 +8,7 @@ RESOURCE_PREFIX = "kgr"
 SCHEMA_PREFIX = "schema"
 SKOS_PREFIX = "skos"
 OWL_PREFIX = "owl"
+PROV_PREFIX = "prov"
 
 BASE_URI = "https://id.duffield.cornell.edu"
 
@@ -17,3 +18,4 @@ RESOURCE_NAMESPACE = f"{BASE_URI}/resource#"
 SCHEMA_NAMESPACE = "https://schema.org/"
 SKOS_NAMESPACE = "http://www.w3.org/2004/02/skos/core#"
 OWL_NAMESPACE = "http://www.w3.org/2002/07/owl#"
+PROV_NAMESPACE = "http://www.w3.org/ns/prov#"

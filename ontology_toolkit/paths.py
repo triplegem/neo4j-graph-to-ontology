@@ -11,7 +11,9 @@ ONTOLOGY = OUTPUT_DIR / "ontology.ttl"
 ONTOLOGY_NARY = OUTPUT_DIR / "ontology_nary.ttl"
 
 GRAPH = OUTPUT_DIR / "graph.ttl"
+GRAPH_NARY = OUTPUT_DIR / "graph_nary.ttl"
 GRAPH_JSONLD = OUTPUT_DIR / "graph.jsonld"
+
 
 SHAPES = OUTPUT_DIR / "shapes.ttl"
 

@@ -2,6 +2,7 @@ from ontology_toolkit.connection import get_driver
 from ontology_toolkit.neo4j_reader import read_graph
 
 from ontology_toolkit.export_rdf import export_rdf
+from ontology_toolkit.export_rdf_nary import export_rdf_nary
 from ontology_toolkit.export_jsonld import export_jsonld
 from ontology_toolkit.export_schema_org import export_schema_org
 
@@ -9,6 +10,7 @@ from ontology_toolkit.validate_shacl import validate_graph
 
 from ontology_toolkit.paths import (
     GRAPH,
+    GRAPH_NARY,
     GRAPH_JSONLD,
     SCHEMA_ORG_DIR,
     SHAPES,
@@ -61,6 +63,15 @@ class ValidationService:
 
             print("\nGenerated RDF:")
             print(GRAPH)
+
+            #
+            # Export n-ary RDF
+            #
+
+            export_rdf_nary(semantic_graph)
+
+            print("\nGenerated n-ary RDF:")
+            print(GRAPH_NARY)
 
             #
             # Export JSON-LD
