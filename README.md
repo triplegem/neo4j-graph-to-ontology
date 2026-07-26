@@ -470,10 +470,14 @@ Potential future enhancements include:
 
 ---
 
-# AI Reviews and Responses
+## Documentation
 
-- `CLAUDE_REVIEW.md`
-- `CHATGPT_CLAUDE_REVIEW_RESPONSE.md`
+- [Configuration Guide](documentation/CONFIGURATION.md)
+- Architecture Guide *(coming soon)*
+- Ontology Profiles *(coming soon)*
+- SHACL Validation *(coming soon)*
+- Provenance *(coming soon)*
+- Reasoning *(coming soon)*
 
 ---
 
